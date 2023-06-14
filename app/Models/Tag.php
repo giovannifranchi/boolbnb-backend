@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+
+    public function apartments(){
+        return $this->belongsToMany(Apartment::class)->withTimestamps();
+    }
 }
