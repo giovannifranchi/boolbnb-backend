@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('apartment_plan', function (Blueprint $table) {
+        Schema::create('apartment_service', function (Blueprint $table) {
             $table->id();
             $table->foreignId('apartment_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('plan_id')->constrained()->cascadeOnDelete();
-            $table->date('expire_date');
+            $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartment_plan');
+        Schema::dropIfExists('apartment_service');
     }
 };
