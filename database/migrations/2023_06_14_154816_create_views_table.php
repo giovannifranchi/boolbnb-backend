@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('apartment_id')->constrained()->cascadeOnDelete();
-            $table->string('image_path');
+            $table->foreignId('apartments_id')->constrained()->cascadeOnDelete();
+            $table->string('ip_address');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('views');
     }
 };
