@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('views', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('apartments_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('apartment_id')->constrained()->cascadeOnDelete();
             $table->string('ip_address');
             $table->timestamps();
         });
