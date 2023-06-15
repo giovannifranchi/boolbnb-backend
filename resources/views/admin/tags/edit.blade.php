@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="container mt-3">
-    <form action="{{  }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.tags.update', $tag) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="mb-3">
