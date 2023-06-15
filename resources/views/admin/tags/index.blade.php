@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($tag as $tags)
+                @foreach ($tags as $tag)
                     <tr>
                         <td>{{ $tag->id }}</td>
                         <td>{{ $tag->name }}</td>
@@ -26,7 +26,7 @@
                         <td class="d-flex gap-3">
                             <a href="" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#modal{{  }}">Delete</button>
+                                data-bs-target="#modal{{ $tag->id }}">Delete</button>
                         </td>
                     </tr>
                     {{-- modal --}}
