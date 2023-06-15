@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Apartment;
 use App\Models\Plan;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -42,6 +43,16 @@ class ApartmentSeeder extends Seeder
             $newApartment->description = $apartment['description'];
 
             $newApartment->save();
+
+            $services = Service::inRandomOrder()->take(rand(2, 10))->get();
+
+            $idServices = [];
+
+            foreach($services as $service){
+                array_push($idServices, $service->id);
+            }
+
+            $newApartment->services()->attach($idServices);
 
             if($index % 3 === 0){
                 $plan = Plan::inRandomOrder()->first();
