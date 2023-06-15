@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->tinyInteger('duration');
+            $table->unsignedSmallInteger('duration');
             $table->decimal('price');
             $table->timestamps();
         });
