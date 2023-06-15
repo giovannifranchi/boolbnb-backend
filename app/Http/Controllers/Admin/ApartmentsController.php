@@ -59,9 +59,10 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Apartment $apartment)
     {
-        //
+        $apartments = Apartment::all();
+        return view('admin.apartments.edit', compact('apartment', 'apartments'));
     }
 
     /**
@@ -82,8 +83,18 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Apartment $apartment)
     {
-        //
+        // Storage::delete($game->thumb);
+        // $game->delete();
+        // return to_route('admin.games.index');
+
+
+
+
+
+        $apartment->delete();
+
+        return redirect()->route('admin.apartments.index')->with('message', "Post eliminato con successo");
     }
 }
