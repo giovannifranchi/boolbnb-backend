@@ -18,6 +18,8 @@ class AuthController extends Controller
         $newUser->email = $fields['email'];
         $newUser->password = bcrypt($fields['password']);
 
+        $newUser->save();
+
         $token = $newUser->createToken('mytoken')->plainTextToken;
 
         $response = [
