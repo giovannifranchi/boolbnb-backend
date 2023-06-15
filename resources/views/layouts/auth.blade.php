@@ -50,10 +50,9 @@
                                 <li class="nav-item">
                                     <a href="{{route('admin.dashboard')}}" class="nav-link">{{__('Dashboard')}}</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="{{route('admin.apartments.index')}}" class="nav-link">{{__('Apartments')}}</a>
-                                </li>
-                                
+                                {{-- <li class="nav-item">
+                                    <a href="{{route('admin.projects.index')}}" class="nav-link">{{__('Projects')}}</a>
+                                </li> --}}
                             @endauth
                         </ul>
 
