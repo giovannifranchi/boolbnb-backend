@@ -26,7 +26,7 @@
                         <td>{{ $plan->duration }} hours</td>
                         <td>{{ $plan->price }} €</td>
                         <td class="d-flex gap-3">
-                            <a href="" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('admin.plans.edit', $plan)}}" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#modal{{ $plan->id }}">Delete</button>
                         </td>

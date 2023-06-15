@@ -57,9 +57,10 @@ class PlansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Plan $plan)
     {
-        //
+        $plans = Plan::all();
+        return view('admin.plans.edit', compact('plan', 'plans'));
     }
 
     /**
@@ -69,9 +70,12 @@ class PlansController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Plan $plan)
     {
-        //
+        $data = $request->all();
+
+        $plan->update($data);
+        return redirect()->route('admin.plans.index', $plan);
     }
 
     /**

@@ -66,10 +66,6 @@
                                     <a href="{{route('admin.plans.index')}}" class="nav-link">{{__('Plans')}}</a>
                                 </li>
 
-
-                                
-
-
                             @endauth
                         </ul>
 

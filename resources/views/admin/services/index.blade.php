@@ -24,7 +24,7 @@
                         <td>{{ $service->name }}</td>
                         <td>{{ $service->icon_url }}</td>
                         <td class="d-flex gap-3">
-                            <a href="" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('admin.services.edit', $service)}}" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#modal{{ $service->id }}">Delete</button>
                         </td>

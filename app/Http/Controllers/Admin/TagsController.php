@@ -57,9 +57,10 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        $tags = Tag::all();
+        return view('admin.tags.edit', compact('tag', 'tags'));
     }
 
     /**
@@ -69,9 +70,12 @@ class TagsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
-        //
+        $data = $request->all();
+
+        $tag->update($data);
+        return redirect()->route('admin.tags.index', $tag);
     }
 
     /**

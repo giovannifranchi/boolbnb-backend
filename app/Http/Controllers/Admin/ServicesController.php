@@ -57,9 +57,10 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        $services = Service::all();
+        return view('admin.services.edit', compact('service', 'services'));
     }
 
     /**
@@ -69,9 +70,12 @@ class ServicesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $data = $request->all();
+
+        $service->update($data);
+        return redirect()->route('admin.services.index', $service);
     }
 
     /**

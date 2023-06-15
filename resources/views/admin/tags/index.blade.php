@@ -24,7 +24,7 @@
                         <td>{{ $tag->name }}</td>
                         <td>{{ $tag->icon_path }}</td>
                         <td class="d-flex gap-3">
-                            <a href="" class="btn btn-warning">Edit</a>
+                            <a href="{{ route('admin.tags.edit', $tag)}}" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#modal{{ $tag->id }}">Delete</button>
                         </td>
