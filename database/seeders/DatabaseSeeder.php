@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PlanSeeder::class,
+            ServiceSeeder::class,
             ApartmentSeeder::class,
             MessageSeeder::class,
             ViewSeeder::class,
