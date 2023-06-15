@@ -16,6 +16,8 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
+        Message::truncate();
+
         for($i = 0; $i < 50; $i++){
             $randomApartment = Apartment::inRandomOrder()->first();
             $newMessage = new Message();

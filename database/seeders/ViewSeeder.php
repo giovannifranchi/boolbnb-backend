@@ -16,6 +16,9 @@ class ViewSeeder extends Seeder
      */
     public function run()
     {
+        View::truncate();
+
+
         for($i = 0; $i < 500; $i++){
             $newView = new View();
             $randomApartment = Apartment::inRandomOrder()->first();
