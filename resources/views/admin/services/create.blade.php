@@ -20,7 +20,7 @@
             </div>
             <div class="mb-3">
                 <label for="icon_url" class="form-label">Service Icon</label>
-                <input type="text" class="form-control" id="icon_url" name="icon_url" value="{{ old('icon_url') }}"></input>
+                <input type="text" class="form-control" id="icon_url" name="icon_url" value="{{ old('icon_url') }}">
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
