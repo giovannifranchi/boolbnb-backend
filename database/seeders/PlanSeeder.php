@@ -17,7 +17,7 @@ class PlanSeeder extends Seeder
     {
         $plans = config('plans');
 
-        Plan::truncate();
+       
 
         foreach($plans as $plan){
             $newPlan = new Plan();

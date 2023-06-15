@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
+        
 
         for($i = 0; $i < 20; $i++){
             $newUser = new User();

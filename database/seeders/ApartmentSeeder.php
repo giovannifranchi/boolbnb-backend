@@ -20,7 +20,7 @@ class ApartmentSeeder extends Seeder
     {
         $apartments = config('apartments');
 
-        Apartment::truncate();
+        
 
         foreach($apartments as $apartment){
             $randomUser = User::inRandomOrder()->first();
