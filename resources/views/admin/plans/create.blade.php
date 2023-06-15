@@ -15,12 +15,16 @@
         <form action="{{ }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
-                <label for="name" class="form-label">Service Name</label>
+                <label for="name" class="form-label">Plan Name</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
             </div>
             <div class="mb-3">
-                <label for="icon_url" class="form-label">Service Icon</label>
-                <input type="text" class="form-control" id="icon_url" name="icon_url" value="{{ old('icon_url') }}">
+                <label for="duration" class="form-label">Duration Plan</label>
+                <input type="text" class="form-control" id="duration" name="duration" value="{{ old('duration') }}">
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price Plan</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}">
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
