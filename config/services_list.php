@@ -8,52 +8,52 @@ return [
     ],
     [
         'name' => 'wi-fi',
-        'icon_url' => 24,
+        'icon_url' => "fa-wifi",
 
     ],
     [
         'name' => 'breakfast',
-        'icon_url' => 24,
+        'icon_url' => "fa-mug-saucer",
 
     ],
     [
         'name' => 'parking',
-        'icon_url' => 24,
+        'icon_url' => "fa-square-parking",
 
     ],
     [
         'name' => 'reception',
-        'icon_url' => 24,
+        'icon_url' => "fa-bell-concierge",
 
     ],
     [
         'name' => 'commuting',
-        'icon_url' => 24,
+        'icon_url' => "fa-van-shuttle",
 
     ],
     [
         'name' => 'info-point',
-        'icon_url' => 24,
+        'icon_url' => 'fa-info',
 
     ],
     [
         'name' => 'laundery',
-        'icon_url' => 24,
+        'icon_url' => 'fa-jug-detergen',
 
     ],
     [
-        'name' => 'guest-hall',
-        'icon_url' => 24,
+        'name' => 'camping',
+        'icon_url' => 'fa-campground',
 
     ],
     [
         'name' => 'pets',
-        'icon_url' => 24,
+        'icon_url' => 'fa-paw',
 
     ],
     [
         'name' => 'air-conditioning',
-        'icon_url' => 24,
+        'icon_url' => 'fa-snowflake',
 
     ],
     [
