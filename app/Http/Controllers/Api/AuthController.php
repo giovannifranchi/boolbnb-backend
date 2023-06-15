@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+// TODOS: create an app token and add it to env, fix expiration date for tokens
+
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request){
