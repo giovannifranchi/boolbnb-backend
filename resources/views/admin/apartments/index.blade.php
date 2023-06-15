@@ -17,14 +17,14 @@
                 <tbody>
                     @foreach ($apartments as $apartment)
                         <tr>
-                            {{-- <th>{{$apartment->}}</th> --}}
+                            <th>.</th>
                             <td>{{$apartment->city}}</td>
-                            <td>{{$apartment->square_meters}}</td>
-                            <td>{{$apartment->price}}</td>
-                            <td>{{$apartment->discount}}</td>
+                            <td>{{$apartment->square_meters}}mq</td>
+                            <td>{{$apartment->price}}$</td>
+                            <td>{{$apartment->discount}}%</td>
                             <td>
-                                <ul>
-                                    <li><a href="#" class="btn btn-primary">Details</a></li>
+                                <ul class="list-unstyled d-flex gap-1">
+                                    <li><a href="{{ route('admin.apartments.show', $apartment)}}" class="btn btn-primary">Details</a></li>
                                     <li><a href="#" class="btn btn-success">Edit</a></li>
                                     <li><a href="#" class="btn btn-danger" id="{{$apartment->id}}">Delete</a></li>
                                 </ul>
