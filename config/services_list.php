@@ -58,72 +58,67 @@ return [
     ],
     [
         'name' => 'restaurant',
-        'icon_url' => 24,
+        'icon_url' => 'fa-utensils',
 
     ],
     [
         'name' => 'room-service',
-        'icon_url' => 24,
+        'icon_url' => 'fa-bell-concierge',
 
     ],
     [
         'name' => 'baby-sitting',
-        'icon_url' => 24,
+        'icon_url' => 'fa-baby',
 
     ],
     [
         'name' => 'meeting-room',
-        'icon_url' => 24,
+        'icon_url' => "fa-handshake",
 
     ],
     [
         'name' => 'bike-rental',
-        'icon_url' => 24,
+        'icon_url' => 'fa-bicycle',
 
     ],
     [
         'name' => 'massages',
-        'icon_url' => 24,
+        'icon_url' => 'fa-spa',
 
     ],
     [
         'name' => 'tennis',
-        'icon_url' => 24,
+        'icon_url' => 'fa-table-tennis-paddle-ball',
 
     ],
     [
         'name' => 'basket',
-        'icon_url' => 24,
+        'icon_url' => 'fa-basketball',
 
     ],
     [
         'name' => 'car-rental',
-        'icon_url' => 24,
+        'icon_url' => 'fa-car-on',
 
     ],
     [
         'name' => 'excurions',
-        'icon_url' => 24,
+        'icon_url' => 'fa-person-hioking',
 
     ],
     [
         'name' => 'fitness',
-        'icon_url' => 24,
+        'icon_url' => 'fa-dumbbell',
 
     ],
     [
         'name' => 'multilingual-reception',
-        'icon_url' => 24,
-
-    ],
-    [
-        'name' => 'spa',
-        'icon_url' => 24,
+        'icon_url' => 'fa-language',
 
     ],
     [
         'name' => 'weddings',
-        'icon_url' => 24,
+        'icon_url' => 'fa-children',
 
     ],
 
