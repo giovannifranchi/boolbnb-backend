@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApartmentsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PlansController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -26,10 +27,15 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+<<<<<<< HEAD
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
+=======
+
+    Route::resource('apartments', ApartmentsController::class);
+>>>>>>> origin/develop
 });
 
 Route::middleware('auth')->group(function () {
