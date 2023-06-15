@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Apartment;
+use App\Models\Plan;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class ApartmentSeeder extends Seeder
 {
@@ -38,6 +40,17 @@ class ApartmentSeeder extends Seeder
             $newApartment->description = $apartment['description'];
 
             $newApartment->save();
+
+            $plan = Plan::inRandomOrder()->first();
+
+
+            $now = Carbon::now();
+
+            $expiration = $now->addHours($plan->duration);
+
+            $newApartment->plans()->attach($plan->id, ['expire_date'=>$expiration]);
+
+        
         }
     }
 }
