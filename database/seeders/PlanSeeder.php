@@ -17,6 +17,8 @@ class PlanSeeder extends Seeder
     {
         $plans = config('plans');
 
+       
+
         foreach($plans as $plan){
             $newPlan = new Plan();
 
