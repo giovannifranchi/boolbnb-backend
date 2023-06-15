@@ -24,8 +24,8 @@ return new class extends Migration
             $table->tinyInteger('rooms');
             $table->decimal('price');
             $table->tinyInteger('discount')->default(0);
-            $table->decimal('latitude');
-            $table->decimal('longitude');
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
             $table->string('cover_image')->nullable();
             $table->text('description');
             $table->timestamps();
