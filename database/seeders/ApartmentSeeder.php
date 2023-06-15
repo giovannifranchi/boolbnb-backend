@@ -20,6 +20,8 @@ class ApartmentSeeder extends Seeder
     {
         $apartments = config('apartments');
 
+        
+
         foreach($apartments as $apartment){
             $randomUser = User::inRandomOrder()->first();
 
