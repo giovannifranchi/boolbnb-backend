@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ApartmentsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PlansController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TagsController;
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('apartments', ApartmentsController::class);
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
+    Route::resource('plans', PlansController::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -19,16 +19,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($plan as $plans)
+                @foreach ($plans as $plan)
                     <tr>
                         <td>{{ $plan->id }}</td>
                         <td>{{ $plan->name }}</td>
-                        <td>{{ $plan->duration }}</td>
-                        <td>{{ $plan->price }}</td>
+                        <td>{{ $plan->duration }} hours</td>
+                        <td>{{ $plan->price }} €</td>
                         <td class="d-flex gap-3">
                             <a href="" class="btn btn-warning">Edit</a>
                             <button class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#modal{{  }}">Delete</button>
+                                data-bs-target="#modal{{ $plan->id }}">Delete</button>
                         </td>
                     </tr>
                     {{-- modal --}}
