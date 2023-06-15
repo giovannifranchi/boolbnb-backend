@@ -52,7 +52,14 @@
                                 </li>
                                 {{-- <li class="nav-item">
                                     <a href="{{route('admin.projects.index')}}" class="nav-link">{{__('Projects')}}</a>
+
+                                </li>
+                               <!--  <li class="nav-item">
+                                    <a href="{{route('admin.services.index')}}" class="nav-link">{{__('Services')}}</a>
+                                </li> -->
+
                                 </li> --}}
+
                             @endauth
                         </ul>
 
