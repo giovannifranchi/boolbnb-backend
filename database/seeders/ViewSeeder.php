@@ -10,12 +10,13 @@ use Illuminate\Database\Seeder;
 class ViewSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the database seeds.remove trucation
      *
      * @return void
      */
     public function run()
     {
+    
         for($i = 0; $i < 500; $i++){
             $newView = new View();
             $randomApartment = Apartment::inRandomOrder()->first();

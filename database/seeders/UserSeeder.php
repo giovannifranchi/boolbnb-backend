@@ -15,6 +15,8 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
+
         for($i = 0; $i < 20; $i++){
             $newUser = new User();
             $newUser->name = fake()->name();
