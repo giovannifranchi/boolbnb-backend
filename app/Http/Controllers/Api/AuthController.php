@@ -36,7 +36,7 @@ class AuthController extends Controller
         
         $fields = $request->validated();
 
-        $user = User::where('email', $fields['email']);
+        $user = User::where('email', $fields['email'])->first();
 
         if(!$user || !Hash::check($fields['password'], $user->password)){
             return response([
@@ -53,4 +53,6 @@ class AuthController extends Controller
 
         return response($response, 200);
     }
+
+    
 }
