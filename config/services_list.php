@@ -103,7 +103,7 @@ return [
     ],
     [
         'name' => 'excurions',
-        'icon_url' => 'fa-person-hioking',
+        'icon_url' => 'fa-person-hiking',
 
     ],
     [
