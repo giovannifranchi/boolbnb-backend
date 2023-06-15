@@ -60,8 +60,6 @@ class AuthController extends Controller
         
         $user = User::find($request['id']);
 
-    ;
-
        $user->tokens()->delete();
 
         return [
