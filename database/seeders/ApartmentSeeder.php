@@ -22,7 +22,7 @@ class ApartmentSeeder extends Seeder
 
         
 
-        foreach($apartments as $apartment){
+        foreach($apartments as $index => $apartment){
             $randomUser = User::inRandomOrder()->first();
 
             $newApartment = new Apartment();
@@ -43,14 +43,15 @@ class ApartmentSeeder extends Seeder
 
             $newApartment->save();
 
-            $plan = Plan::inRandomOrder()->first();
+            if($index % 3 === 0){
+                $plan = Plan::inRandomOrder()->first();
 
-
-            $now = Carbon::now();
-
-            $expiration = $now->addHours($plan->duration);
-
-            $newApartment->plans()->attach($plan->id, ['expire_date'=>$expiration]);
+                $now = Carbon::now();
+    
+                $expiration = $now->addHours($plan->duration);
+    
+                $newApartment->plans()->attach($plan->id, ['expire_date'=>$expiration]);
+            }
 
         
         }
