@@ -2,18 +2,18 @@
 
 @section('content')
     <main>
-        <form action="{{}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.apartments.update', $apartment)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
             {{-- inserimento nome appartamento --}}
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="name" class="form-label">Apartment Name </label>
                 <input type="text" class="form-control" id="name" value="{{ old('name', $apartment->name)}}" name="name">
-            </div>
+            </div> --}}
             {{-- inserimento indirizzo --}}
             <div class="mb-3">
                 <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" value="{{ old('address', $appartment->address)}}" name="address">
+                <input type="text" class="form-control" id="address" value="{{ old('address', $apartment->address)}}" name="address">
             </div>
             {{-- inserimento città --}}
             <div class="mb-3">
@@ -66,7 +66,7 @@
                 <textarea class="form-control" id="description" rows="3" name="description">{{old('description', $apartment->description)}}</textarea>
             </div>
             {{-- inserimento immagine che si vuole avere come copertina  --}}
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="cover_image" class="form-label">Cover Image</label>
                     <input class="form-control" type="file" id="cover_image" name="cover_image" value="{{ old('cover_image', $apartment->cover_image) }}" name="cover_image">
                 <div class="mb-3 @if (!$apartment->cover_image) d-none @endif" id="image2-input-container">
@@ -74,7 +74,7 @@
                         <img id="file-image2-preview" @if ($apartment->cover_image) src="{{ asset('storage/' . $apartment->cover_image) }} @endif" class="img-fluid">
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <button type="submit" class="btn btn-primary">Submit</button>
 

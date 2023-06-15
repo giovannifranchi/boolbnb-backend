@@ -72,9 +72,12 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Apartment $apartment)
     {
-        //
+        $data = $request->all();
+
+        $apartment->update($data);
+        return redirect()->route('admin.apartments.show', $apartment);
     }
 
     /**
