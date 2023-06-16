@@ -10,6 +10,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class ApartmentSeeder extends Seeder
 {
@@ -30,6 +31,8 @@ class ApartmentSeeder extends Seeder
             $newApartment = new Apartment();
 
             $newApartment->user_id = $randomUser->id;
+            $newApartment->name = $apartment['description'];
+            $newApartment->slug = Str::slug($newApartment->name);
             $newApartment->address = $apartment['address'];
             $newApartment->city = $apartment['city'];
             $newApartment->state = $apartment['country'];
@@ -39,7 +42,7 @@ class ApartmentSeeder extends Seeder
             $newApartment->price = $apartment['price'];
             $newApartment->discount = $apartment['discount'];
             $newApartment->cover_image = $apartment['cover_image'];
-            $newApartment->description = $apartment['description'];
+            $newApartment->description = fake()->realText(500);
 
             $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($apartment['address'] . ', ' . $apartment['city'] . ', ' . $apartment['country']) . '.json', [
                 'key' => env('TOM_TOM_KEY')
