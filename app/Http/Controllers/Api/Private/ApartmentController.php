@@ -73,24 +73,6 @@ class ApartmentController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ApartmentUpdateRequest $request, $id)
     {
         $fields = $request->validated();
@@ -131,8 +113,18 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $user = $request->user();
+
+        $apartment = Apartment::where('user_id', $user->id)->where('id', $id)->first();
+
+        if(!$apartment){
+            return response(['error'=>'apartment not found'],404);
+        }
+
+        $apartment->delete();
+
+        return response(['message'=>'apartment deleted successfully'], 200);
     }
 }
