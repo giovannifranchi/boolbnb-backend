@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\Pulic\ApartmentsController;
+use App\Http\Controllers\Api\Public\ApartmentsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/apartments', [ApartmentsController::class, 'index']);
 Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
-Route::get('/apartments/{slug}', [ApartmentsController::class, 'show']);
+Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
