@@ -17,7 +17,7 @@
                 <tbody>
                     @foreach ($apartments as $apartment)
                         <tr>
-                            <th>.</th>
+                            <th>{{$apartment->name}}</th>
                             <td>{{$apartment->city}}</td>
                             <td>{{$apartment->square_meters}}mq</td>
                             <td>{{$apartment->price}}$</td>
