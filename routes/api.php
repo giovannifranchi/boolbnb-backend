@@ -27,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/apartments', [ApartmentsController::class, 'index']);
 Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
-
+Route::get('/apartments/{slug}', [ApartmentsController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -11,12 +11,30 @@ use Illuminate\Http\Request;
 class ApartmentsController extends Controller
 
 {
-    public function index(){
+    public function index()
+    {
         $apartments = Apartment::all();
         return response($apartments);
     }
 
-    public function highlighted(){
+    public function highlighted()
+    {
         // $apartments = Apartment::all()->where()
+    }
+
+    public function show(Request $request)
+    {
+        $apartments = Apartment::with('views', 'images', 'services', 'tags', ' plans', 'user')->where('slug', $request['slug'])->get();
+        if ($apartments) {
+            return response()->json([
+                'success' => true,
+                'results' => $apartments
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'results' => null
+            ], 404);
+        }
     }
 }
