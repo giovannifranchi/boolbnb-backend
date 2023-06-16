@@ -47,3 +47,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/apartments/vendors/update/{id}', [ApartmentController::class, 'update']);
     Route::delete('/apartments/vendors/delete/{id}', [ApartmentController::class, 'destroy']);
 });
+ 

@@ -24,14 +24,16 @@ class AuthController extends Controller
 
         $newUser->save();
 
-        $token = $newUser->createToken('myapptoken',['*'], now()->addDays(2))->plainTextToken;
+        // $token = $newUser->createToken('mytoken')->plainTextToken;
+
+        $token = $newUser->createToken('myapptoken',[], now()->addDays(2))->plainTextToken;
 
         $response = [
             'user'=>$newUser,
             'token'=>$token
         ];
 
-        return response($response, 201);
+        return response()->json($response, 201);
     }
 
     public function login(LoginRequest $request){
@@ -46,19 +48,19 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('mytoken', ['*'], now()->addDays(2))->plainTextToken;
+        $token = $user->createToken('mytoken', [], now()->addDays(2))->plainTextToken;
 
         $response = [
             'user'=>$user,
             'token'=>$token
         ];
 
-        return response($response, 200);
+        return response()->json($response, 200);
     }
 
     public function logout(Request $request){
-        
-        $user = User::find($request['id']);
+
+        $user = $request->user(); 
 
        $user->tokens()->delete();
 
