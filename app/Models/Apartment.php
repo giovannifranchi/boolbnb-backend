@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Apartment extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['slug', 'longitude', 'latitude', 'user_id'];
     public function user()
     {
         return $this->belongsTo(User::class);

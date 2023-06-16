@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+
 use App\Http\Controllers\Api\Public\ApartmentsController;
+
+use App\Http\Controllers\Api\Private\ApartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +34,7 @@ Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/apartments/vendors', [ApartmentController::class, 'index']);
+    Route::post('/apartments/vendors/create', [ApartmentController::class, 'store']);
+    Route::put('/apartments/vendors/update/{slug}', [ApartmentController::class, 'update']);
 });
