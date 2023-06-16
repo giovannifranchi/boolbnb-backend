@@ -19,7 +19,7 @@
                             <div>Latitude: {{$apartment->latitude}}</div>
                             <div>Longitude: {{$apartment->longitude}}</div>
                             <div>Description: {{$apartment->description}}</div>
-                            <button><a href="#">Images Gallery</a></button>
+                            <a href="{{ route('admin.gallery.index')}}" class="btn btn-success">View Gallery</a>
                         </div>
                     </div>
                 </div>
