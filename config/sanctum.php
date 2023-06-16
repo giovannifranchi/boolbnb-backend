@@ -46,9 +46,7 @@ return [
     |
     */
 
-    'expiration' => [
-        'personal_access_token' => now()->addDays(1),
-    ],
+    'expiration' => null,
 
     /*
     |--------------------------------------------------------------------------
