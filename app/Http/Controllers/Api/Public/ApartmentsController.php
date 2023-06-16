@@ -40,15 +40,14 @@ class ApartmentsController extends Controller
         //     }
         // }
 
-        $highlightedApartments = Apartment::whereHas('plans', function ($query) use ($now) {
+        $highlightedApartments = Apartment::whereHas('latestPlan', function ($query) use ($now) {
             $query->where('expire_date', '>', $now);
         })
-        ->with(['plans' => function ($query) {
-            $query->orderBy('expire_date', 'desc')->take(1);
-        }])
+        ->with(['services'])
         ->get();
+    
 
-        return response(count($highlightedApartments), 200);
+        return response($highlightedApartments, 200);
     }
 
     public function show($id)

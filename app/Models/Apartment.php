@@ -39,6 +39,14 @@ class Apartment extends Model
         return $this->belongsToMany(Plan::class)->withTimestamps();
     }
 
+    public function latestPlan()
+    {
+        return $this->belongsToMany(Plan::class)
+        ->withTimestamps()
+        ->orderBy('expire_date', 'desc')
+        ->take(1); 
+    }
+
     public function services()
     {
         return $this->belongsToMany(Service::class)->withTimestamps();
