@@ -43,7 +43,7 @@ class ApartmentsController extends Controller
         return response($highlightedApartments, 200);
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $apartments = Apartment::with('views', 'images', 'services', 'tags', 'plans', 'user')->where('id', $id)->first();
         if ($apartments) {

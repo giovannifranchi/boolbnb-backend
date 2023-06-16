@@ -59,7 +59,7 @@ class ApartmentController extends Controller
             $newApartment->services()->sync($fields['services']);
         }
 
-        if (isset($fields['images'])) {
+        if(isset($fields['images'])) {
             foreach ($fields['images'] as $image) {
                 
                 $path = $image->store('images', 'public');    
