@@ -20,17 +20,8 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-        $fields = $request->validate([
-            'user_id'=> 'required',
-        ]);
 
-        $user = User::find($fields['user_id']);
-
-        if(!in_array($request->bearerToken(), $user->tokens())){
-            return response([
-                'error'=>'unauthorized'
-            ],403);
-        }
+        $user = $request->user();
 
         $apartments = Apartment::all()->where('user_id', $user->id);
 
@@ -48,7 +39,6 @@ class ApartmentController extends Controller
         $fields = $request->validated();
 
         $user = $request->user();
-
 
         $newApartment = new Apartment();
 
