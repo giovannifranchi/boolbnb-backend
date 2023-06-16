@@ -87,12 +87,12 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApartmentUpdateRequest $request)
+    public function update(ApartmentUpdateRequest $request, $slug)
     {
         $fields = $request->validated();
         $user = $request->user();
 
-        $apartment = Apartment::where('user_id', $user->id)->where('slug', $fields['slug'])->first();
+        $apartment = Apartment::where('user_id', $user->id)->where('slug', $slug)->first();
 
         if(!$apartment){
             return response(['error'=> 'apartment not found'], 404);
@@ -117,6 +117,8 @@ class ApartmentController extends Controller
         }
 
         $apartment->update($fields);
+
+        return response($apartment, 202);
     }
 
     /**
