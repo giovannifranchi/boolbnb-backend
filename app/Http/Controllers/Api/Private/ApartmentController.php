@@ -13,14 +13,9 @@ use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
-
         $user = $request->user();
 
         $apartments = Apartment::all()->where('user_id', $user->id);
@@ -28,12 +23,7 @@ class ApartmentController extends Controller
         return response($apartments, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(ApartmentStoreRequest $request)
     {
         $fields = $request->validated();
