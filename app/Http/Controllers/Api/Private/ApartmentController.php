@@ -58,15 +58,19 @@ class ApartmentController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(Request $request, $id)
     {
-        //
+        $user = $request->user();
+
+        $apartment = Apartment::with(['images', 'services', 'messages', 'views', 'plans'])->where('user_id', $user->id)->where('id', $id)->first();
+
+        if(!$apartment){
+            return response(['error'=>'apartment not found'], 404);
+        }
+
+        return response($apartment, 200);
+
     }
 
     /**
@@ -87,12 +91,12 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApartmentUpdateRequest $request, $slug)
+    public function update(ApartmentUpdateRequest $request, $id)
     {
         $fields = $request->validated();
         $user = $request->user();
 
-        $apartment = Apartment::where('user_id', $user->id)->where('slug', $slug)->first();
+        $apartment = Apartment::where('user_id', $user->id)->where('slug', $id)->first();
 
         if(!$apartment){
             return response(['error'=> 'apartment not found'], 404);

@@ -34,5 +34,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/apartments/vendors', [ApartmentController::class, 'index']);
     Route::post('/apartments/vendors/create', [ApartmentController::class, 'store']);
-    Route::put('/apartments/vendors/update/{slug}', [ApartmentController::class, 'update']);
+    Route::put('/apartments/vendors/update/{id}', [ApartmentController::class, 'update']);
+    Route::delete('/apartments/vendors/delete/{id}', [ApartmentController::class, 'destroy']);
 });
