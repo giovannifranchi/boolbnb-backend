@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 // work on accessors to sanitize response cleand the pivot entity
@@ -26,7 +27,26 @@ class ApartmentsController extends Controller
 
     public function highlighted()
     {
-        // $apartments = Apartment::all()->where()
+        $now = Carbon::now();
+
+        $apartments = Apartment::all();
+
+        $highlightedApartments = [];
+
+        foreach($apartments as $apartment){
+
+            $expirationDates = $apartment->plans()->pluck('expire_date')->toArray();
+
+            if(!empty($expirationDates)){
+
+                $expirationDate = max($expirationDates);
+                if($expirationDate > $now){
+                    array_push($highlightedApartments, $apartment);
+                }
+            }
+        }
+
+        return response($highlightedApartments, 200);
     }
 
     public function show(Request $request)
