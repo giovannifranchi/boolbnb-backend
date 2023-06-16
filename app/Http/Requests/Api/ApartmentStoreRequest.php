@@ -24,7 +24,6 @@ class ApartmentStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'=>'required|exists:users,id',
             'name'=>'required|string|max:255',
             'address'=>'required|string',
             'city'=>'required|string',

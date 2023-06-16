@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api\Private;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\ApartmentStoreRequest;
 use App\Models\Apartment;
 use App\Models\User;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -35,24 +38,43 @@ class ApartmentController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApartmentStoreRequest $request)
     {
-        //
+        $fields = $request->validated();
+
+        $user = $request->user();
+
+
+        $newApartment = new Apartment();
+
+        $newApartment->fill($fields);
+
+        $newApartment->user_id = $user->id;
+
+        $newApartment->slug = Str::slug($fields['name']);
+
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($fields['address'] . ', ' . $fields['city'] . ', ' . $fields['state']) . '.json', [
+            'key' => env('TOM_TOM_KEY')
+        ]);
+
+        $data = $response->json();
+
+        if (!empty($data['results']) && isset($data['results'][0]['position'])) {
+            $newApartment->latitude = $data['results'][0]['position']['lat'];
+            $newApartment->longitude = $data['results'][0]['position']['lon'];
+        }else {
+            return response(['error'=>'internal service error'], 500);
+        }
+
+        $newApartment->save();
+
+        return response($newApartment, 201);
+
     }
 
     /**
