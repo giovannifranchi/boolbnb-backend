@@ -24,18 +24,21 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
+//auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-
+//public routes
 Route::get('/apartments', [ApartmentsController::class, 'index']);
 Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
 Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 Route::get('services', [ServiceController::class, 'index']);
 
+//protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    //auth route
     Route::post('/logout', [AuthController::class, 'logout']);
+    //apartment routes
     Route::get('/apartments/vendors/index', [ApartmentController::class, 'index']);
     Route::get('/apartments/vendors/{id}',[ApartmentController::class, 'show']);
     Route::post('/apartments/vendors/create', [ApartmentController::class, 'store']);
