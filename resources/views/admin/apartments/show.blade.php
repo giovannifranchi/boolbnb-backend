@@ -8,7 +8,7 @@
                     <div class="card mb-3">
                         {{-- <img src="{{asset('storage/' . $apartments->cover_image}}" alt=""> --}}
                         <div class="p-3">
-                            {{-- <h3 class="card-title">Apartment Name: {{$apartments->name}}</h3> --}}
+                            <h3 class="card-title">Apartment Name: {{$apartment->name}}</h3>
                             <div>Address: {{$apartment->address}}</div>
                             <div>City: {{$apartment->city}}</div>
                             <div>State: {{$apartment->state}}</div>
