@@ -26,6 +26,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 
 Route::get('/apartments', [ApartmentsController::class, 'index']);
+Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

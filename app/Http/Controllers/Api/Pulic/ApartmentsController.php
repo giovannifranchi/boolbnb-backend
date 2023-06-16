@@ -12,8 +12,11 @@ class ApartmentsController extends Controller
 
 {
     public function index(){
-        $apartments = Apartment::with(['services', 'user', 'plans', 'messages', 'views'])->get();
-
+        $apartments = Apartment::all();
         return response($apartments);
+    }
+
+    public function highlighted(){
+        // $apartments = Apartment::all()->where()
     }
 }
