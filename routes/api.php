@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+
+
 //auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
