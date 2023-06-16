@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ApartmentStoreRequest;
 use App\Http\Requests\Api\ApartmentUpdateRequest;
 use App\Models\Apartment;
+use App\Models\Image;
 use App\Models\User;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Http\Request;
@@ -53,6 +54,21 @@ class ApartmentController extends Controller
         }
 
         $newApartment->save();
+
+        if(isset($fields['services'])){
+            $newApartment->services()->sync($fields['services']);
+        }
+
+        if (isset($fields['images'])) {
+            foreach ($fields['images'] as $image) {
+                
+                $path = $image->store('images', 'public');    
+            
+                $newImage = Image::create(['image_path' => $path]);
+        
+                $newApartment->images()->attach($newImage);
+            }
+        }
 
         return response($newApartment, 201);
 
