@@ -14,15 +14,9 @@ class ApartmentsController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with('views', 'images', 'services', 'tags', 'plans', 'user')->get();
+        $apartments = Apartment::with('images')->get();
 
-
-
-        return response()->json([
-            'success' => true,
-            'results' => $apartments
-
-        ]);
+        return response($apartments, 200);
     }
 
     public function highlighted()
@@ -49,19 +43,13 @@ class ApartmentsController extends Controller
         return response($highlightedApartments, 200);
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
-        $apartments = Apartment::with('views', 'images', 'services', 'tags', 'plans', 'user')->where('id', $request['id'])->get();
+        $apartments = Apartment::with('views', 'images', 'services', 'tags', 'plans', 'user')->where('id', $id)->first();
         if ($apartments) {
-            return response()->json([
-                'success' => true,
-                'results' => $apartments
-            ]);
+            return response($apartments, 200);
         } else {
-            return response()->json([
-                'success' => false,
-                'results' => null
-            ], 404);
+            return response(['error'=>'apartment not found'], 404);
         }
     }
 }
