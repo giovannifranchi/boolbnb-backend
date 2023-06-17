@@ -22,6 +22,7 @@ class ApartmentSeeder extends Seeder
     public function run()
     {
         $apartments = config('apartments');
+        $images = config('images');
 
         
 
@@ -41,7 +42,7 @@ class ApartmentSeeder extends Seeder
             $newApartment->rooms = $apartment['rooms'];
             $newApartment->price = $apartment['price'];
             $newApartment->discount = $apartment['discount'];
-            $newApartment->cover_image = $apartment['cover_image'];
+            $newApartment->thumb = $images[rand(0, count($images)-1)]['path'];
             $newApartment->description = fake()->realText(500);
 
             $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($apartment['address'] . ', ' . $apartment['city'] . ', ' . $apartment['country']) . '.json', [

@@ -34,7 +34,7 @@ class ApartmentUpdateRequest extends FormRequest
             'price'=>'required',
             'discount'=>'integer',
             'description'=>'string|max:500',
-            'cover_image'=>'image',
+            'thumb'=>'image',
         ];
     }
 }

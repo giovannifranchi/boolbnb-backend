@@ -28,7 +28,7 @@ return new class extends Migration
             $table->tinyInteger('discount')->default(0);
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
-            $table->string('cover_image')->nullable();
+            $table->string('thumb')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
