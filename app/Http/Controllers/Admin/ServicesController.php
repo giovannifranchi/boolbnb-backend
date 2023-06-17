@@ -26,7 +26,7 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.services.create');
     }
 
     /**
@@ -37,7 +37,16 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newService = new Service();
+
+        $newService->name = $data['name'];
+        $newService->icon_url = $data['icon_url'];
+
+        $newService->fill($data);
+        $newService->save();
+
+        return redirect()->route('admin.services.index')->with('success', 'Service created successfully');
     }
 
     /**
