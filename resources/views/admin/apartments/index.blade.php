@@ -12,6 +12,7 @@
                         <th scope="col">Square Meters</th>
                         <th scope="col">Price</th>
                         <th scope="col">Discount</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>

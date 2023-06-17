@@ -26,7 +26,7 @@ class PlansController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.plans.create');
     }
 
     /**
@@ -37,7 +37,18 @@ class PlansController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newPlan = new Plan();
+
+        $newPlan->name = $data['name'];
+        $newPlan->duration = $data['duration'];
+        $newPlan->price = $data['price'];
+
+        $newPlan->fill($data);
+        $newPlan->save();
+
+        return redirect()->route('admin.plans.index')->with('success', 'Plan created successfully');
+    
     }
 
     /**

@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="my-3">Services List</h1>
 
-        <a href="" class="btn btn-success mb-3">
+        <a href="{{ route('admin.services.create') }}" class="btn btn-success mb-3">
             <h5 class="mb-0">Add a new service</h5>
         </a>
 
@@ -15,6 +15,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Icon</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
