@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="my-3">Tags List</h1>
 
-        <a href="" class="btn btn-success mb-3">
+        <a href="{{ route('admin.tags.create') }}" class="btn btn-success mb-3">
             <h5 class="mb-0">Add a new tag</h5>
         </a>
 
