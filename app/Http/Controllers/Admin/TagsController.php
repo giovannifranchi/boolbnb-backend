@@ -26,7 +26,7 @@ class TagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tags.create');
     }
 
     /**
@@ -37,7 +37,16 @@ class TagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $newTag = new Tag();
+
+        $newTag->name = $data['name'];
+        $newTag->icon_path = $data['icon_path'];
+
+        $newTag->fill($data);
+        $newTag->save();
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag created successfully');
     }
 
     /**

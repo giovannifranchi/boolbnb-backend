@@ -4,7 +4,7 @@
     <div class="container">
         <h1 class="my-3">Plans List</h1>
 
-        <a href="" class="btn btn-success mb-3">
+        <a href="{{ route('admin.plans.create') }}" class="btn btn-success mb-3">
             <h5 class="mb-0">Add a new plan</h5>
         </a>
 
@@ -16,6 +16,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Duration</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
