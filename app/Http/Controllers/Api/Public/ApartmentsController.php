@@ -59,4 +59,8 @@ class ApartmentsController extends Controller
             return response(['error'=>'apartment not found'], 404);
         }
     }
+
+    public function search(){
+        
+    }
 }
