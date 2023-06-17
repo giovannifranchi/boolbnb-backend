@@ -30,7 +30,6 @@ class ApartmentSearchRequest extends FormRequest
             'state'=>'string',
             'price_max'=>'integer',
             'price_min'=>'integer',
-
         ];
     }
 }

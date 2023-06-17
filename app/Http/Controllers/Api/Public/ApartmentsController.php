@@ -14,7 +14,7 @@ class ApartmentsController extends Controller
 {
     public function index()
     {
-        $apartments = Apartment::with('images')->get();
+        $apartments = Apartment::where('is_visible', true)->with('images')->get();
 
         return response($apartments, 200);
     }
@@ -53,7 +53,7 @@ class ApartmentsController extends Controller
     public function show($id)
     {
         $apartments = Apartment::with('views', 'images', 'services', 'tags', 'plans', 'user')->where('id', $id)->first();
-        if ($apartments) {
+        if ($apartments && $apartments->is_visible) {
             return response($apartments, 200);
         } else {
             return response(['error'=>'apartment not found'], 404);
@@ -61,6 +61,6 @@ class ApartmentsController extends Controller
     }
 
     public function search(){
-        
+
     }
 }
