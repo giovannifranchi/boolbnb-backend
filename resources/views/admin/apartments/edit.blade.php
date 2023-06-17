@@ -67,11 +67,11 @@
             </div>
             {{-- inserimento immagine che si vuole avere come copertina  --}}
             {{-- <div class="mb-3">
-                <label for="cover_image" class="form-label">Cover Image</label>
-                    <input class="form-control" type="file" id="cover_image" name="cover_image" value="{{ old('cover_image', $apartment->cover_image) }}" name="cover_image">
-                <div class="mb-3 @if (!$apartment->cover_image) d-none @endif" id="image2-input-container">
+                <label for="thumb" class="form-label">Cover Image</label>
+                    <input class="form-control" type="file" id="thumb" name="thumb" value="{{ old('thumb', $apartment->thumb) }}">
+                <div class="mb-3 @if (!$apartment->thumb) d-none @endif" id="image2-input-container">
                     <div class="preview">
-                        <img id="file-image2-preview" @if ($apartment->cover_image) src="{{ asset('storage/' . $apartment->cover_image) }} @endif" class="img-fluid">
+                        <img id="file-image2-preview" @if ($apartment->thumb) src="{{ asset('storage/' . $apartment->thumb) }} @endif" class="img-fluid">
                     </div>
                 </div>
             </div> --}}

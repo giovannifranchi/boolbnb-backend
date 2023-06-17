@@ -6,7 +6,7 @@
             <div class="row justify-content-center">
                 <div class="col-6">
                     <div class="card mb-3">
-                        {{-- <img src="{{asset('storage/' . $apartments->cover_image}}" alt=""> --}}
+                        {{-- <img src="{{asset($apartments->thumb}}" alt=""> --}}
                         <div class="p-3">
                             <h3 class="card-title">Apartment Name: {{$apartment->name}}</h3>
                             <div>Address: {{$apartment->address}}</div>
