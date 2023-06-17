@@ -6,7 +6,9 @@ use App\Http\Controllers\Api\Public\ApartmentsController;
 
 use App\Http\Controllers\Api\Private\ApartmentController;
 use App\Http\Controllers\Api\Public\ServiceController;
+use App\Http\Controllers\Api\Public\ViewsController;
 use Illuminate\Http\Request;
+use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +37,7 @@ Route::get('/apartments', [ApartmentsController::class, 'index']);
 Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
 Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 Route::get('services', [ServiceController::class, 'index']);
+Route::post('view/{id}', [ViewsController::class, 'store']);
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
