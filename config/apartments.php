@@ -14,7 +14,13 @@ return array (
     'discount' => 0,
     'latitude' => 51.52,
     'longitude' => -0.15,
-    'cover_image' => 'london_house.jpg',
+    'thumb' => '/storage/images/london/casa-1/casa1.webp', 
+    'gallery'=>[
+      '/storage/images/london/casa-1/gallery/1.webp',
+      '/storage/images/london/casa-1/gallery/2.webp',
+      '/storage/images/london/casa-1/gallery/3.webp',
+      '/storage/images/london/casa-1/gallery/4.webp',
+    ],
     'description' => 'A beautiful apartment in the heart of London',
   ),
   1 => 
@@ -30,7 +36,13 @@ return array (
     'discount' => 0,
     'latitude' => 48.86,
     'longitude' => 2.33,
-    'cover_image' => 'paris_apartment.jpg',
+    'thumb' => '/storage/images/paris/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/paris/casa-1/gallery/1.webp',
+      '/storage/images/paris/casa-1/gallery/2.webp',
+      '/storage/images/paris/casa-1/gallery/3.webp',
+      '/storage/images/paris/casa-1/gallery/4.webp',
+    ],
     'description' => 'A charming apartment in the center of Paris',
   ),
   2 => 
@@ -46,7 +58,13 @@ return array (
     'discount' => 10,
     'latitude' => 41.9,
     'longitude' => 12.5,
-    'cover_image' => 'rome_apartment.jpg',
+    'thumb' => '/storage/images/rome/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/rome/casa-1/gallery/1.webp',
+      '/storage/images/rome/casa-1/gallery/2.webp',
+      '/storage/images/rome/casa-1/gallery/3.webp',
+      '/storage/images/rome/casa-1/gallery/4.webp',
+    ],
     'description' => 'Cozy apartment in the historical center of Rome',
   ),
   3 => 
@@ -62,7 +80,13 @@ return array (
     'discount' => 0,
     'latitude' => 52.51,
     'longitude' => 13.41,
-    'cover_image' => 'berlin_apartment.jpg',
+    'thumb' => '/storage/images/berlin/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/berlin/casa-1/gallery/1.webp',
+      '/storage/images/berlin/casa-1/gallery/2.webp',
+      '/storage/images/berlin/casa-1/gallery/3.webp',
+      '/storage/images/berlin/casa-1/gallery/4.webp',
+    ],
     'description' => 'Modern apartment in the vibrant city of Berlin',
   ),
   4 => 
@@ -78,7 +102,13 @@ return array (
     'discount' => 10,
     'latitude' => 41.3981,
     'longitude' => 2.1902,
-    'cover_image' => 'barcelona_apartment.jpg',
+    'thumb' => '/storage/images/barcelona/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/barcelona/casa-1/gallery/1.webp',
+      '/storage/images/barcelona/casa-1/gallery/2.webp',
+      '/storage/images/barcelona/casa-1/gallery/3.webp',
+      '/storage/images/barcelona/casa-1/gallery/4.webp',
+    ],
     'description' => 'Bright apartment in central Barcelona',
   ),
   5 => 
@@ -94,7 +124,8 @@ return array (
     'discount' => 0,
     'latitude' => 48.2028,
     'longitude' => 16.3501,
-    'cover_image' => 'vienna_apartment.jpg',
+    'thumb' => 'vienna_apartment.jpg', //TODO: ADD to folder with images
+    'gallery'=> [],
     'description' => 'Comfortable apartment in vibrant Neubau district',
   ),
   6 => 
@@ -110,7 +141,8 @@ return array (
     'discount' => 0,
     'latitude' => 55.7619,
     'longitude' => 37.6094,
-    'cover_image' => 'moscow_apartment.jpg',
+    'thumb' => 'moscow_apartment.jpg',    //TODO add to folder with images
+    'gallery'=> [],
     'description' => 'Spacious apartment in the heart of Moscow',
   ),
   7 => 
@@ -126,7 +158,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.4392,
     'longitude' => 24.7454,
-    'cover_image' => 'tallinn_apartment.jpg',
+    'thumb' => 'tallinn_apartment.jpg',     //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Historic apartment in Tallinn\'s Old Town',
   ),
   8 => 
@@ -142,7 +175,13 @@ return array (
     'discount' => 0,
     'latitude' => 50.842,
     'longitude' => 4.3583,
-    'cover_image' => 'brussels_apartment.jpg',
+    'thumb' => '/storage/images/brussels/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/brussels/casa-1/gallery/1.webp',
+      '/storage/images/brussels/casa-1/gallery/2.webp',
+      '/storage/images/brussels/casa-1/gallery/3.webp',
+      '/storage/images/brussels/casa-1/gallery/4.webp',
+    ],
     'description' => 'Central apartment near Brussels\' museums',
   ),
   9 => 
@@ -158,7 +197,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.9141,
     'longitude' => 10.7491,
-    'cover_image' => 'oslo_apartment.jpg',
+    'thumb' => 'oslo_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Modern apartment in downtown Oslo',
   ),
   10 => 
@@ -174,7 +214,8 @@ return array (
     'discount' => 0,
     'latitude' => 49.6106,
     'longitude' => 6.132,
-    'cover_image' => 'luxembourg_apartment.jpg',
+    'thumb' => 'luxemburg_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in the heart of Luxembourg',
   ),
   11 => 
@@ -190,7 +231,8 @@ return array (
     'discount' => 0,
     'latitude' => 52.25,
     'longitude' => 21.0122,
-    'cover_image' => 'warsaw_apartment.jpg',
+    'thumb' => 'warsaw_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Comfortable apartment in historic Warsaw',
   ),
   12 => 
@@ -206,7 +248,8 @@ return array (
     'discount' => 0,
     'latitude' => 54.352,
     'longitude' => 18.6466,
-    'cover_image' => 'gdansk_apartment.jpg',
+    'thumb' => 'gdsansk_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in Gdańsk\'s Old Town',
   ),
   13 => 
@@ -222,7 +265,8 @@ return array (
     'discount' => 0,
     'latitude' => 56.9496,
     'longitude' => 24.1052,
-    'cover_image' => 'riga_apartment.jpg',
+    'thumb' => 'riga_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Cozy apartment near Riga\'s parks',
   ),
   14 => 
@@ -238,7 +282,13 @@ return array (
     'discount' => 10,
     'latitude' => 53.5511,
     'longitude' => 9.9937,
-    'cover_image' => 'hamburg_apartment.jpg',
+    'thumb' => '/storage/images/berlin/casa-2/casa2.webp',
+    'gallery'=>[
+      '/storage/images/berlin/casa-2/gallery/1.webp',
+      '/storage/images/berlin/casa-2/gallery/2.webp',
+      '/storage/images/berlin/casa-2/gallery/3.webp',
+      '/storage/images/berlin/casa-2/gallery/4.webp',
+    ],
     'description' => 'Cozy apartment in central Hamburg',
   ),
   15 => 
@@ -254,7 +304,13 @@ return array (
     'discount' => 0,
     'latitude' => 55.6761,
     'longitude' => 12.5683,
-    'cover_image' => 'copenhagen_apartment.jpg',
+    'thumb' => '/storage/images/copenaghen/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/copenaghen/casa-1/gallery/1.webp',
+      '/storage/images/copenaghen/casa-1/gallery/2.webp',
+      '/storage/images/copenaghen/casa-1/gallery/3.webp',
+      '/storage/images/copenaghen/casa-1/gallery/4.webp',
+    ],
     'description' => 'Lovely apartment in the heart of Copenhagen',
   ),
   16 => 
@@ -270,7 +326,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.4268,
     'longitude' => 26.1025,
-    'cover_image' => 'bucharest_apartment.jpg',
+    'thumb' => 'bucarest_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Spacious apartment in the heart of Bucharest',
   ),
   17 => 
@@ -286,7 +343,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.9386,
     'longitude' => 30.3141,
-    'cover_image' => 'saintpetersburg_apartment.jpg',
+    'thumb' => 'saintpetersbourg_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Bright apartment in Dostoyevsky\'s neighborhood',
   ),
   18 => 
@@ -302,7 +360,8 @@ return array (
     'discount' => 10,
     'latitude' => 41.0082,
     'longitude' => 28.9784,
-    'cover_image' => 'istanbul_apartment.jpg',
+    'thumb' => 'istanbul_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in central Istanbul',
   ),
   19 => 
@@ -318,7 +377,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.7866,
     'longitude' => 20.4489,
-    'cover_image' => 'belgrade_apartment.jpg',
+    'thumb' => 'belgrade_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Stylish apartment in downtown Belgrade',
   ),
   20 => 
@@ -334,7 +394,13 @@ return array (
     'discount' => 10,
     'latitude' => 46.2044,
     'longitude' => 6.1432,
-    'cover_image' => 'geneva_apartment.jpg',
+    'thumb' => '/storage/images/berna/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/berna/casa-1/gallery/1.webp',
+      '/storage/images/berna/casa-1/gallery/2.webp',
+      '/storage/images/berna/casa-1/gallery/3.jpg',
+      '/storage/images/berna/casa-1/gallery/4.jpg',
+    ],
     'description' => 'Cozy apartment in central Geneva',
   ),
   21 => 
@@ -350,7 +416,13 @@ return array (
     'discount' => 0,
     'latitude' => 46.2044,
     'longitude' => 6.1432,
-    'cover_image' => 'geneva2_apartment.jpg',
+    'thumb' => '/storage/images/berna/casa-2/casa2.webp',
+    'gallery'=>[
+      '/storage/images/berna/casa-1/gallery/1.webp',
+      '/storage/images/berna/casa-1/gallery/2.webp',
+      '/storage/images/berna/casa-1/gallery/3.webp',
+      '/storage/images/berna/casa-1/gallery/4.webp',
+    ],
     'description' => 'Modern apartment with a view of Mont Blanc',
   ),
   22 => 
@@ -366,7 +438,13 @@ return array (
     'discount' => 0,
     'latitude' => 55.6761,
     'longitude' => 12.5683,
-    'cover_image' => 'copenhagen2_apartment.jpg',
+    'thumb' => '/storage/images/copenaghen/casa-2/casa2.webp',
+    'gallery'=> [
+      '/storage/images/copenaghen/casa-2/gallery/1.webp',
+      '/storage/images/copenaghen/casa-2/gallery/2.webp',
+      '/storage/images/copenaghen/casa-2/gallery/3.webp',
+      '/storage/images/copenaghen/casa-2/gallery/4.webp',
+    ],
     'description' => 'Charming apartment in Vesterbro district',
   ),
   23 => 
@@ -382,7 +460,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.4268,
     'longitude' => 26.1025,
-    'cover_image' => 'bucharest2_apartment.jpg',
+    'thumb' => 'bucarest_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Comfortable apartment in central Bucharest',
   ),
   24 => 
@@ -398,7 +477,13 @@ return array (
     'discount' => 10,
     'latitude' => 51.5145,
     'longitude' => -0.1557,
-    'cover_image' => 'london_apartment.jpg',
+    'thumb' => '/storage/images/london/casa-2/casa2.webp',
+    'gallery'=>[
+      '/storage/images/london/casa-2/gallery/1.webp',
+      '/storage/images/london/casa-2/gallery/2.webp',
+      '/storage/images/london/casa-2/gallery/3.webp',
+      '/storage/images/london/casa-2/gallery/4.webp',
+    ],
     'description' => 'Luxury apartment in central London',
   ),
   25 => 
@@ -414,7 +499,13 @@ return array (
     'discount' => 0,
     'latitude' => 41.9028,
     'longitude' => 12.4964,
-    'cover_image' => 'rome_apartment.jpg',
+    'thumb' => '/storage/images/rome/casa-2/casa2.webp',
+    'gallery'=> [
+      '/storage/images/rome/casa-2/gallery/1.webp',
+      '/storage/images/rome/casa-2/gallery/2.webp',
+      '/storage/images/rome/casa-2/gallery/3.webp',
+      '/storage/images/rome/casa-2/gallery/4.webp',
+    ],
     'description' => 'Elegant apartment in the heart of Rome',
   ),
   26 => 
@@ -430,7 +521,8 @@ return array (
     'discount' => 0,
     'latitude' => 37.9838,
     'longitude' => 23.7275,
-    'cover_image' => 'athens_apartment.jpg',
+    'thumb' => 'athens_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Spacious apartment in central Athens',
   ),
   27 => 
@@ -446,7 +538,13 @@ return array (
     'discount' => 0,
     'latitude' => 50.8503,
     'longitude' => 4.3517,
-    'cover_image' => 'brussels_apartment.jpg',
+    'thumb' => '/storage/images/brussels/casa-2/casa2.webp',
+    'gallery'=>[
+      '/storage/images/brussels/casa-2/gallery/1.webp',
+      '/storage/images/brussels/casa-2/gallery/2.webp',
+      '/storage/images/brussels/casa-2/gallery/3.webp',
+      '/storage/images/brussels/casa-2/gallery/4.webp',
+    ],
     'description' => 'Modern apartment near European Quarter',
   ),
   28 => 
@@ -462,7 +560,8 @@ return array (
     'discount' => 10,
     'latitude' => 48.21,
     'longitude' => 16.3635,
-    'cover_image' => 'vienna_apartment.jpg',
+    'thumb' => 'vienna_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in old Vienna',
   ),
   29 => 
@@ -478,7 +577,13 @@ return array (
     'discount' => 0,
     'latitude' => 38.7223,
     'longitude' => -9.1393,
-    'cover_image' => 'lisbon_apartment.jpg',
+    'thumb' => '/storage/images/lisbon/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/lisbon/casa-1/gallery/1.webp',
+      '/storage/images/lisbon/casa-1/gallery/2.webp',
+      '/storage/images/lisbon/casa-1/gallery/3.webp',
+      '/storage/images/lisbon/casa-1/gallery/4.webp',
+    ],
     'description' => 'Sunny apartment in downtown Lisbon',
   ),
   30 => 
@@ -494,7 +599,13 @@ return array (
     'discount' => 0,
     'latitude' => 44.8378,
     'longitude' => -0.5792,
-    'cover_image' => 'bordeaux_apartment.jpg',
+    'thumb' => '/storage/images/paris/casa-2/casa2.webp',
+    'gallery'=> [
+      '/storage/images/paris/casa-2/gallery/1.webp',
+      '/storage/images/paris/casa-2/gallery/2.webp',
+      '/storage/images/paris/casa-2/gallery/3.webp',
+      '/storage/images/paris/casa-2/gallery/4.webp',
+    ],
     'description' => 'Comfortable apartment on popular shopping street',
   ),
   31 => 
@@ -510,7 +621,13 @@ return array (
     'discount' => 10,
     'latitude' => 52.3702,
     'longitude' => 4.8952,
-    'cover_image' => 'amsterdam_apartment.jpg',
+    'thumb' => '/storage/images/amsterdam/casa-1/casa1.webp',
+    'gallery'=>[
+      '/storage/images/amsterdam/casa-1/gallery/1.webp',
+      '/storage/images/amsterdam/casa-1/gallery/2.webp',
+      '/storage/images/amsterdam/casa-1/gallery/3.webp',
+      '/storage/images/amsterdam/casa-1/gallery/4.webp',
+    ],
     'description' => 'Charming canal-side apartment in Amsterdam',
   ),
   32 => 
@@ -526,7 +643,13 @@ return array (
     'discount' => 0,
     'latitude' => 40.4168,
     'longitude' => -3.7038,
-    'cover_image' => 'madrid_apartment.jpg',
+    'thumb' => '/storage/images/madrid/casa-1/casa1.jpeg',
+    'gallery'=>[
+      '/storage/images/madrid/casa-1/gallery/1.webp',
+      '/storage/images/madrid/casa-1/gallery/2.jpeg',
+      '/storage/images/madrid/casa-1/gallery/3.webp',
+      '/storage/images/madrid/casa-1/gallery/4.jpeg',
+    ],
     'description' => 'Spacious apartment on Plaza Mayor',
   ),
   33 => 
@@ -542,7 +665,13 @@ return array (
     'discount' => 10,
     'latitude' => 51.2277,
     'longitude' => 6.7735,
-    'cover_image' => 'dusseldorf_apartment.jpg',
+    'thumb' => '/storage/images/berlin/casa-3/casa3.webp',
+    'gallery'=>[
+      '/storage/images/berlin/casa-3/gallery/1.webp',
+      '/storage/images/berlin/casa-3/gallery/2.webp',
+      '/storage/images/berlin/casa-3/gallery/3.webp',
+      '/storage/images/berlin/casa-3/gallery/4.webp',
+    ],
     'description' => 'Elegant apartment in central Dusseldorf',
   ),
   34 => 
@@ -558,7 +687,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.9343,
     'longitude' => 30.3351,
-    'cover_image' => 'saintpetersburg_apartment2.jpg',
+    'thumb' => 'saintpetersbourg_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Centrally located apartment with city view',
   ),
   35 => 
@@ -574,7 +704,13 @@ return array (
     'discount' => 10,
     'latitude' => 45.4642,
     'longitude' => 9.19,
-    'cover_image' => 'milan_apartment.jpg',
+    'thumb' => '/storage/images/rome/casa-3/casa3.webp',
+    'gallery'=> [
+      '/storage/images/rome/casa-3/gallery/1.webp',
+      '/storage/images/rome/casa-3/gallery/2.webp',
+      '/storage/images/rome/casa-3/gallery/3.webp',
+      '/storage/images/rome/casa-3/gallery/4.webp',
+    ],
     'description' => 'Elegant apartment in the heart of Milan',
   ),
   36 => 
@@ -590,7 +726,13 @@ return array (
     'discount' => 10,
     'latitude' => 48.8566,
     'longitude' => 2.3522,
-    'cover_image' => 'paris_apartment.jpg',
+    'thumb' => '/storage/images/paris/casa-3/casa3.webp',
+    'gallery'=> [
+      '/storage/images/paris/casa-3/gallery/1.webp',
+      '/storage/images/paris/casa-3/gallery/2.webp',
+      '/storage/images/paris/casa-3/gallery/3.webp',
+      '/storage/images/paris/casa-3/gallery/4.webp',
+    ],
     'description' => 'Charming apartment with Seine view',
   ),
   37 => 
@@ -606,7 +748,8 @@ return array (
     'discount' => 0,
     'latitude' => 45.815,
     'longitude' => 15.9819,
-    'cover_image' => 'zagreb_apartment.jpg',
+    'thumb' => 'zagreb_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Spacious apartment in central Zagreb',
   ),
   38 => 
@@ -622,7 +765,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.7866,
     'longitude' => 20.4489,
-    'cover_image' => 'belgrade_apartment2.jpg',
+    'thumb' => 'belgrade_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Vintage apartment in historic district',
   ),
   39 => 
@@ -638,7 +782,13 @@ return array (
     'discount' => 10,
     'latitude' => 38.7223,
     'longitude' => -9.1393,
-    'cover_image' => 'lisbon_apartment2.jpg',
+    'thumb' => '/storage/images/lisbon/casa-2/casa2.webp',
+    'gallery'=>[
+      '/storage/images/lisbon/casa-2/gallery/1.webp',
+      '/storage/images/lisbon/casa-2/gallery/2.webp',
+      '/storage/images/lisbon/casa-2/gallery/3.webp',
+      '/storage/images/lisbon/casa-2/gallery/4.webp',
+    ],
     'description' => 'Bright and cozy apartment in central Lisbon',
   ),
   40 => 
@@ -654,7 +804,13 @@ return array (
     'discount' => 0,
     'latitude' => 53.5511,
     'longitude' => 9.9937,
-    'cover_image' => 'hamburg_apartment.jpg',
+    'thumb' => '/storage/images/berlin/casa-4/casa4.webp',
+    'gallery'=>[
+      '/storage/images/berlin/casa-4/gallery/1.webp',
+      '/storage/images/berlin/casa-4/gallery/2.webp',
+      '/storage/images/berlin/casa-4/gallery/3.webp',
+      '/storage/images/berlin/casa-4/gallery/4.jpg',
+    ],
     'description' => 'Modern apartment in central Hamburg',
   ),
   41 => 
@@ -670,7 +826,13 @@ return array (
     'discount' => 0,
     'latitude' => 46.2044,
     'longitude' => 6.1432,
-    'cover_image' => 'geneva_apartment2.jpg',
+    'thumb' => '/storage/images/berna/casa-3/casa3.webp',
+    'gallery'=>[
+      '/storage/images/berna/casa-3/gallery/1.webp',
+      '/storage/images/berna/casa-3/gallery/2.webp',
+      '/storage/images/berna/casa-3/gallery/3.webp',
+      '/storage/images/berna/casa-3/gallery/4.webp',
+    ],
     'description' => 'Stylish apartment in downtown Geneva',
   ),
   42 => 
@@ -686,7 +848,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.4268,
     'longitude' => 26.1025,
-    'cover_image' => 'bucharest_apartment.jpg',
+    'thumb' => 'bucarest_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Bright and spacious apartment in Bucharest',
   ),
   43 => 
@@ -702,7 +865,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.9139,
     'longitude' => 10.7522,
-    'cover_image' => 'oslo_apartment.jpg',
+    'thumb' => 'oslo_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Modern apartment in central Oslo',
   ),
   44 => 
@@ -718,7 +882,8 @@ return array (
     'discount' => 10,
     'latitude' => 50.0755,
     'longitude' => 14.4378,
-    'cover_image' => 'prague_apartment.jpg',
+    'thumb' => 'prague_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Central apartment with city view in Prague',
   ),
   45 => 
@@ -734,7 +899,8 @@ return array (
     'discount' => 0,
     'latitude' => 43.8563,
     'longitude' => 18.4131,
-    'cover_image' => 'sarajevo_apartment.jpg',
+    'thumb' => 'sarajevo_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in the heart of Sarajevo',
   ),
   46 => 
@@ -750,7 +916,8 @@ return array (
     'discount' => 0,
     'latitude' => 53.9045,
     'longitude' => 27.5615,
-    'cover_image' => 'minsk_apartment.jpg',
+    'thumb' => 'misnk_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Comfortable apartment in central Minsk',
   ),
   47 => 
@@ -766,7 +933,8 @@ return array (
     'discount' => 10,
     'latitude' => 60.1699,
     'longitude' => 24.9384,
-    'cover_image' => 'helsinki_apartment.jpg',
+    'thumb' => 'helsinki_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Cozy apartment in downtown Helsinki',
   ),
   48 => 
@@ -782,7 +950,8 @@ return array (
     'discount' => 0,
     'latitude' => 60.1699,
     'longitude' => 24.9384,
-    'cover_image' => 'helsinki_apartment2.jpg',
+    'thumb' => 'helsinki_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Modern apartment in lively district',
   ),
   49 => 
@@ -798,7 +967,8 @@ return array (
     'discount' => 0,
     'latitude' => 59.437,
     'longitude' => 24.7536,
-    'cover_image' => 'tallinn_apartment.jpg',
+    'thumb' => 'tallin_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Charming apartment in historic Tallinn',
   ),
   50 => 
@@ -814,7 +984,8 @@ return array (
     'discount' => 10,
     'latitude' => 49.6116,
     'longitude' => 6.1319,
-    'cover_image' => 'luxembourg_apartment.jpg',
+    'thumb' => 'luxemburg_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Luxury apartment in central Luxembourg',
   ),
   51 => 
@@ -830,7 +1001,8 @@ return array (
     'discount' => 0,
     'latitude' => 44.7866,
     'longitude' => 20.4489,
-    'cover_image' => 'belgrade_apartment3.jpg',
+    'thumb' => 'belgrade_apartment.jpg',   //TODO add to folder with images
+    'gallery'=>[],
     'description' => 'Bright and spacious apartment in Belgrade',
   ),
   52 => 
