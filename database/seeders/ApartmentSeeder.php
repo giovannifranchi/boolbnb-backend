@@ -40,6 +40,7 @@ class ApartmentSeeder extends Seeder
             $newApartment->square_meters = $apartment['square_meters'];
             $newApartment->bathrooms = $apartment['bathrooms'];
             $newApartment->rooms = $apartment['rooms'];
+            $newApartment->beds = $apartment['rooms'];
             $newApartment->price = $apartment['price'];
             $newApartment->discount = $apartment['discount'];
             // $newApartment->thumb = $images[rand(0, count($images)-1)]['path'];
