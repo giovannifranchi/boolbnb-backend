@@ -146,8 +146,13 @@ return array(
     'discount' => 0,
     'latitude' => 55.7619,
     'longitude' => 37.6094,
-    'thumb' => 'moscow_apartment.jpg',    //TODO add to folder with images
-    'gallery' => [],
+    'thumb' => '/storage/images/stockholm/casa-3/casa3.webp',    //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/stockholm/casa-3/gallery/1.webp',
+      '/storage/images/stockholm/casa-3/gallery/2.webp',
+      '/storage/images/stockholm/casa-3/gallery/3.webp',
+      '/storage/images/stockholm/casa-3/gallery/4.webp',
+    ],
     'description' => 'Spacious apartment in the heart of Moscow',
   ),
   7 =>
@@ -1199,7 +1204,13 @@ return array(
     'discount' => 0,
     'latitude' => 55.7558,
     'longitude' => 37.6176,
-    'thumb' => 'moscow_apartment.jpg', //TODO: Moscow
+    'thumb' => '/storage/images/stockholm/casa-4/casa4.webp',    //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/stockholm/casa-4/gallery/1.webp',
+      '/storage/images/stockholm/casa-4/gallery/2.webp',
+      '/storage/images/stockholm/casa-4/gallery/3.webp',
+      '/storage/images/stockholm/casa-4/gallery/4.webp',
+    ],
     'description' => 'Spacious apartment in downtown Moscow',
     'gallery' => []
   ),
