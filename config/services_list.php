@@ -38,7 +38,7 @@ return [
     ],
     [
         'name' => 'laundery',
-        'icon_url' => 'fa-jug-detergen',
+        'icon_url' => 'fa-jug-detergent',
 
     ],
     [
