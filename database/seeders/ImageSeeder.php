@@ -27,6 +27,8 @@ class ImageSeeder extends Seeder
 
                 $newImage->path = $image;
 
+                $newImage->save();
+
             }
         }
     }
