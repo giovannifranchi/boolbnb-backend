@@ -38,9 +38,9 @@ Route::get('/apartments', [ApartmentsController::class, 'index']);
 Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted']);
 Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 Route::get('apartments/search', [ApartmentsController::class, 'search']);
-Route::get('services', [ServiceController::class, 'index']);
+Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/plans', [PlanController::class, 'index']);
-Route::post('view/{id}', [ViewsController::class, 'store']);
+Route::post('/view/{id}', [ViewsController::class, 'store']);
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
