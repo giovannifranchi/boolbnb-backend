@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('square_meters');
             $table->tinyInteger('bathrooms');
             $table->tinyInteger('rooms');
+            $table->tinyInteger('beds');
             $table->decimal('price');
             $table->tinyInteger('discount')->default(0);
             $table->decimal('latitude', 10, 8);

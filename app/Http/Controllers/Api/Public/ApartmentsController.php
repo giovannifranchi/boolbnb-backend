@@ -60,7 +60,16 @@ class ApartmentsController extends Controller
         }
     }
 
-    public function search(){
+    public function search(Request $request){
 
+        $filteredByDistance  = Apartment::closeTo($request->latitude, $request->longitude, $request->radius);
+    
+        if($request->has('minPrice') && $request->has('maxPrice')){
+            $filteredByDistance = $filteredByDistance->priceRange($request->minPrice, $request->maxPrice);
+        }
+    
+        $apartments = $filteredByDistance->get();
+    
+        return response($apartments, 200);
     }
 }
