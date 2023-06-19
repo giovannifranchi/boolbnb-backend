@@ -43,7 +43,7 @@ class ApartmentsController extends Controller
         $highlightedApartments = Apartment::whereHas('latestPlan', function ($query) use ($now) {
             $query->where('expire_date', '>', $now);
         })
-        ->with(['services'])
+        ->with(['services', 'images'])
         ->get();
     
 
