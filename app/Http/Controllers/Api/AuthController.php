@@ -26,7 +26,7 @@ class AuthController extends Controller
 
         // $token = $newUser->createToken('mytoken')->plainTextToken;
 
-        $token = $newUser->createToken('myapptoken',[], now()->addDays(2))->plainTextToken;
+        $token = $newUser->createToken('myapptoken',['*'], now()->addDays(2))->plainTextToken;
 
         $response = [
             'user'=>$newUser,
@@ -48,7 +48,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('mytoken', [], now()->addDays(2))->plainTextToken;
+        $token = $user->createToken('mytoken', ['*'], now()->addDays(2))->plainTextToken;
 
         $response = [
             'user'=>$user,
