@@ -2,43 +2,44 @@
 
 return [
     [
-        'id'=> 1,
-        'path'=>'/storage/images/Amsterdam/amsterdam.jpg'
+        'id' => 1,
+        'cover_image' => '/storage/images/amsterdam/casa-1/nomeimg.jpg',
+        'gallery' => '/storage/images/amsterdam/casa-1/gallery/nomeimg.jpg'
     ],
     [
-        'id'=> 2,
-        'path'=>'/storage/images/Barcellona/barcellona.jpg'
+        'id' => 2,
+        'path' => '/storage/images/Barcellona/barcellona.jpg'
     ],
     [
-        'id'=> 3,
-        'path'=>'/storage/images/Berlino/Berlino.webp'
+        'id' => 3,
+        'path' => '/storage/images/Berlino/Berlino.webp'
     ],
     [
-        'id'=> 4,
-        'path'=>'/storage/images/Berna/berna.jpg'
+        'id' => 4,
+        'path' => '/storage/images/Berna/berna.jpg'
     ],
     [
-        'id'=> 5,
-        'path'=>'/storage/images/Bruxelles/bruxelles.jpg'
+        'id' => 5,
+        'path' => '/storage/images/Bruxelles/bruxelles.jpg'
     ],
     [
-        'id'=> 6,
-        'path'=>'/storage/images/Budapest/Budapest.jpg'
+        'id' => 6,
+        'path' => '/storage/images/Budapest/Budapest.jpg'
     ],
     [
-        'id'=> 7,
-        'path'=>'/storage/images/Copenaghen/copenaghen.jpg'
+        'id' => 7,
+        'path' => '/storage/images/Copenaghen/copenaghen.jpg'
     ],
     [
-        'id'=> 8,
-        'path'=>'/storage/images/Dublino/dublino.jpg'
+        'id' => 8,
+        'path' => '/storage/images/Dublino/dublino.jpg'
     ],
     [
-        'id'=> 9,
-        'path'=>'/storage/images/Roma/roma.webp'
+        'id' => 9,
+        'path' => '/storage/images/Roma/roma.webp'
     ],
     [
-        'id'=> 10,
-        'path'=>'/storage/images/Parigi/parigi.jpg'
+        'id' => 10,
+        'path' => '/storage/images/Parigi/parigi.jpg'
     ],
 ];
