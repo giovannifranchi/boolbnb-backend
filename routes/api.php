@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Public\ApartmentsController;
 
 use App\Http\Controllers\Api\Private\ApartmentController;
+use App\Http\Controllers\Api\Public\PlanController;
 use App\Http\Controllers\Api\Public\ServiceController;
 use App\Http\Controllers\Api\Public\ViewsController;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ Route::get('/apartments/highlighted', [ApartmentsController::class, 'highlighted
 Route::get('/apartments/{id}', [ApartmentsController::class, 'show']);
 Route::get('apartments/search', [ApartmentsController::class, 'search']);
 Route::get('services', [ServiceController::class, 'index']);
+Route::get('/plans', [PlanController::class, 'index']);
 Route::post('view/{id}', [ViewsController::class, 'store']);
 
 //protected routes
