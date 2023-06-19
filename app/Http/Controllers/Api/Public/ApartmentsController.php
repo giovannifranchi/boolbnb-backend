@@ -23,23 +23,6 @@ class ApartmentsController extends Controller
     {
         $now = Carbon::now();
 
-        // $apartments = Apartment::all();
-
-        // $highlightedApartments = [];
-
-        // foreach($apartments as $apartment){
-
-        //     $expirationDates = $apartment->plans()->pluck('expire_date')->toArray();
-
-        //     if(!empty($expirationDates)){
-
-        //         $expirationDate = max($expirationDates);
-        //         if($expirationDate > $now){
-        //             array_push($highlightedApartments, $apartment);
-        //         }
-        //     }
-        // }
-
         $highlightedApartments = Apartment::whereHas('latestPlan', function ($query) use ($now) {
             $query->where('expire_date', '>', $now);
         })
