@@ -2,8 +2,8 @@
 
 return [
     [
-        'id'=> 1,
-        'path'=>'/storage/images/Amsterdam/amsterdam.jpg'
+        'city'=> 'amsterdam',
+        'path'=>'/storage/images/amsterdam/casa-1/gallery/nomeimg.jpg'
     ],
-    
+
 ];
