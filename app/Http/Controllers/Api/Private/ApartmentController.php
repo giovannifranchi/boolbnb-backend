@@ -64,7 +64,7 @@ class ApartmentController extends Controller
                 
                 $path = $image->store('images', 'public');    
             
-                $newImage = Image::create(['image_path' => $path]);
+                $newImage = Image::create(['path' => $path]);
         
                 $newApartment->images()->attach($newImage);
             }
