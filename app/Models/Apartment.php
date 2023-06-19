@@ -68,6 +68,11 @@ class Apartment extends Model
             ->orderBy('distance', 'asc');
     }
 
+    public function scopePriceRange($query, $minPrice, $maxPrice)
+    {
+        return $query->whereBetween('price', [$minPrice, $maxPrice]);
+    }
+
     protected function thumb(): Attribute
     {
         return Attribute::make(
