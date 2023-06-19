@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <div class="container">
-            
+            <a href="{{ route('admin.apartments.create')}}" class="btn btn-success">Create</a>
             <table class="table">
                 <thead>
                     <tr>

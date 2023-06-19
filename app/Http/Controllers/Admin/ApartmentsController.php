@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ApartmentsController extends Controller
 {
@@ -26,6 +29,8 @@ class ApartmentsController extends Controller
      */
     public function create(Apartment $apartments)
     {
+        $apartments = Apartment::all();
+        return view('admin.apartments.create', compact('apartments'));
     }
 
     /**
@@ -36,6 +41,15 @@ class ApartmentsController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        $userId = Auth::id();
+        $apartment = new Apartment();
+        $apartment->slug = Str::slug($data['name'], '-');
+        $apartment->user_id = $userId;
+        $apartment->fill($data);
+        $apartment->save();
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
