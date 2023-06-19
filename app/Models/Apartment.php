@@ -43,9 +43,9 @@ class Apartment extends Model
     public function latestPlan()
     {
         return $this->belongsToMany(Plan::class)
-        ->withTimestamps()
-        ->orderBy('expire_date', 'desc')
-        ->take(1); 
+            ->withTimestamps()
+            ->orderBy('expire_date', 'desc')
+            ->take(1);
     }
 
     public function services()
@@ -53,10 +53,25 @@ class Apartment extends Model
         return $this->belongsToMany(Service::class)->withTimestamps();
     }
 
+    public function scopeCloseTo($query, $latitude, $longitude, $radius = 20)
+    {
+        $haversine = "(6371 * acos(cos(radians($latitude)) 
+                  * cos(radians(latitude)) 
+                  * cos(radians(longitude) - radians($longitude)) 
+                  + sin(radians($latitude)) 
+                  * sin(radians(latitude))))";
+
+        return $query
+            ->select()
+            ->selectRaw("{$haversine} AS distance")
+            ->whereRaw("{$haversine} < ?", [$radius])
+            ->orderBy('distance', 'asc');
+    }
+
     protected function thumb(): Attribute
     {
         return Attribute::make(
-            get: fn(string|null $value) => $value !== null ? asset($value) : null,
+            get: fn (string|null $value) => $value !== null ? asset($value) : null,
         );
     }
 }
