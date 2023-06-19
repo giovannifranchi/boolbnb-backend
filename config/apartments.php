@@ -388,8 +388,13 @@ return array(
     'discount' => 0,
     'latitude' => 59.9386,
     'longitude' => 30.3141,
-    'thumb' => 'saintpetersbourg_apartment.jpg',   //TODO add to folder with images
-    'gallery' => [],
+    'thumb' => '/storage/images/berlin/casa-6/casa6.webp',   //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/berlin/casa-6/gallery/1.webp',
+      '/storage/images/berlin/casa-6/gallery/2.webp',
+      '/storage/images/berlin/casa-6/gallery/3.webp',
+      '/storage/images/berlin/casa-6/gallery/4.webp',
+    ],
     'description' => 'Bright apartment in Dostoyevsky\'s neighborhood',
   ),
   18 =>
@@ -757,8 +762,13 @@ return array(
     'discount' => 0,
     'latitude' => 59.9343,
     'longitude' => 30.3351,
-    'thumb' => 'saintpetersbourg_apartment.jpg',   //TODO add to folder with images
-    'gallery' => [],
+    'thumb' => '/storage/images/lisbon/casa-7/casa7.webp',   //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/lisbon/casa-7/gallery/1.webp',
+      '/storage/images/lisbon/casa-7/gallery/2.webp',
+      '/storage/images/lisbon/casa-7/gallery/3.webp',
+      '/storage/images/lisbon/casa-7/gallery/4.webp',
+    ],
     'description' => 'Centrally located apartment with city view',
   ),
   35 =>
@@ -972,7 +982,7 @@ return array(
     'discount' => 10,
     'latitude' => 50.0755,
     'longitude' => 14.4378,
-    'thumb' => '/storage/images/prague/casa-1/casa2.webp',   //TODO add to folder with images
+    'thumb' => '/storage/images/prague/casa-1/casa1.webp',   //TODO add to folder with images
     'gallery' => [
       '/storage/images/prague/casa-1/gallery/1.jpg',
       '/storage/images/prague/casa-1/gallery/2.webp',
@@ -994,8 +1004,13 @@ return array(
     'discount' => 0,
     'latitude' => 43.8563,
     'longitude' => 18.4131,
-    'thumb' => 'sarajevo_apartment.jpg',   //TODO add to folder with images
-    'gallery' => [],
+    'thumb' => '/storage/images/belgrad/casa-4/casa4.webp',   //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/belgrad/casa-4/gallery/1.webp',
+      '/storage/images/belgrad/casa-4/gallery/2.webp',
+      '/storage/images/belgrad/casa-4/gallery/3.webp',
+      '/storage/images/belgrad/casa-4/gallery/4.webp',
+    ],
     'description' => 'Charming apartment in the heart of Sarajevo',
   ),
   46 =>
@@ -1011,8 +1026,13 @@ return array(
     'discount' => 0,
     'latitude' => 53.9045,
     'longitude' => 27.5615,
-    'thumb' => 'misnk_apartment.jpg',   //TODO add to folder with images
-    'gallery' => [],
+    'thumb' => '/storage/images/dublin/casa-4/casa4.webp',   //TODO add to folder with images
+    'gallery' => [
+      '/storage/images/dublin/casa-4/gallery/1.webp',
+      '/storage/images/dublin/casa-4/gallery/2.webp',
+      '/storage/images/dublin/casa-4/gallery/3.webp',
+      '/storage/images/dublin/casa-4/gallery/4.webp',
+    ],
     'description' => 'Comfortable apartment in central Minsk',
   ),
   47 =>
@@ -1755,9 +1775,14 @@ return array(
     'discount' => 10,
     'latitude' => 59.9343,
     'longitude' => 30.3351,
-    'thumb' => 'saintpetersburg_apartment.jpg', //TODO: Saint Petersburg
     'description' => 'Stylish apartment in the heart of Saint Petersburg',
-    'gallery' => []
+    'thumb' => '/storage/images/london/casa-4/casa4.webp', //TODO: Saint Petersburg
+    'gallery' => [
+      '/storage/images/london/casa-4/gallery/1.jpg',
+      '/storage/images/london/casa-4/gallery/2.webp',
+      '/storage/images/london/casa-4/gallery/3.webp',
+      '/storage/images/london/casa-4/gallery/4.jpg',
+    ]
   ),
   81 =>
   array(
@@ -1970,8 +1995,8 @@ return array(
     'discount' => 0,
     'latitude' => 48.2082,
     'longitude' => 16.3738,
-    'thumb' => '/storage/images/vienna/casa-5/casa5.webp', //TODO: Vienna
     'description' => 'Spacious apartment in classic Vienna',
+    'thumb' => '/storage/images/vienna/casa-5/casa5.jpeg', //TODO: Vienna
     'gallery' => [
       '/storage/images/vienna/casa-5/gallery/1.webp',
       '/storage/images/vienna/casa-5/gallery/2.webp',
@@ -2125,9 +2150,14 @@ return array(
     'discount' => 10,
     'latitude' => 59.9139,
     'longitude' => 10.7522,
-    'thumb' => 'oslo_apartment2.jpg', //TODO: Oslo
     'description' => 'Luxurious apartment on Karl Johans gate in Oslo',
-    'gallery' => []
+    'thumb' => '/storage/images/oslo/casa-3/casa3.webp', //TODO: Oslo
+    'gallery' => [
+      '/storage/images/oslo/casa-3/gallery/1.jpeg',
+      '/storage/images/oslo/casa-3/gallery/2.webp',
+      '/storage/images/oslo/casa-3/gallery/3.jpeg',
+      '/storage/images/oslo/casa-3/gallery/4.jpeg',
+    ]
   ),
   98 =>
   array(
@@ -2231,8 +2261,8 @@ return array(
     'discount' => 5,
     'latitude' => 59.3257,
     'longitude' => 18.0719,
-    'thumb' => '/storage/images/stockholm/casa-7/casa7.webp', //TODO: Stockholm
     'description' => 'Cosy apartment in the charming Gamla Stan of Stockholm',
+    'thumb' => '/storage/images/stockholm/casa-7/casa4.webp', //TODO: Stockholm
     'gallery' => [
       '/storage/images/stockholm/casa-7/gallery/1.webp',
       '/storage/images/stockholm/casa-7/gallery/2.webp',
