@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ApartmentStoreRequest;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -39,7 +40,7 @@ class ApartmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApartmentStoreRequest $request)
     {
         $data = $request->all();
         $userId = Auth::id();
@@ -83,7 +84,7 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apartment $apartment)
+    public function update(ApartmentStoreRequest $request, Apartment $apartment)
     {
         $data = $request->all();
 
