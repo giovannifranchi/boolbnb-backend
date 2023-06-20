@@ -40,6 +40,11 @@
                 <label for="rooms" class="form-label">Rooms Number</label>
                 <input type="number" class="form-control" id="rooms" value="{{old('rooms')}}" name="rooms">
             </div>
+            {{-- inserimento numero letti --}}
+            <div class="mb-3">
+                <label for="beds" class="form-label">Beds Number</label>
+                <input type="number" class="form-control" id="beds" value="{{old('beds')}}" name="beds">
+            </div>
             {{-- inserimento prezzo appartamento  --}}
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
