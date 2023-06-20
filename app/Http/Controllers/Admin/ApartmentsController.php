@@ -8,7 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApartmentStoreRequest;
 use App\Models\Apartment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -54,6 +56,20 @@ class ApartmentsController extends Controller
         $apartment->fill($data);
         $apartment->slug = Str::slug($apartment->name);
         $apartment->user_id = $user->id;
+        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($data['address'] . ', ' . $data['city'] . ', ' . $data['state']) . '.json', [
+            'key' => env('TOM_TOM_KEY')
+        ]);
+
+        $data = $response->json();
+
+        if (!empty($data['results']) && isset($data['results'][0]['position'])) {
+            $apartment->latitude = $data['results'][0]['position']['lat'];
+            $apartment->longitude = $data['results'][0]['position']['lon'];
+        }else {
+            return response(['error'=>'internal service error'], 500);
+        }
+
+
         $apartment->save();
 
         return redirect()->route('admin.apartments.index');
