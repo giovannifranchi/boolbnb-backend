@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-    <main>
+    <main class="container">
         <form action="{{ route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         
