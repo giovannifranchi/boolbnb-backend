@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApartmentStoreRequest;
 use App\Models\Apartment;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -39,7 +40,9 @@ class ApartmentsController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $apartments = Apartment::all();
+        $services = Service::all();
+        return view('admin.apartments.create', compact('apartments','services'));
     }
 
     /**
@@ -74,6 +77,10 @@ class ApartmentsController extends Controller
 
         $apartment->save();
 
+        if(isset($request['services'])) {
+            $apartment->services()->sync($request['services']);
+        }
+
         return redirect()->route('admin.apartments.index');
     }
 
@@ -95,9 +102,11 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit($id)
     {
-        return view('admin.apartments.edit', compact('apartment'));
+        $apartment = Apartment::where('id', $id)->first();
+        $services = Service::all();
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -112,6 +121,13 @@ class ApartmentsController extends Controller
         $data = $request->validated();
 
         $apartment->slug = Str::slug($data['name']);
+
+        if(isset($data['services'])){
+            $apartment->services()->sync($data['services']);
+        }else{
+            $apartment->services()->detach();
+        }
+        
 
         $apartment->update($data);
         return redirect()->route('admin.apartments.show', $apartment);
@@ -129,12 +145,10 @@ class ApartmentsController extends Controller
         // $game->delete();
         // return to_route('admin.games.index');
 
-
-
-
+        $old_id = $apartment->id;
 
         $apartment->delete();
 
-        return redirect()->route('admin.apartments.index')->with('message', "Post eliminato con successo");
+        return redirect()->route('admin.apartments.index')->with('message', "Apartment $old_id deleted successfully");
     }
 }

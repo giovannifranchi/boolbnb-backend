@@ -44,7 +44,7 @@ Route::get('/plans', [PlanController::class, 'index']);
 Route::post('/view/{id}', [ViewsController::class, 'store']);
 Route::get('/search/{query}', function ($query) {
     $client = new Client();
-    $response = $client->request('GET', 'https://api.tomtom.com/search/2/search/'.$query.'.json?key=Svz7LipmreJVnHm9yFvS36THWzv1koFe&typeahead=true&limit=5');
+    $response = $client->request('GET', 'https://api.tomtom.com/search/2/search/'.$query.'.json?key=HHabEOt4x9FdwiD1eDYpjSANMfXG5rxr&typeahead=true&limit=5');
 
     return $response->getBody();
 });
