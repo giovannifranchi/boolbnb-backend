@@ -10,6 +10,8 @@ use App\Models\Apartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+use function PHPUnit\Framework\isEmpty;
+
 class ApartmentsController extends Controller
 {
     /**
@@ -21,8 +23,11 @@ class ApartmentsController extends Controller
     {
 
         $user = $request->user();
-        $apartments = Apartment::where('apartment_id', $user->id)->get();
-        return view('admin.apartments.index', compact('apartments'));
+        $apartments = Apartment::where('user_id', $user->id)->get();
+        
+            return view('admin.apartments.index', compact('apartments'));
+        
+        
     }
 
     /**
