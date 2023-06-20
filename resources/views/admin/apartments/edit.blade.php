@@ -12,8 +12,9 @@
         </ul>
     </div>
     @endif
-    <form action="{{ route('admin.apartments.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.apartments.update', $apartment)}}" method="POST" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         {{-- inserimento nome appartamento --}}
         <div class="mb-3">
