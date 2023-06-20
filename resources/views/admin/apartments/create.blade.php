@@ -22,9 +22,14 @@
             </div>
             {{-- inserimento indirizzo --}}
             <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" value="{{ old('address')}}" name="address">
+                <label for="address-input" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address-input" value="{{ old('address')}}">
             </div>
+            {{-- lista dinamica di autocompletamento --}}
+            <ul class="list-unstyled d-none" id="autocompleteContainer">
+                
+            </ul>
+            <input type="text" name="address" id="address" class="d-none">
             {{-- inserimento città --}}
             <div class="mb-3 d-none">
                 <label for="city" class="form-label">City</label>
@@ -71,6 +76,11 @@
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" rows="3" name="description">{{old('description')}}</textarea>
             </div>
+
+            {{-- Longitude --}}
+            <input type="text" name="longitude" id="longitude" class="d-none">
+            {{-- Latitude --}}
+            <input type="text" name="latitude" id="latitude" class="d-none">
             {{-- inserimento immagine che si vuole avere come copertina  --}}
             {{-- <div class="mb-3">
                 <label for="cover_image" class="form-label">Cover Image</label>

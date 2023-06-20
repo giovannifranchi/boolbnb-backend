@@ -44,11 +44,28 @@ const addressField = document.getElementById('address');
 
 addressField.addEventListener('input', async (e) => {
     const searchText = e.target.value;
+    let foundOptions = [];
 
     if (searchText) {
         const response = await axios.get(`http://127.0.0.1:8000/api/search/${searchText}`);
-
-        console.log(response.data);
+        if(response.data.results.length > 0){
+            foundOptions = response.data.results;
+            console.log(foundOptions);
+            const container = document.getElementById('autocompleteContainer');
+            container.classList.remove('d-none');
+            container.classList.add('d-block');
+            foundOptions.forEach(result => {
+                const listItem = document.createElement('li');
+                const text = `${result.address.steet || ''} ${result.address.municipality} ${result.address.country}`
+                listItem.innerHTML = text;
+                listItem.addEventListener('click', ()=>{
+                    addressField.value = text;
+                    container.classList.remove('d-block');
+                    container.classList.add('d-none');
+                });
+                container.append(listItem);
+            });
+        }
     }
 });
 
