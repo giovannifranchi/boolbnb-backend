@@ -36,7 +36,7 @@
                                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ $plan->name }}</h6>
                                 <h5 class="card-title">{{ $plan->duration }} hours</h5>
                                 <p class="card-text">{{ $plan->price }} €</p>
-                                <a href="{{route('admin.payments.index', $plan)}}" class="card-link btn btn-primary">Paga!!</a>
+                                <a href="{{route('braintree.token', $plan)}}" class="card-link btn btn-primary">Paga!!</a>
                             </div>
                         </div>
                     </div>
