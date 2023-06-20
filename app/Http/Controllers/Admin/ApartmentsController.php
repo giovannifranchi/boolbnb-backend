@@ -95,8 +95,7 @@ class ApartmentsController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $apartments = Apartment::all();
-        return view('admin.apartments.edit', compact('apartment', 'apartments'));
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -108,7 +107,9 @@ class ApartmentsController extends Controller
      */
     public function update(ApartmentStoreRequest $request, Apartment $apartment)
     {
-        $data = $request->all();
+        $data = $request->validated();
+
+        $apartment->slug = Str::slug($data['name']);
 
         $apartment->update($data);
         return redirect()->route('admin.apartments.show', $apartment);
