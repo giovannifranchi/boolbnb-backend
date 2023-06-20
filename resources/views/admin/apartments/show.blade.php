@@ -24,7 +24,8 @@
                     </div>
                 </div>
             </div>
-            @if (!$apartment->plans)
+            {{-- put the condition if services are not set --}}
+            @if (true) 
             <div class="container text-center">
                 <h1 class="my-3">Plans List</h1>
                 <div class="row justify-content-center">
@@ -35,7 +36,7 @@
                                 <h6 class="card-subtitle mb-2 text-body-secondary">{{ $plan->name }}</h6>
                                 <h5 class="card-title">{{ $plan->duration }} hours</h5>
                                 <p class="card-text">{{ $plan->price }} €</p>
-                                <a href="#" class="card-link btn btn-primary">Paga!!</a>
+                                <a href="{{route('admin.payments.index', $plan)}}" class="card-link btn btn-primary">Paga!!</a>
                             </div>
                         </div>
                     </div>
