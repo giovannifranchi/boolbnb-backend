@@ -25,7 +25,7 @@ class ApartmentsController extends Controller
         $user = $request->user();
         $apartments = Apartment::where('user_id', $user->id)->get();
         
-            return view('admin.apartments.index', compact('apartments'));
+        return view('admin.apartments.index', compact('apartments'));
         
         
     }
@@ -35,10 +35,9 @@ class ApartmentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Apartment $apartments)
+    public function create()
     {
-        $apartments = Apartment::all();
-        return view('admin.apartments.create', compact('apartments'));
+        return view('admin.apartments.create');
     }
 
     /**
@@ -49,12 +48,12 @@ class ApartmentsController extends Controller
      */
     public function store(ApartmentStoreRequest $request)
     {
-        $data = $request->all();
-        $userId = Auth::id();
+        $data = $request->validated();
+        $user = $request->user();
         $apartment = new Apartment();
-        $apartment->slug = Str::slug($data['name'], '-');
-        $apartment->user_id = $userId;
         $apartment->fill($data);
+        $apartment->slug = Str::slug($apartment->name);
+        $apartment->user_id = $user->id;
         $apartment->save();
 
         return redirect()->route('admin.apartments.index');

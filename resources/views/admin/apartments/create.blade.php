@@ -50,16 +50,7 @@
                 <label for="discount" class="form-label">Discount Value</label>
                 <input type="number" class="form-control" id="discount" value="{{old('discount')}}" name="discount">
             </div>
-            {{-- inserimento latitudine per geolocalizzazione  --}}
-            <div class="mb-3">
-                <label for="latitude" class="form-label">Latitude</label>
-                <input type="number" step="0.00000001" class="form-control" id="latitude" value="{{old('latitude')}}" name="latitude">
-            </div>
-            {{-- inserimento longitudine per geolocalizzazione --}}
-            <div>
-                <label for="longitude" class="form-label">Longitude</label>
-                <input path=^\d{1,2}(\.\d{1,8})?$ step="0.00000001" class="form-control" id="longitude" value="{{old('longitude')}}" name="longitude">
-            </div>
+
             {{-- inserimento descrizione appartamento  --}}
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
