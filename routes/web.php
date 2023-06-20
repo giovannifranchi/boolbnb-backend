@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\ProfileController;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
 
 /*

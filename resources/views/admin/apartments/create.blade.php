@@ -26,12 +26,12 @@
                 <input type="text" class="form-control" id="address" value="{{ old('address')}}" name="address">
             </div>
             {{-- inserimento città --}}
-            <div class="mb-3">
+            <div class="mb-3 d-none">
                 <label for="city" class="form-label">City</label>
                 <input type="text" class="form-control" id="city" value="{{old('city')}}" name="city">
             </div>
             {{-- inserimento nazione  --}}
-            <div class="mb-3">
+            <div class="mb-3 d-none">
                 <label for="state" class="form-label">State</label>
                 <input type="text" class="form-control" id="state" value="{{old('state')}}" name="state">
             </div>

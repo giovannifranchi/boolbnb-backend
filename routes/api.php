@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\Private\ApartmentController;
 use App\Http\Controllers\Api\Public\PlanController;
 use App\Http\Controllers\Api\Public\ServiceController;
 use App\Http\Controllers\Api\Public\ViewsController;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,12 @@ Route::get('apartments/search', [ApartmentsController::class, 'search']);
 Route::get('/services', [ServiceController::class, 'index']);
 Route::get('/plans', [PlanController::class, 'index']);
 Route::post('/view/{id}', [ViewsController::class, 'store']);
+Route::get('/search/{query}', function ($query) {
+    $client = new Client();
+    $response = $client->request('GET', 'https://api.tomtom.com/search/2/search/'.$query.'.json?key=Svz7LipmreJVnHm9yFvS36THWzv1koFe&typeahead=true&limit=5');
+
+    return $response->getBody();
+});
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
