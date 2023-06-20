@@ -40,8 +40,9 @@ class ApartmentsController extends Controller
      */
     public function create()
     {
+        $apartments = Apartment::all();
         $services = Service::all();
-        return view('admin.apartments.create', compact('services'));
+        return view('admin.apartments.create', compact('apartments','services'));
     }
 
     /**
@@ -58,24 +59,26 @@ class ApartmentsController extends Controller
         $apartment->fill($data);
         $apartment->slug = Str::slug($apartment->name);
         $apartment->user_id = $user->id;
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($data['address'] . ', ' . $data['city'] . ', ' . $data['state']) . '.json', [
-            'key' => env('TOM_TOM_KEY')
-        ]);
+        // $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($data['address'] . ', ' . $data['city'] . ', ' . $data['state']) . '.json', [
+        //     'key' => env('TOM_TOM_KEY')
+        // ]);
 
-        $data = $response->json();
+        // $data = $response->json();
 
-        if (!empty($data['results']) && isset($data['results'][0]['position'])) {
-            $apartment->latitude = $data['results'][0]['position']['lat'];
-            $apartment->longitude = $data['results'][0]['position']['lon'];
-        }else {
-            return response(['error'=>'internal service error'], 500);
-        }
+        // if (!empty($data['results']) && isset($data['results'][0]['position'])) {
+        //     $apartment->latitude = $data['results'][0]['position']['lat'];
+        //     $apartment->longitude = $data['results'][0]['position']['lon'];
+        // }else {
+        //     return response(['error'=>'internal service error'], 500);
+        // }
+        $apartment->longitude = $request['longitude'];
+        $apartment->latitude = $request['latitude'];
 
 
         $apartment->save();
 
-        if(isset($data['services'])) {
-            $apartment->services()->sync($data['services']);
+        if(isset($request['services'])) {
+            $apartment->services()->sync($request['services']);
         }
 
         return redirect()->route('admin.apartments.index');
@@ -99,8 +102,9 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apartment $apartment)
+    public function edit($id)
     {
+        $apartment = Apartment::where('id', $id)->first();
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }

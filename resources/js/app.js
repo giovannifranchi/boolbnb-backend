@@ -40,28 +40,37 @@ const image = document.getElementById('image-field');
 // }
 
 
-const addressField = document.getElementById('address');
+const addressField = document.getElementById('address-input');
 
 addressField.addEventListener('input', async (e) => {
     const searchText = e.target.value;
     let foundOptions = [];
+    const container = document.getElementById('autocompleteContainer');
 
     if (searchText) {
         const response = await axios.get(`http://127.0.0.1:8000/api/search/${searchText}`);
         if(response.data.results.length > 0){
+            if(container.children.length > 0){
+                container.innerHTML = '';
+            }
+            foundOptions = [];
             foundOptions = response.data.results;
             console.log(foundOptions);
-            const container = document.getElementById('autocompleteContainer');
             container.classList.remove('d-none');
             container.classList.add('d-block');
             foundOptions.forEach(result => {
                 const listItem = document.createElement('li');
-                const text = `${result.address.steet || ''} ${result.address.municipality} ${result.address.country}`
+                const text = `${result.address.streetName || ''} ${result.address.municipality} ${result.address.country}`
                 listItem.innerHTML = text;
                 listItem.addEventListener('click', ()=>{
                     addressField.value = text;
                     container.classList.remove('d-block');
                     container.classList.add('d-none');
+                    document.getElementById('address').value = result.address.streetName;
+                    document.getElementById('city').value = result.address.municipality;
+                    document.getElementById('state').value = result.address.country;
+                    document.getElementById('longitude').value = result.position.lon;
+                    document.getElementById('latitude').value = result.position.lat;
                 });
                 container.append(listItem);
             });
