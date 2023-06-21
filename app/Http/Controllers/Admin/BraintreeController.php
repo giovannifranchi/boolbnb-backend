@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use App\Models\Plan;
 use Braintree\Gateway;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BraintreeController extends Controller
 {
-    public function token($plan)
+    public function token($plan, $apartment)
     {
         $gateway = new Gateway([
             'environment' => 'sandbox', // use 'production' for production environment
@@ -24,7 +26,7 @@ class BraintreeController extends Controller
         $plan = Plan::where('id', $plan)->first();
 
         // pass the generated token to your view
-        return view('admin.payments.index', compact('token', 'plan'));
+        return view('admin.payments.index', compact('token', 'plan', 'apartment'));
     }
 
     public function checkout(Request $request)
@@ -37,6 +39,7 @@ class BraintreeController extends Controller
         ]);
 
         $nonce = $request->payment_method_nonce;
+
 
         $amount = json_decode($request->amount);
 
@@ -52,6 +55,14 @@ class BraintreeController extends Controller
         ]);
 
         if ($result->success) {
+            $apartment = Apartment::where('id', $request->apartment)->first();
+
+            $now = Carbon::now();
+        
+            $expiration = $now->addHours($amount->duration);
+    
+            $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
+            
             return redirect()->back()->with('success', 'Transaction successful with plan'.$amount->name);
         } else {
             return redirect()->back()->withErrors(['error' => 'Transaction failed']);

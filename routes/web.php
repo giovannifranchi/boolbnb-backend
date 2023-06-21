@@ -36,7 +36,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
     Route::resource('payments', PaymentController::class);
-    Route::get('braintree/{plan}', [BraintreeController::class, 'token'])->name('braintree.token');
+    Route::get('braintree/{plan}/{apartment}', [BraintreeController::class, 'token'])->name('braintree.token');
     Route::post('braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
 });
 
