@@ -37,6 +37,7 @@ class ApartmentStoreRequest extends FormRequest
             'description'=>'string|max:500',
             'thumb'=>'image',
             'services'=>'array',
+            'services.*'=>'string|exists:services,id'
         ];
     }
 }
