@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ApartmentsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GalleryImagesController;
 use App\Http\Controllers\Admin\PlansController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServicesController;
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
+    Route::get('/gallery/{apartment}', [GalleryImagesController::class, 'index'])->name('gallery.index');
+
 });
 
 Route::middleware('auth')->group(function () {
