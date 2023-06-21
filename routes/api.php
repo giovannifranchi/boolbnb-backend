@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\Public\ApartmentsController;
 
 use App\Http\Controllers\Api\Private\ApartmentController;
+use App\Http\Controllers\Api\Private\UploadController;
 use App\Http\Controllers\Api\Public\PlanController;
 use App\Http\Controllers\Api\Public\ServiceController;
 use App\Http\Controllers\Api\Public\ViewsController;
@@ -35,6 +36,10 @@ use Illuminate\Support\Facades\Route;
 //auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+//upload routes
+
+Route::post('/upload', [UploadController::class, 'upload']);
 
 //public routes
 Route::get('/apartments', [ApartmentsController::class, 'index']);
