@@ -43,32 +43,32 @@
         {{-- inserimento metri quadri appartamento  --}}
         <div class="mb-3">
             <label for="square_meters" class="form-label">Square Meters</label>
-            <input type="number" class="form-control" id="square_meters" value="{{old('square_meters')}}" name="square_meters">
+            <input type="number" class="form-control" id="square_meters" value="{{old('square_meters')}}" name="square_meters" path="^(?!-)[0-9]+$">
         </div>
         {{-- inserimento numero bagni --}}
         <div class="mb-3">
             <label for="bathrooms" class="form-label">Bathrooms Number</label>
-            <input type="number" step="0.01" class="form-control" id="bathrooms" value="{{old('bathrooms')}}" name="bathrooms">
+            <input type="number" step="0.01" class="form-control" id="bathrooms" value="{{old('bathrooms')}}" name="bathrooms" path="^(?!-)[0-9]+$">
         </div>
         {{-- inserimento numero stanze --}}
         <div class="mb-3">
             <label for="rooms" class="form-label">Rooms Number</label>
-            <input type="number" class="form-control" id="rooms" value="{{old('rooms')}}" name="rooms">
+            <input type="number" class="form-control" id="rooms" value="{{old('rooms')}}" name="rooms" path="^(?!-)[0-9]+$">
         </div>
         {{-- inserimento numero letti --}}
         <div class="mb-3">
             <label for="beds" class="form-label">Beds Number</label>
-            <input type="number" class="form-control" id="beds" value="{{old('beds')}}" name="beds">
+            <input type="number" class="form-control" id="beds" value="{{old('beds')}}" name="beds" path="^(?!-)[0-9]+$">
         </div>
         {{-- inserimento prezzo appartamento  --}}
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" value="{{old('price')}}" name="price">
+            <input type="number" class="form-control" id="price" value="{{old('price')}}" name="price" path="^(?!-)[0-9]+$">
         </div>
         {{-- inserimento valore percentuale dello sconto --}}
         <div class="mb-3">
             <label for="discount" class="form-label">Discount Value</label>
-            <input type="number" class="form-control" id="discount" value="{{old('discount')}}" name="discount">
+            <input type="number" class="form-control" id="discount" value="{{old('discount')}}" name="discount" path="^(?!-)[0-9]+$">
         </div>
         <div class="mb-3">
             <div>Services</div>
