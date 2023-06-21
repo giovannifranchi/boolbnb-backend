@@ -10,8 +10,9 @@ use App\Http\Controllers\Api\Public\ServiceController;
 use App\Http\Controllers\Api\Public\ViewsController;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 //auth routes
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -44,7 +46,9 @@ Route::get('/plans', [PlanController::class, 'index']);
 Route::post('/view/{id}', [ViewsController::class, 'store']);
 Route::get('/search/{query}', function ($query) {
     $client = new Client();
-    $response = $client->request('GET', 'https://api.tomtom.com/search/2/search/'.$query.'.json?key=Svz7LipmreJVnHm9yFvS36THWzv1koFe&typeahead=true&limit=5');
+    $apiKey = env('TOM_TOM_KEY');
+    //add api key
+    $response = $client->request('GET', 'https://api.tomtom.com/search/2/search/'.$query.'.json?key='.$apiKey.'&typeahead=true&limit=5');
 
     return $response->getBody();
 });
