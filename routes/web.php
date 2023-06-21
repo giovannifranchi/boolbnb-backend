@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\ApartmentsController;
+use App\Http\Controllers\Admin\BraintreeController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PlansController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServicesController;
@@ -33,6 +35,9 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
+    Route::resource('payments', PaymentController::class);
+    Route::get('braintree/{plan}/{apartment}', [BraintreeController::class, 'token'])->name('braintree.token');
+    Route::post('braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
 });
 
 Route::middleware('auth')->group(function () {

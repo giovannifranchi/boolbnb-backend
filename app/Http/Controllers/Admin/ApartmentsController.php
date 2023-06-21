@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApartmentStoreRequest;
 use App\Models\Apartment;
+use App\Models\Plan;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -92,8 +93,8 @@ class ApartmentsController extends Controller
      */
     public function show(Apartment $apartment)
     {
-
-        return view('admin.apartments.show', compact('apartment'));
+        $plans = Plan::all();
+        return view('admin.apartments.show', compact('apartment', 'plans'));
     }
 
     /**
