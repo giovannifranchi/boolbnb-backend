@@ -10,14 +10,18 @@ class UploadController extends Controller
 {
     public function upload(Request $request)
     {
-        if($request->hasFile('image')){
+        if($request->hasFile('images')){
             try {
-                $file = $request->file('image');
-                $path = $file->store('images', 'public');
+                $paths = [];
+                $files = $request->file('images');
+                foreach($files as $file) {
+                    $path = $file->store('images', 'public');
+                    $paths[] = asset("storage/".$path);
+                }
                 
                 return response()->json([
-                    'message'=>'file uploaded successfully',
-                    'path' => asset("storage/".$path),
+                    'message'=>'files uploaded successfully',
+                    'paths' => $paths
                 ], 200);
                 
             } catch(\Exception $e) {
@@ -27,6 +31,8 @@ class UploadController extends Controller
             }
         }
     }
+    
+    
      
     
 }
