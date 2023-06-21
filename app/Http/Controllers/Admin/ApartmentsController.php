@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApartmentStoreRequest;
+use App\Http\Requests\Admin\ApartmentUpdateRequest;
 use App\Models\Apartment;
 use App\Models\Plan;
 use App\Models\Service;
@@ -117,7 +118,7 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ApartmentStoreRequest $request, Apartment $apartment)
+    public function update(ApartmentUpdateRequest $request, Apartment $apartment)
     {
         $data = $request->validated();
 
