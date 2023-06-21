@@ -54,5 +54,6 @@ class ApartmentsController extends Controller
         $apartments = $filteredByDistance->get();
     
         return response($apartments, 200);
+        // return response($request);
     }
 }
