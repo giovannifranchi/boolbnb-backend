@@ -51,7 +51,7 @@ class ApartmentsController extends Controller
             $filteredByDistance = $filteredByDistance->priceRange($request->minPrice, $request->maxPrice);
         }
     
-        $apartments = $filteredByDistance->get();
+        $apartments = $filteredByDistance->with(['images', 'services'])->get();
     
         return response($apartments, 200);
     }
