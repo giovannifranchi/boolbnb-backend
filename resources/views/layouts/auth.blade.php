@@ -55,16 +55,16 @@
                                 </li>
 
 
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="{{route('admin.services.index')}}" class="nav-link">{{__('Services')}}</a>
                                 </li> 
 
                                 <li class="nav-item">
                                     <a href="{{route('admin.tags.index')}}" class="nav-link">{{__('Tags')}}</a>
-                                </li>
+                                </li> 
                                 <li class="nav-item">
                                     <a href="{{route('admin.plans.index')}}" class="nav-link">{{__('Plans')}}</a>
-                                </li>
+                                </li> --}}
 
                             @endauth
                         </ul>
