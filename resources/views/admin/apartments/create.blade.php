@@ -17,7 +17,7 @@
 
         {{-- inserimento nome appartamento --}}
         <div class="mb-3">
-            <label for="name" class="form-label">Apartment Name </label>
+            <label for="name" class="form-label">Apartment Name</label>
             <input type="text" class="form-control" id="name" value="{{ old('name')}}" name="name">
         </div>
         {{-- inserimento indirizzo --}}
@@ -26,9 +26,7 @@
             <input type="text" class="form-control" id="address-input" value="{{ old('address')}}">
         </div>
         {{-- lista dinamica di autocompletamento --}}
-        <ul class="list-unstyled d-none" id="autocompleteContainer">
-
-        </ul>
+        <ul class="list-unstyled d-none" id="autocompleteContainer"></ul>
         <input type="text" name="address" id="address" class="d-none">
         {{-- inserimento città --}}
         <div class="mb-3 d-none">
@@ -70,6 +68,7 @@
             <label for="discount" class="form-label">Discount Value</label>
             <input type="number" class="form-control" id="discount" value="{{old('discount')}}" name="discount" path="^(?!-)[0-9]+$">
         </div>
+    
         <div class="mb-3">
             <div>Services</div>
             @foreach ($services as $service)
@@ -90,21 +89,54 @@
         <input type="text" name="longitude" id="longitude" class="d-none">
         {{-- Latitude --}}
         <input type="text" name="latitude" id="latitude" class="d-none">
+        
         {{-- inserimento immagine che si vuole avere come copertina  --}}
-        {{-- <div class="mb-3">
-                <label for="cover_image" class="form-label">Cover Image</label>
-                    <input class="form-control" type="file" id="cover_image" name="cover_image" value="{{ old('cover_image', $apartment->cover_image) }}" name="cover_image">
-        <div class="mb-3 @if (!$apartment->cover_image) d-none @endif" id="image2-input-container">
+        <div class="mb-3">
+            <label for="cover_image" class="form-label">Cover Image</label>
+            <input class="form-control" type="file" id="cover_image" name="thumb" onchange="previewImage(event, 'file-image-preview')" multiple>
             <div class="preview">
-                <img id="file-image2-preview" @if ($apartment->cover_image) src="{{ asset('storage/' . $apartment->cover_image) }} @endif" class="img-fluid">
+                <img id="file-image-preview" class="img-fluid" style="width: 200px;">
             </div>
         </div>
-        </div> --}}
+        {{-- inserimento immagini aggiuntive --}}
+        <div class="mb-3">
+            <label for="additional_images" class="form-label">Additional Images</label>
+            <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
+            <div class="preview" id="additional-images-preview" style="display: flex; width: 200px;"></div>
+        </div>
+        
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Submit</button>
-
         </div>
     </form>
 </main>
+
+<script>
+    function previewImage(event, previewId) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById(previewId);
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function previewMultipleImages(event, previewContainerId) {
+        const files = event.target.files;
+        const previewContainer = document.getElementById(previewContainerId);
+        previewContainer.innerHTML = "";
+
+        for (let i = 0; i < files.length; i++) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.createElement("img");
+                img.src = reader.result;
+                img.className = "img-fluid";
+                previewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(files[i]);
+        }
+    }
+</script>
 
 @endsection
