@@ -14,7 +14,7 @@ class StatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(StatChart $chart, Request $request)
+    public function index(Request $request)
     {
         $user = $request->user();
         $apartments = Apartment::where('user_id', $user->id)->get();
