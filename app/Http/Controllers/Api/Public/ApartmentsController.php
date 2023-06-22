@@ -50,6 +50,18 @@ class ApartmentsController extends Controller
         if($request->has('minPrice') && $request->has('maxPrice')){
             $filteredByDistance = $filteredByDistance->priceRange($request->minPrice, $request->maxPrice);
         }
+
+        if($request->rooms > 0){
+            $filteredByDistance = $filteredByDistance->where('rooms', '>', $request->rooms);
+        }
+
+        if($request->beds > 0){
+            $filteredByDistance = $filteredByDistance->where('beds', '>', $request->beds);
+        }
+
+        if($request->baths > 0){
+            $filteredByDistance = $filteredByDistance->where('bathrooms', '>', $request->baths);
+        }
     
         $apartments = $filteredByDistance->with(['images', 'services'])->get();
     
