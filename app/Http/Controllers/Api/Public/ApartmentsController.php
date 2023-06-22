@@ -52,15 +52,22 @@ class ApartmentsController extends Controller
         }
 
         if($request->rooms > 0){
-            $filteredByDistance = $filteredByDistance->where('rooms', '>', $request->rooms);
+            $filteredByDistance = $filteredByDistance->where('rooms', '>=', $request->rooms);
         }
 
         if($request->beds > 0){
-            $filteredByDistance = $filteredByDistance->where('beds', '>', $request->beds);
+            $filteredByDistance = $filteredByDistance->where('beds', '>=', $request->beds);
         }
 
         if($request->baths > 0){
-            $filteredByDistance = $filteredByDistance->where('bathrooms', '>', $request->baths);
+            $filteredByDistance = $filteredByDistance->where('bathrooms', '>=', $request->baths);
+        }
+
+        if ($request->has('services') && count($request->input('services')) > 0) {
+            $services = $request->input('services');
+            $filteredByDistance = $filteredByDistance->whereHas('services', function ($query) use ($services) {
+                $query->whereIn('services.id', $services);
+            }, '=', count($services));
         }
     
         $apartments = $filteredByDistance->with(['images', 'services'])->get();
