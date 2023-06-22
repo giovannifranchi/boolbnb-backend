@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ApartmentStoreRequest;
 use App\Http\Requests\Admin\ApartmentUpdateRequest;
 use App\Models\Apartment;
+use App\Models\Image;
 use App\Models\Plan;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -29,10 +30,8 @@ class ApartmentsController extends Controller
 
         $user = $request->user();
         $apartments = Apartment::where('user_id', $user->id)->get();
-        
+
         return view('admin.apartments.index', compact('apartments'));
-        
-        
     }
 
     /**
@@ -44,7 +43,7 @@ class ApartmentsController extends Controller
     {
         $apartments = Apartment::all();
         $services = Service::all();
-        return view('admin.apartments.create', compact('apartments','services'));
+        return view('admin.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -61,25 +60,39 @@ class ApartmentsController extends Controller
         $apartment->fill($data);
         $apartment->slug = Str::slug($apartment->name);
         $apartment->user_id = $user->id;
-        // $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($data['address'] . ', ' . $data['city'] . ', ' . $data['state']) . '.json', [
-        //     'key' => env('TOM_TOM_KEY')
-        // ]);
 
-        // $data = $response->json();
+        // Salvataggio della copertina
+        if ($request->hasFile('thumb')) {
+            $thumb = $request->file('thumb');
+            $path = $thumb->store('images', 'public');
+            $apartment->thumb = "storage/" . $path;
+        }
 
-        // if (!empty($data['results']) && isset($data['results'][0]['position'])) {
-        //     $apartment->latitude = $data['results'][0]['position']['lat'];
-        //     $apartment->longitude = $data['results'][0]['position']['lon'];
-        // }else {
-        //     return response(['error'=>'internal service error'], 500);
-        // }
+
         $apartment->longitude = $request['longitude'];
         $apartment->latitude = $request['latitude'];
 
 
         $apartment->save();
 
-        if(isset($request['services'])) {
+        // Salvataggio delle immagini aggiuntive
+
+        if ($request->hasFile('additional_images')) {
+            $additionalImages = $request->file('additional_images');
+            $additionalImageNames = [];
+
+            foreach ($additionalImages as $additionalImage) {
+                $path = $additionalImage->store('images', 'public');
+                $image = new Image();
+                $image->apartment_id = $apartment->id;
+                $image->path = "storage/".$path;
+                $image->save();
+            }
+
+            $apartment->additional_images = $additionalImageNames;
+        }
+
+        if (isset($request['services'])) {
             $apartment->services()->sync($request['services']);
         }
 
@@ -124,14 +137,41 @@ class ApartmentsController extends Controller
 
         $apartment->slug = Str::slug($data['name']);
 
-        if(isset($data['services'])){
-            $apartment->services()->sync($data['services']);
-        }else{
-            $apartment->services()->detach();
+        // Salvataggio della copertina
+        if ($request->hasFile('thumb')) {
+            $thumb = $request->file('thumb');
+            $path = $thumb->store('images', 'public');
+            $data['thumb'] = "storage/" . $path;
         }
-        
+
 
         $apartment->update($data);
+
+         // Salvataggio delle immagini aggiuntive
+
+         if ($request->hasFile('additional_images')) {
+            $additionalImages = $request->file('additional_images');
+            $additionalImageNames = [];
+
+            foreach ($additionalImages as $additionalImage) {
+                $path = $additionalImage->store('images', 'public');
+                $image = new Image();
+                $image->apartment_id = $apartment->id;
+                $image->path = "storage/".$path;
+                $image->save();
+            }
+
+            $apartment->additional_images = $additionalImageNames;
+        }
+
+        if (isset($data['services'])) {
+            $apartment->services()->sync($data['services']);
+        } else {
+            $apartment->services()->detach();
+        }
+
+
+        
         return redirect()->route('admin.apartments.show', $apartment);
     }
 
