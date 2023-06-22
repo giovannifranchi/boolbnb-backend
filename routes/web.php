@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatsController;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,9 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('payments', PaymentController::class);
     Route::get('braintree/{plan}/{apartment}', [BraintreeController::class, 'token'])->name('braintree.token');
     Route::post('braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
+
+
+    Route::get('/stats', [StatsController::class, 'index'])->name('stats.index');
 });
 
 Route::middleware('auth')->group(function () {
