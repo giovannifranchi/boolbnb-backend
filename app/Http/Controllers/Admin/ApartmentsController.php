@@ -152,7 +152,7 @@ class ApartmentsController extends Controller
         if (!$request->is_visible) {
 
             $apartment->is_visible = false;
-        } else {
+        } elseif ($request->is_visible) {
             $apartment->is_visible = true;
         }
 

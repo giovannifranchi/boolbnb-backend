@@ -110,7 +110,8 @@
         </div>
         <div class="form-check form-switch">
             
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" checked>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
+            {{-- @dd($apartment->is_visible) --}}
             <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
         </div>
         <div class="mb-3">
