@@ -29,7 +29,7 @@ class ApartmentUpdateRequest extends FormRequest
             'bathrooms' => 'required|integer|min:1',
             'rooms' => 'required|integer|min:1',
             'beds' => 'required|integer|min:1',
-            'price' => 'required',
+            'price' => 'required|regex:/^\d{1,13}(\.\d{1,4})?$/',
             'discount' => 'integer|min:0',
             'description' => 'string|max:500',
             'thumb' => 'image',
