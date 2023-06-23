@@ -194,4 +194,5 @@ class ApartmentsController extends Controller
 
         return redirect()->route('admin.apartments.index')->with('message', "Apartment $old_id deleted successfully");
     }
+    
 }

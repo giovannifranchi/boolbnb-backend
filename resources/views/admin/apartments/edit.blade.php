@@ -93,24 +93,22 @@
             </div>
         </div>
 
-
         {{-- inserimento immagini aggiuntive --}}
-   
+
         <div class="mb-3">
             <label for="additional_images" class="form-label">Additional Images</label>
             <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-            <div class="preview" id="additional-images-preview" style="display: flex; width: 200px; height: 200px;">
-   
-            @if ($images)
+            <div class="preview" id="additional-images-preview" style="display: flex;">
+                @if ($images)
                 @foreach ($images as $image)
-                <img class="img-fluid" src="{{ $image->path }}" style="width: 200px; height: 200px; object-fit: cover; margin-right: 5px;">
+                <div class="image-container" style="margin-right: 10px;">
+                    <img class="img-fluid" src="{{ $image->path }}">
+                    <button class="delete-icon" onclick="deleteImage(this)">&#10006;</button>
+                </div>
                 @endforeach
                 @endif
             </div>
         </div>
-
-
-
 
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -118,6 +116,32 @@
         </div>
     </form>
 </main>
+
+<style>
+    .image-container {
+        position: relative;
+        display: flex;
+        width: 200px;
+        height: 200px;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .delete-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: grey;
+        cursor: pointer;
+        font-size: 18px;
+        z-index: 1;
+    }
+</style>
+
 
 <script>
     function previewImage(event, previewId) {
@@ -129,22 +153,47 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
+    function previewImage(event, previewId) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const preview = document.getElementById(previewId);
+            preview.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function deleteImage(element) {
+        const imageContainer = element.parentNode;
+        imageContainer.parentNode.removeChild(imageContainer);
+    }
+
     function previewMultipleImages(event, previewContainerId) {
         const files = event.target.files;
         const previewContainer = document.getElementById(previewContainerId);
-        previewContainer.innerHTML = "";
 
         for (let i = 0; i < files.length; i++) {
             const reader = new FileReader();
             reader.onload = function() {
+                const imgContainer = document.createElement("div");
+                imgContainer.className = "image-container";
+
                 const img = document.createElement("img");
                 img.src = reader.result;
-                previewContainer.appendChild(img);
+
+                const deleteIcon = document.createElement("span");
+                deleteIcon.className = "delete-icon";
+                deleteIcon.innerHTML = "&#10006;"; // X icon
+                deleteIcon.addEventListener("click", function() {
+                    deleteImage(this);
+                });
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(deleteIcon);
+                previewContainer.appendChild(imgContainer);
             };
             reader.readAsDataURL(files[i]);
         }
     }
 </script>
-
 
 @endsection

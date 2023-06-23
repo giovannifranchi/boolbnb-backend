@@ -28,19 +28,10 @@ class GalleryImagesController extends Controller
         return redirect()->back();
     }
 
-    public function removeImage(Image $image)
-    {
-        // Rimuovi l'immagine dal database
-        $image->delete();
-
-        // Rimuovi il file fisico dall'archivio
-        Storage::delete('public/' . $image->path);
-
-        return redirect()->back()->with('success', 'Immagine rimossa con successo.');
-    }
-
+   
     public function destroy(Image $image)
     {
+
         // Elimina il file fisico
         Storage::delete($image->path);
 

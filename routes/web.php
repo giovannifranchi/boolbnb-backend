@@ -38,8 +38,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
-    Route::delete('/gallery/{image}', [GalleryImagesController::class, 'destroy'])->name('admin.gallery.destroy');
-    
+    Route::delete('/gallery/{image}', [GalleryImagesController::class, 'delete']);
 
     Route::get('/gallery/{apartment}', [GalleryImagesController::class, 'index'])->name('gallery.index');
     Route::resource('payments', PaymentController::class);
