@@ -23,11 +23,11 @@
                             <td>{{$apartment->square_meters}}mq</td>
                             <td>{{$apartment->price}}$</td>
                             <td>{{$apartment->discount}}%</td>
+
                             <td>
                                 <ul class="list-unstyled d-flex gap-1">
                                     <li><a href="{{ route('admin.apartments.show', $apartment)}}" class="btn btn-primary">Details</a></li>
                                     <li><a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="btn btn-success">Edit</a></li>
-                                    <li><a href="{{ route('admin.plans.index', $apartment->id)}}" class="btn btn-warning">Abbonati</a></li>
                                     <li>
                                         <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" id="form">
                                             @csrf
