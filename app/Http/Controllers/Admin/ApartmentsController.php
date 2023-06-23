@@ -10,6 +10,7 @@ use App\Http\Requests\Admin\ApartmentUpdateRequest;
 use App\Models\Apartment;
 use App\Models\Plan;
 use App\Models\Service;
+use App\Models\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -29,10 +30,8 @@ class ApartmentsController extends Controller
 
         $user = $request->user();
         $apartments = Apartment::where('user_id', $user->id)->get();
-        
+
         return view('admin.apartments.index', compact('apartments'));
-        
-        
     }
 
     /**
@@ -44,7 +43,7 @@ class ApartmentsController extends Controller
     {
         $apartments = Apartment::all();
         $services = Service::all();
-        return view('admin.apartments.create', compact('apartments','services'));
+        return view('admin.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -79,7 +78,7 @@ class ApartmentsController extends Controller
 
         $apartment->save();
 
-        if(isset($request['services'])) {
+        if (isset($request['services'])) {
             $apartment->services()->sync($request['services']);
         }
 
@@ -92,9 +91,11 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Apartment $apartment)
+    public function show(Request $request, Apartment $apartment)
     {
+
         $plans = Plan::all();
+        $views = View::where('apartment_id', $views->apartment_id)->count();
         return view('admin.apartments.show', compact('apartment', 'plans'));
     }
 
@@ -124,12 +125,12 @@ class ApartmentsController extends Controller
 
         $apartment->slug = Str::slug($data['name']);
 
-        if(isset($data['services'])){
+        if (isset($data['services'])) {
             $apartment->services()->sync($data['services']);
-        }else{
+        } else {
             $apartment->services()->detach();
         }
-        
+
 
         $apartment->update($data);
         return redirect()->route('admin.apartments.show', $apartment);

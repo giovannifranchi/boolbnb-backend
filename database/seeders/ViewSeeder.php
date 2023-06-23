@@ -16,14 +16,16 @@ class ViewSeeder extends Seeder
      */
     public function run()
     {
-    
-        for($i = 0; $i < 500; $i++){
+
+        for ($i = 0; $i < 500; $i++) {
             $newView = new View();
             $randomApartment = Apartment::inRandomOrder()->first();
 
             $newView->apartment_id = $randomApartment->id;
 
             $newView->ip_address = fake()->ipv4();
+
+            $newView->date = fake()->dateTimeBetween('-2 week', '+2 week');
 
             $newView->save();
         }
