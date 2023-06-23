@@ -13,6 +13,7 @@
                         <th scope="col">Price</th>
                         <th scope="col">Discount</th>
                         <th scope="col">Actions</th>
+                        <th scope="col">Sponsor</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,8 +21,8 @@
                         <tr>
                             <th>{{$apartment->name}}</th>
                             <td>{{$apartment->city}}</td>
-                            <td>{{$apartment->square_meters}}mq</td>
-                            <td>{{$apartment->price}}$</td>
+                            <td>{{$apartment->square_meters}} mq</td>
+                            <td>{{$apartment->price}} $</td>
                             <td>{{$apartment->discount}}%</td>
                             <td>
                                 <ul class="list-unstyled d-flex gap-1">
@@ -37,6 +38,8 @@
                                     </li>
                                 </ul>
                             </td>
+                            <td>{{$apartment->plan}}</td>
+
                         </tr>
                     @endforeach
                 </tbody>

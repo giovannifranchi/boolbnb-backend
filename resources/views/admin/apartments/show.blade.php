@@ -14,10 +14,8 @@
                             <div>State: {{$apartment->state}}</div>
                             <div>Bathrooms: {{$apartment->bathrooms}}</div>
                             <div>Rooms: {{$apartment->rooms}}</div>
-                            <div>Price: {{$apartment->price}}</div>
-                            <div>Discount Value: {{$apartment->discount}}</div>
-                            <div>Latitude: {{$apartment->latitude}}</div>
-                            <div>Longitude: {{$apartment->longitude}}</div>
+                            <div>Price: {{$apartment->price}} $</div>
+                            <div>Discount Value: {{$apartment->discount}}%</div>
                             <div>Description: {{$apartment->description}}</div>
                             <a href="{{ route('admin.gallery.index', ['apartment' => $apartment])}}" class="btn btn-primary">Images Gallery</a>
                         </div>
