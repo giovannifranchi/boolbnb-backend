@@ -13,6 +13,7 @@ use App\Models\Plan;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -193,4 +194,6 @@ class ApartmentsController extends Controller
 
         return redirect()->route('admin.apartments.index')->with('message', "Apartment $old_id deleted successfully");
     }
+
 }
+
