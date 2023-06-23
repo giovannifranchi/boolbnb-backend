@@ -10,6 +10,8 @@ class Image extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function apartment(){
         return $this->belongsTo(Apartment::class);
     }
