@@ -149,7 +149,12 @@ class ApartmentsController extends Controller
             $path = $thumb->store('images', 'public');
             $data['thumb'] = "storage/" . $path;
         }
+        if (!$request->is_visible) {
 
+            $apartment->is_visible = false;
+        } else {
+            $apartment->is_visible = true;
+        }
 
         $apartment->update($data);
 

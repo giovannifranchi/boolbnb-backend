@@ -108,6 +108,11 @@
             <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple value="{{ old('additional_images', $apartment->additional_images) }}">
             <div class="preview" id="additional-images-preview" style="display: flex; width: 200px;"></div>
         </div>
+        <div class="form-check form-switch">
+            
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" checked>
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Submit</button>
 
