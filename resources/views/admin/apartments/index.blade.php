@@ -3,7 +3,7 @@
 @section('content')
     <main>
         <div class="container">
-            <a href="{{ route('admin.apartments.create')}}" class="btn btn-success">Create</a>
+            <a href="{{ route('admin.apartments.create') }}" class="btn btn-success">Create</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -19,18 +19,22 @@
                 <tbody>
                     @foreach ($apartments as $apartment)
                         <tr>
-                            <th>{{$apartment->name}}</th>
-                            <td>{{$apartment->city}}</td>
-                            <td>{{$apartment->square_meters}} mq</td>
-                            <td>{{$apartment->price}} $</td>
-                            <td>{{$apartment->discount}}%</td>
+                            <th>{{ $apartment->name }}</th>
+                            <td>{{ $apartment->city }}</td>
+                            <td>{{ $apartment->square_meters }} mq</td>
+                            <td>{{ $apartment->price }} $</td>
+                            <td>{{ $apartment->discount }}%</td>
                             <td>
                                 <ul class="list-unstyled d-flex gap-1">
-                                    <li><a href="{{ route('admin.apartments.show', $apartment)}}" class="btn btn-primary">Details</a></li>
-                                    <li><a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="btn btn-success">Edit</a></li>
-                                    <li><a href="{{ route('admin.plans.index', $apartment->id)}}" class="btn btn-warning">Abbonati</a></li>
+                                    <li><a href="{{ route('admin.apartments.show', $apartment) }}"
+                                            class="btn btn-primary">Details</a></li>
+                                    <li><a href="{{ route('admin.apartments.edit', $apartment->id) }}"
+                                            class="btn btn-success">Edit</a></li>
+                                    <li><a href="{{ route('admin.plans.index', $apartment->id) }}"
+                                            class="btn btn-warning">Abbonati</a></li>
                                     <li>
-                                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" id="form">
+                                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
+                                            id="form">
                                             @csrf
                                             @method('DELETE')
                                             <input type="submit" value="Delete" class="btn btn-danger">
@@ -38,8 +42,16 @@
                                     </li>
                                 </ul>
                             </td>
-                            <td>{{$apartment->plan}}</td>
-
+                            <td>
+                                <td>
+                                    @if ($apartment->plans->isEmpty())
+                                        nulla
+                                    @else
+                                        @foreach ($apartment->plans as $plan)
+                                            {{ $plan->name }}
+                                        @endforeach
+                                    @endif
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
