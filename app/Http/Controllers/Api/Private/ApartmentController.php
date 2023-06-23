@@ -40,20 +40,13 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($fields['name']);
 
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($fields['address'] . ', ' . $fields['city'] . ', ' . $fields['state']) . '.json', [
-            'key' => env('TOM_TOM_KEY')
-        ]);
+       $newApartment->longitude = $request['longitude'];
 
 
 
-        $data = $response->json();
+       $newApartment->latitude = $request['latitude'];
 
-        if (!empty($data['results']) && isset($data['results'][0]['position'])) {
-            $newApartment->latitude = $data['results'][0]['position']['lat'];
-            $newApartment->longitude = $data['results'][0]['position']['lon'];
-        } else {
-            return response(['error' => 'internal service error'], 500);
-        }
+
 
         $newApartment->save();
 
@@ -61,14 +54,25 @@ class ApartmentController extends Controller
             $newApartment->services()->sync($fields['services']);
         }
 
-        if (isset($fields['images'])) {
-            foreach ($fields['images'] as $image) {
 
-                $path = $image->store('images', 'public');
+        if($request->hasFile('images')){
+            try {
+                $paths = [];
+                $files = $request->file('images');
+                foreach($files as $file) {
+                    $path = $file->store('images', 'public');
+                    $paths[] = asset("storage/".$path);
+                    $newImage = new Image();
+                    $newImage->apartment_id = $newApartment->id;
+                    $newImage->path = "storage/".$path;
+                    $newImage->save();
+                }
 
-                $newImage = Image::create(['path' => $path]);
+            } catch(\Exception $e) {
+                return response()->json([
+                    'message'=>$e->getMessage()
+                ]);
 
-                $newApartment->images()->attach($newImage);
             }
         }
 
