@@ -120,8 +120,9 @@ class ApartmentsController extends Controller
     public function edit($id)
     {
         $apartment = Apartment::where('id', $id)->first();
+        $images = Image::where('apartment_id', $id)->get();
         $services = Service::all();
-        return view('admin.apartments.edit', compact('apartment', 'services'));
+        return view('admin.apartments.edit', compact('apartment', 'services', 'images'));
     }
 
     /**

@@ -8,18 +8,14 @@
             <div class="col-md-4">
                 <div class="card">
                     <img src="{{ asset($image->path) }}" class="img-fluid" style="width: 100%; height: 400px;" alt="...">
+                    <form action="{{ route('admin.gallery.index', $image) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Rimuovi</button>
+                    </form>
                 </div>
             </div>
             @endforeach
-           <!--  <div class="col-md-4" style="height: 100vh;">
-                <div class="card">
-                    <input type="file" name="fileInput" id="fileInput" style="display: none;">
-                    <label for="fileInput" class="site-btn d-flex align-items-center justify-content-center" style="width: 100%; height: 400px;">
-                        <h1>+</h1>
-                    </label>
-                </div>
-            </div> -->
-
         </div>
     </div>
 </main>
