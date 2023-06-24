@@ -5,11 +5,11 @@
 <main>
 
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-4">
                 <h4 class="text-center"><strong>STYLE 3</strong></h4>
                 <hr>
-                <div class="profile-card-4 text-center"><img src="{{asset($apartment->thumb)}}" class="img img-responsive">
+                <div class="profile-card-12 text-center"><img src="{{asset($apartment->thumb)}}" class="img img-responsive" style="width: 100%; object-fit: cover;" >
                     <div class="profile-content">
                         <div class="profile-name">John Doe
                             <p>@johndoedesigner</p>
