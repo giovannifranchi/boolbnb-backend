@@ -152,17 +152,11 @@
 
 <style>
     body {
-     /*    background-color:  #EAEAEA;
-        color: #EAEAEA; */
+        background-color:  #EAEAEA;
     }
 
     .footer-text {
         font-size: 1.25rem;
-    }
-
-    .social a {
-       
-
     }
 
 

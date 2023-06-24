@@ -29,9 +29,11 @@ class ApartmentsController extends Controller
     {
 
         $user = $request->user();
-        $apartments = Apartment::where('user_id', $user->id)->get();
+        $apartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        $services = Service::all();
+        
 
-        return view('admin.apartments.index', compact('apartments'));
+        return view('admin.apartments.index', compact('apartments', 'services'));
     }
 
     /**
