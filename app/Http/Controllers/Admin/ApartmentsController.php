@@ -55,6 +55,7 @@ class ApartmentsController extends Controller
      */
     public function store(ApartmentStoreRequest $request)
     {
+
         $data = $request->validated();
         $user = $request->user();
         $apartment = new Apartment();
@@ -73,6 +74,10 @@ class ApartmentsController extends Controller
         $apartment->longitude = $request['longitude'];
         $apartment->latitude = $request['latitude'];
 
+        if (!$request->is_visible) {
+
+            $apartment->is_visible = false;
+        }
 
         $apartment->save();
 
@@ -86,7 +91,7 @@ class ApartmentsController extends Controller
                 $path = $additionalImage->store('images', 'public');
                 $image = new Image();
                 $image->apartment_id = $apartment->id;
-                $image->path = "storage/".$path;
+                $image->path = "storage/" . $path;
                 $image->save();
             }
 
@@ -144,13 +149,18 @@ class ApartmentsController extends Controller
             $path = $thumb->store('images', 'public');
             $data['thumb'] = "storage/" . $path;
         }
+        if (!$request->is_visible) {
 
+            $apartment->is_visible = false;
+        } elseif ($request->is_visible) {
+            $apartment->is_visible = true;
+        }
 
         $apartment->update($data);
 
-         // Salvataggio delle immagini aggiuntive
+        // Salvataggio delle immagini aggiuntive
 
-         if ($request->hasFile('additional_images')) {
+        if ($request->hasFile('additional_images')) {
             $additionalImages = $request->file('additional_images');
             $additionalImageNames = [];
 
@@ -158,7 +168,7 @@ class ApartmentsController extends Controller
                 $path = $additionalImage->store('images', 'public');
                 $image = new Image();
                 $image->apartment_id = $apartment->id;
-                $image->path = "storage/".$path;
+                $image->path = "storage/" . $path;
                 $image->save();
             }
 
@@ -172,7 +182,7 @@ class ApartmentsController extends Controller
         }
 
 
-        
+
         return redirect()->route('admin.apartments.show', $apartment);
     }
 
@@ -194,6 +204,4 @@ class ApartmentsController extends Controller
 
         return redirect()->route('admin.apartments.index')->with('message', "Apartment $old_id deleted successfully");
     }
-
 }
-
