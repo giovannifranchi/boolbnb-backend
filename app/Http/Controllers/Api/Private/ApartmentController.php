@@ -25,9 +25,10 @@ class ApartmentController extends Controller
         return response($apartments, 200);
     }
 
- 
+
     public function store(ApartmentStoreRequest $request)
     {
+
         $fields = $request->validated();
 
         $user = $request->user();
@@ -40,39 +41,52 @@ class ApartmentController extends Controller
 
         $newApartment->slug = Str::slug($fields['name']);
 
-        $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($fields['address'] . ', ' . $fields['city'] . ', ' . $fields['state']) . '.json', [
-            'key' => env('TOM_TOM_KEY')
-        ]);
+       $newApartment->longitude = $request['longitude'];
 
-        $data = $response->json();
 
-        if (!empty($data['results']) && isset($data['results'][0]['position'])) {
-            $newApartment->latitude = $data['results'][0]['position']['lat'];
-            $newApartment->longitude = $data['results'][0]['position']['lon'];
-        }else {
-            return response(['error'=>'internal service error'], 500);
-        }
+
+       $newApartment->latitude = $request['latitude'];
+
+
 
         $newApartment->save();
 
-        if(isset($fields['services'])){
+        if (isset($fields['services'])) {
             $newApartment->services()->sync($fields['services']);
         }
 
-        if(isset($fields['images'])) {
-            foreach ($fields['images'] as $image) {
-                
-                $path = $image->store('images', 'public');    
-            
-                $newImage = Image::create(['path' => $path]);
-        
-                $newApartment->images()->attach($newImage);
+
+        if($request->hasFile('images')){
+            try {
+
+                $paths = [];
+                $files = $request->file('images');
+                foreach($files as $file) {
+                    $path = $file->store('images', 'public');
+                    $paths[] = asset("storage/".$path);
+                    $newImage = new Image();
+                    $newImage->apartment_id = $newApartment->id;
+                    $newImage->path = "storage/".$path;
+                    $newImage->save();
+                }
+
+
+            } catch(\Exception $e) {
+                return response()->json([
+                    'message'=>$e->getMessage()
+                ]);
+
+
             }
-        }
+    
+        } 
+
+
 
         return response($newApartment, 201);
 
     }
+    
 
 
     public function show(Request $request, $id)
@@ -81,12 +95,11 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::with(['images', 'services', 'messages', 'views', 'plans'])->where('user_id', $user->id)->where('id', $id)->first();
 
-        if(!$apartment){
-            return response(['error'=>'apartment not found'], 404);
+        if (!$apartment) {
+            return response(['error' => 'apartment not found'], 404);
         }
 
         return response($apartment, 200);
-
     }
 
     public function update(ApartmentUpdateRequest $request, $id)
@@ -96,25 +109,25 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::where('user_id', $user->id)->where('slug', $id)->first();
 
-        if(!$apartment){
-            return response(['error'=> 'apartment not found'], 404);
+        if (!$apartment) {
+            return response(['error' => 'apartment not found'], 404);
         }
 
-        if($apartment->address !== $fields['address'] || $apartment->city !== $fields['city'] || $apartment->state !== $fields['state']){
+        if ($apartment->address !== $fields['address'] || $apartment->city !== $fields['city'] || $apartment->state !== $fields['state']) {
             $response = Http::get('https://api.tomtom.com/search/2/geocode/' . urlencode($fields['address'] . ', ' . $fields['city'] . ', ' . $fields['state']) . '.json', [
                 'key' => env('TOM_TOM_KEY')
             ]);
-    
+
             $data = $response->json();
             if (!empty($data['results']) && isset($data['results'][0]['position'])) {
                 $apartment->latitude = $data['results'][0]['position']['lat'];
                 $apartment->longitude = $data['results'][0]['position']['lon'];
-            }else {
-                return response(['error'=>'internal service error'], 500);
+            } else {
+                return response(['error' => 'internal service error'], 500);
             }
         }
 
-        if($apartment->name !== $fields['name']){
+        if ($apartment->name !== $fields['name']) {
             $apartment->slug = Str::slug($fields['name']);
         }
 
@@ -135,12 +148,12 @@ class ApartmentController extends Controller
 
         $apartment = Apartment::where('user_id', $user->id)->where('id', $id)->first();
 
-        if(!$apartment){
-            return response(['error'=>'apartment not found'],404);
+        if (!$apartment) {
+            return response(['error' => 'apartment not found'], 404);
         }
 
         $apartment->delete();
 
-        return response(['message'=>'apartment deleted successfully'], 200);
+        return response(['message' => 'apartment deleted successfully'], 200);
     }
 }

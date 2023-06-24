@@ -10,6 +10,7 @@ class Apartment extends Model
 {
     use HasFactory;
     protected $guarded = ['slug', 'longitude', 'latitude', 'user_id'];
+    protected $appends = ['is_sponsored'];
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -43,6 +44,7 @@ class Apartment extends Model
     public function latestPlan()
     {
         return $this->belongsToMany(Plan::class)
+            ->withPivot('expire_date')
             ->withTimestamps()
             ->withPivot('expire_date')
             ->orderBy('expire_date', 'desc')

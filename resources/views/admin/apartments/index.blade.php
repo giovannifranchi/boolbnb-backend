@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <main class="py-3">
 
 
@@ -67,6 +68,7 @@
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
+
                     @endforeach
                 </ul>
             </div>
@@ -520,6 +522,7 @@
         top: 10px;
     }
 
+
     .projcard-tag::after {
         content: "";
         position: absolute;
@@ -531,3 +534,7 @@
     }
 </style>
 @endsection
+
+    </main>
+@endsection
+

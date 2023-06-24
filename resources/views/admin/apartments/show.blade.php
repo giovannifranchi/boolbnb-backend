@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <main>
 
     <div class="container">
@@ -33,6 +34,7 @@
                                     <h4>168</h4>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -66,6 +68,7 @@
                             <div class="col-6 col-lg-4">
                                 <h5 class="text-center">Beds: {{$apartment->beds}}</h5>
                             </div>
+
                         </div>
 
 

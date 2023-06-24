@@ -19,22 +19,22 @@
         {{-- inserimento nome appartamento --}}
         <div class="mb-3">
             <label for="name" class="form-label">Apartment Name </label>
-            <input type="text" class="form-control" id="name" value="{{ old('name',$apartment->name)}}" name="name">
+            <input type="text" class="form-control" id="name" value="{{ old('name',$apartment->name)}}" name="name" minlength="3" required>
         </div>
         {{-- inserimento metri quadri appartamento  --}}
         <div class="mb-3">
             <label for="square_meters" class="form-label">Square Meters</label>
-            <input type="number" class="form-control" id="square_meters" value="{{old('square_meters',$apartment->square_meters)}}" name="square_meters" path="^(?!-)[0-9]+$">
+            <input type="number" class="form-control" id="square_meters" value="{{old('square_meters',$apartment->square_meters)}}" name="square_meters" step="1" min="30" pattern="^(?!-)[0-9]+$" required>
         </div>
         {{-- inserimento numero bagni --}}
         <div class="mb-3">
             <label for="bathrooms" class="form-label">Bathrooms Number</label>
-            <input type="number" step="0.01" class="form-control" id="bathrooms" value="{{old('bathrooms',$apartment->bathrooms)}}" name="bathrooms" path="^(?!-)[0-9]+$">
+            <input type="number" step="0.01" class="form-control" id="bathrooms" value="{{old('bathrooms',$apartment->bathrooms)}}" name="bathrooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
         </div>
         {{-- inserimento numero stanze --}}
         <div class="mb-3">
             <label for="rooms" class="form-label">Rooms Number</label>
-            <input type="number" class="form-control" id="rooms" value="{{old('rooms',$apartment->rooms)}}" name="rooms" path="^(?!-)[0-9]+$">
+            <input type="number" class="form-control" id="rooms" value="{{old('rooms',$apartment->rooms)}}" name="rooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
         </div>
         {{-- inserimento numero letti --}}
         <div class="mb-3">
@@ -44,12 +44,12 @@
         {{-- inserimento prezzo appartamento  --}}
         <div class="mb-3">
             <label for="price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="price" value="{{old('price',$apartment->price)}}" name="price" path="^(?!-)[0-9]+$">
+            <input type="number" class="form-control" id="price" value="{{old('price',$apartment->price)}}" name="price" min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
         </div>
         {{-- inserimento valore percentuale dello sconto --}}
         <div class="mb-3">
             <label for="discount" class="form-label">Discount Value</label>
-            <input type="number" class="form-control" id="discount" value="{{old('discount',$apartment->discount)}}" name="discount" path="^(?!-)[0-9]+$">
+            <input type="number" class="form-control" id="discount" value="{{old('discount',$apartment->discount)}}" name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$" required>
         </div>
         @if ($errors->any())
         <div class="mb-3">
@@ -76,7 +76,7 @@
         {{-- inserimento descrizione appartamento  --}}
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" id="description" rows="3" name="description">{{old('description',$apartment->description)}}</textarea>
+            <textarea class="form-control" id="description" rows="3" name="description" required>{{old('description',$apartment->description)}}</textarea>
         </div>
 
         {{-- Longitude --}}
@@ -108,6 +108,12 @@
             <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple value="{{ old('additional_images', $apartment->additional_images) }}">
             <div class="preview" id="additional-images-preview" style="display: flex; width: 200px;"></div>
         </div>
+        <div class="form-check form-switch">
+            
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
+            {{-- @dd($apartment->is_visible) --}}
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
+        </div>
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -135,7 +141,7 @@
             reader.onload = function() {
                 const img = document.createElement("img");
                 img.src = reader.result;
-                img.className = "img-fluid";
+                img.className = "img-fluid pe-2";
                 previewContainer.appendChild(img);
             };
             reader.readAsDataURL(files[i]);
