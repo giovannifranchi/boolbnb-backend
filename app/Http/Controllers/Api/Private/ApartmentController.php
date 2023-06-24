@@ -28,31 +28,31 @@ class ApartmentController extends Controller
  
     public function store(ApartmentStoreRequest $request)
     {
-        $fields = $request->validated();
-
-        $user = $request->user();
-
-        $newApartment = new Apartment();
-
-        $newApartment->fill($fields);
-
-        $newApartment->user_id = $user->id;
-
-        $newApartment->slug = Str::slug($fields['name']);
-
-       $newApartment->longitude = $request['longitude'];
-
-       $newApartment->latitude = $request['latitude'];
-
-
-        $newApartment->save();
-
-        if(isset($fields['services'])){
-            $newApartment->services()->sync($fields['services']);
-        }
-
-        if($request->hasFile('images')){
-            try {
+        try {
+            $fields = $request->validated();
+    
+            $user = $request->user();
+    
+            $newApartment = new Apartment();
+    
+            $newApartment->fill($fields);
+    
+            $newApartment->user_id = $user->id;
+    
+            $newApartment->slug = Str::slug($fields['name']);
+    
+            $newApartment->longitude = $request['longitude'];
+    
+            $newApartment->latitude = $request['latitude'];
+    
+    
+            $newApartment->save();
+    
+            if(isset($fields['services'])){
+                $newApartment->services()->sync($fields['services']);
+            }
+    
+            if($request->hasFile('images')){
                 $paths = [];
                 $files = $request->file('images');
                 foreach($files as $file) {
@@ -63,17 +63,17 @@ class ApartmentController extends Controller
                     $newImage->path = "storage/".$path;
                     $newImage->save();
                 }
-
-            } catch(\Exception $e) {
-                return response()->json([
-                    'message'=>$e->getMessage()
-                ]);
             }
+    
+            return response($newApartment, 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'There was an error processing your request',
+                'error' => $e->getMessage()
+            ], 400); // Bad Request status code
         }
-
-        return response($newApartment, 201);
-
     }
+    
 
 
     public function show(Request $request, $id)
