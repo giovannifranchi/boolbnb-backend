@@ -533,7 +533,6 @@
         top: 0;
     }
 </style>
-@endsection
 
     </main>
 @endsection
