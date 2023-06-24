@@ -19,6 +19,7 @@
                 <tbody>
                     @foreach ($apartments as $apartment)
                         <tr>
+
                             <th>{{ $apartment->name }}</th>
                             <td>{{ $apartment->city }}</td>
                             <td>{{ $apartment->square_meters }} mq</td>
@@ -32,6 +33,7 @@
                                             class="btn btn-success">Edit</a></li>
                                     <li><a href="{{ route('admin.plans.index', $apartment->id) }}"
                                             class="btn btn-warning">Abbonati</a></li>
+
                                     <li>
                                         <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST"
                                             id="form">
