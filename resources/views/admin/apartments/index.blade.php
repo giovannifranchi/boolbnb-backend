@@ -13,7 +13,7 @@
                 <img class="projcard-img" src="{{ asset($apartment->thumb) }}" />
                 <div class="projcard-textbox">
                     <div class="projcard-title">{{$apartment->name}}</div>
-                    <div class="projcard-subtitle sponsor">SPONSORED</div>
+                    <div class="projcard-subtitle sponsor {{$apartment->is_sponsored ? 'present' : 'absent'}}">SPONSORED</div>
                     <div class="projcard-bar"></div>
                     <div class="projcard-description d-flex justify-content-center flex-column">
                         <h4><strong>LOCATION:</strong> {{$apartment->address}}, {{$apartment->city}}, {{$apartment->state}}</h4>

@@ -44,6 +44,7 @@ class Apartment extends Model
     {
         return $this->belongsToMany(Plan::class)
             ->withTimestamps()
+            ->withPivot('expire_date')
             ->orderBy('expire_date', 'desc')
             ->take(1);
     }
@@ -78,5 +79,11 @@ class Apartment extends Model
         return Attribute::make(
             get: fn (string|null $value) => $value !== null ? asset($value) : null,
         );
+    }
+
+    public function getIsSponsoredAttribute()
+    {
+        $latestPlan = $this->latestPlan()->first();
+        return $latestPlan && $latestPlan->pivot->expire_date > now();
     }
 }
