@@ -17,6 +17,7 @@
                             <div>Price: {{$apartment->price}} $</div>
                             <div>Discount Value: {{$apartment->discount}}%</div>
                             <div>Description: {{$apartment->description}}</div>
+                            <div> {{$apartment->is_sponsored }}ssss</div>
                             <a href="{{ route('admin.gallery.index', ['apartment' => $apartment])}}" class="btn btn-primary">Images Gallery</a>
                         </div>
                     </div>
@@ -36,6 +37,7 @@
                                 <p class="card-text">{{ $plan->price }} €</p>
                                 <a href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}" class="card-link btn btn-primary">Paga!!</a>
                             </div>
+
                         </div>
                     </div>
                     @endforeach

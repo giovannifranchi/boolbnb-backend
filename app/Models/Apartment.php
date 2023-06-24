@@ -44,6 +44,7 @@ class Apartment extends Model
     public function latestPlan()
     {
         return $this->belongsToMany(Plan::class)
+            ->withPivot('expire_date')
             ->withTimestamps()
             ->orderBy('expire_date', 'desc')
             ->take(1);
