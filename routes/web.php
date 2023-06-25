@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BraintreeController;
 use App\Http\Controllers\Admin\DashboardController;
 
 use App\Http\Controllers\Admin\GalleryImagesController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PlansController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
     Route::delete('/gallery/{image}', [GalleryImagesController::class, 'destroy'])->name('admin.gallery.destroy');
+    Route::resource('messages', MessageController::class)->only(['index']);
 
 
     Route::get('/gallery/{apartment}', [GalleryImagesController::class, 'index'])->name('gallery.index');
