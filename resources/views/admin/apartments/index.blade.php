@@ -205,8 +205,8 @@
 <style>
     /* show style */
     .ms-offcanva{
-        background-color: #252A34;
-        color: #EAEAEA;
+        background-color: #EAEAEA;
+        color: #252A34;
     }
 
     /* Actual Code: */
