@@ -50,7 +50,7 @@ class BraintreeController extends Controller
             'amount' => $price,  
             'paymentMethodNonce' => $nonce,
             'options' => [
-                'submitForSettlement' => true
+            'submitForSettlement' => true
             ]
         ]);
 
@@ -67,9 +67,9 @@ class BraintreeController extends Controller
     
             $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
             
-            return view('admin.payments.statuspay', compact('data'))->with('success', 'Transaction successful with plan'.$amount->name);
+            return view('admin.payments.statuspay', compact('data'))->with('success', true);
         } else {
-            return view('admin.payments.statuspay')->with('error', 'Transaction Failed');
+            return view('admin.payments.statuspay')->with('success', false);
         }
     }
 }
