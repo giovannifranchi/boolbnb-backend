@@ -55,6 +55,7 @@ class BraintreeController extends Controller
         ]);
 
         if ($result->success) {
+
             $apartment = Apartment::where('id', $request->apartment)->first();
 
             $now = Carbon::now();
