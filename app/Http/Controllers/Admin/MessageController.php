@@ -12,11 +12,15 @@ class MessageController extends Controller
     public function index(Request $request)
     {
 
-        $user = $request->user();
-        $apartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
-        $message = Message::all();
-        
+        $newMessage = Message::where('apartment_id', $request->apartment_id)->get();
 
         return view('admin.messages.index', compact('apartments', 'message'));
+    }
+
+
+    public function destroy($id){
+        $message = Message::where('id', $id)->first();
+        $message->delete();
+        
     }
 }
