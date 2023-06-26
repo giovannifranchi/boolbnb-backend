@@ -26,11 +26,13 @@
 <body>
     <div id="app">
 
-        <header class="p-1 navbar navbar-expand-md">
+        <header class="p-0 navbar navbar-expand-md">
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
-                    <div class="logo">BoolBnB</div>
-                    {{-- config('app.name', 'Laravel') --}}
+                    <div class="logo">
+                        <img class="logo-img" src="/images/logo-no-background.png" alt="boolbnb">
+                    </div>
+                    
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -178,11 +180,13 @@
             border-bottom: 0.125rem solid var(--custom-black);
 
             .logo {
-                font-size: 3.125rem;
                 color: var(--custom-red);
                 cursor: pointer;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 900;
+                .logo-img{
+                    height: 60px;
+                    margin: 10px 0;
+                }
+
             }
         }
     }
