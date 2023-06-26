@@ -5,21 +5,21 @@
 <main>
 	<div class="container px-3">
 		<div class="row justify-content-center mt-5">
-			<div class="col-12  rounded p-0" style="border: 1px solid #000;">
+			<div class="col-12  rounded p-0 my-container">
 				<div class="row">
-					<div class="col-12 col-md-6 d-flex flex-column">
-						<img src="{{ asset($apartment->thumb) }}" alt="" class="img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
+					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
+						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
-							@foreach ( $images as $image )
-							<div class="box w-100" style="height: 100px;">
-								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded">
+							@foreach ( $galleries as $key =>$gallery )
+							<div class="box w-100 my-box-image" >
+								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
 						</div>
 					</div>
-					<div class="col-12 col-md-6 d-flex flex-column gap-3">
-						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
-						<h3> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
+					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
+						<h1 class="fs-2">{{$apartment->name}}</h1>
+						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
 							<div class="col-3">
 								m²:
@@ -38,19 +38,20 @@
 								<strong>{{$apartment->beds}}</strong>
 							</div>
 						</div>
-						<h3>Serives:</h3>
+						<h3>Services:</h3>
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
-							<li>
-								<strong>
-									{{$service->name}}
-								</strong>
+							<li class="projcard-tag text-decoration-none">
+								{{$service->name}}	
 							</li>
 							@endforeach
 						</ul>
-						<h3>Despription:</h3>
+						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
-						<h3>Price: {{$apartment->price}} €</h3>
+						<div class="d-flex justify-content-end ">
+							<h3 class="my-price-container">{{$apartment->price}} €/<small>night</small></h3>
+						</div>
+						
 					</div>
 				</div>
 
@@ -204,19 +205,82 @@
 				</div>
 		</section>
 	</div>
-
-
-
-
-	</div>
+	
 </main>
+<script>
+ function selectImage(element) {
+    let images = document.getElementsByClassName('thumbnail');
+    let thumbnail = document.getElementById('thumbnail');
 
+    for (let i = 0; i < images.length; i++) {
+        images[i].classList.remove('selected-thumbnail');
+        if (images[i].classList.contains('selected')) {
+            images[i].classList.remove('selected');
+        }
+    }
+
+    element.classList.add('selected');
+    element.classList.add('selected-thumbnail');
+
+    let selectedImagePath = element.getAttribute('src');
+    thumbnail.setAttribute('src', selectedImagePath);
+}
+function enlargeImage(element) {
+    element.style.transform = "scale(1.1)";
+}
+
+function resetImageSize(element) {
+    element.style.transform = "scale(1)";
+}
+	
+</script>
 
 <style>
+	/* img change  */
+	.selected-thumbnail{
+	border: 3px solid rgba(46,204,113,1) ;
+	}
+	.thumbnail {
+        width: 100px;
+		height: 100px;
+		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
+    }
 	/* details style */
+	.my-container{
+		
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
+		transition: 0.3s ease-in-out;
+	}
+	/* .my-container:hover{
 
+		
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
 
+	} */
+	
+	.my-image-container{
+		padding: 10px 0 0 22px;
+		 
+	}
+	.my-box-image{
+		height: 100px;
+		cursor: pointer;
+	}
+	.my-price-container{
+		margin-right: 15px;
+		background-color: rgba(46,204,113,1);
+		padding: 3px 20px 3px 20px;
+		color: white;
+		border-radius: 5px
+	}
+	.my-detail-container{
+		padding-left: 50px;
+		padding-top: 20px
+	}
 
+	.my-height{
+		max-height: 485px;
+	}
 
 	/* plans style */
 
@@ -654,5 +718,33 @@
 		color: #fff;
 		text-decoration: none;
 	}
+
+	/* tag style  */
+  
+    .projcard-tag {
+        display: inline-block;
+        background-color: rgba(224, 224, 224, 1);
+        color: #777;
+        border-radius: 3px 3px 3px 3px;
+        line-height: 26px;
+        padding: 0 10px 0 23px;
+        position: relative;
+        margin-right: 20px;
+        user-select: none;
+        
+    }
+
+    .projcard-tag::before {
+        content: "";
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        height: 6px;
+        left: 10px;
+        width: 6px;
+        top: 10px;
+    }
+
 </style>
 @endsection
