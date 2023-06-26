@@ -132,10 +132,10 @@
 
                 <div class="mb-3">
                     <div>Services</div>
-                    @foreach ($services as $service)
+                    @foreach ($services as $key=>$service)
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="services[]" id="services" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="services">{{ $service->name }}</label>
+                        <input class="form-check-input" type="checkbox" name="services[]" id="services{{$key}}" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="services{{$key}}">{{ $service->name }}</label>
                     </div>
                     @endforeach
                 </div>
