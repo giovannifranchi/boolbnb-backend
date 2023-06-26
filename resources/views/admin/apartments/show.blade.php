@@ -5,13 +5,13 @@
 <main>
 	<div class="container px-3">
 		<div class="row justify-content-center mt-5">
-			<div class="col-12  rounded p-0" style="border: 1px solid #000;">
+			<div class="col-12  rounded p-0 my-container">
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column">
 						<img src="{{ asset($apartment->thumb) }}" alt="" class="img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $images as $image )
-							<div class="box w-100" style="height: 100px;">
+							<div class="box w-100 my-box-image" >
 								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded">
 							</div>
 							@endforeach
@@ -19,7 +19,7 @@
 					</div>
 					<div class="col-12 col-md-6 d-flex flex-column gap-3">
 						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
-						<h3> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
+						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
 							<div class="col-3">
 								m²:
@@ -38,19 +38,19 @@
 								<strong>{{$apartment->beds}}</strong>
 							</div>
 						</div>
-						<h3>Serives:</h3>
+						<h3>Services:</h3>
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
-							<li>
-								<strong>
+							<li class="projcard-tag text-decoration-none">
+								
 									{{$service->name}}
-								</strong>
+								
 							</li>
 							@endforeach
 						</ul>
-						<h3>Despription:</h3>
+						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
-						<h3>Price: {{$apartment->price}} €</h3>
+						<h3 class="d-flex justify-content-end my-price-container">Price: {{$apartment->price}} €</h3>
 					</div>
 				</div>
 
@@ -214,8 +214,16 @@
 
 <style>
 	/* details style */
-
-
+	.my-container{
+		
+		background-color: white;
+	}
+	.my-box-image{
+		height: 100px;
+	}
+	.my-price-container{
+		margin-right: 15px;
+	}
 
 
 	/* plans style */
@@ -654,5 +662,33 @@
 		color: #fff;
 		text-decoration: none;
 	}
+
+	/* tag style  */
+  
+    .projcard-tag {
+        display: inline-block;
+        background-color: rgba(224, 224, 224, 1);
+        color: #777;
+        border-radius: 3px 3px 3px 3px;
+        line-height: 26px;
+        padding: 0 10px 0 23px;
+        position: relative;
+        margin-right: 20px;
+        user-select: none;
+        
+    }
+
+    .projcard-tag::before {
+        content: "";
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        height: 6px;
+        left: 10px;
+        width: 6px;
+        top: 10px;
+    }
+
 </style>
 @endsection
