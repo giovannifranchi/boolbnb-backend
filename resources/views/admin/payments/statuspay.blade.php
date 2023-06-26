@@ -15,7 +15,6 @@
                     <h3>Pagamento non riuscito</h3>
                     <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
                     @endif
-
                     @if ($success)
                     <button id="redirectButton" class="btn btn-primary">Reindirizzamento automatico in corso...</button>
                     @endif
