@@ -8,16 +8,13 @@
 			<div class="col-12  rounded p-0 my-container">
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
-						<img src="{{ asset($apartment->thumb) }}" id="mainImage" alt="" class="main-image img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
+						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
-							@foreach ( $images as $image )
+							@foreach ( $galleries as $gallery )
 							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded thumbnail-image" onclick="changeMainImage('{{ $image->path }}')">
+								<img src="{{ asset($gallery) }}" id="thumbnail" alt="path" class="w-100 h-100 rounded "  onclick="selectImage(this)">
 							</div>
 							@endforeach
-							<div class="box w-100 my-box-image">
-								<img class="w-100 h-100 rounded thumbnail-image" src="{{ $previousMainImage }}" alt="Immagine in miniatura precedente" onclick="restorePreviousMainImage()">
-							</div>
 						</div>
 					</div>
 					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
@@ -208,23 +205,28 @@
 	
 </main>
 <script>
-    let defaultMainImage = "{{ $apartment->thumb }}";
-    let currentMainImage = defaultMainImage;
-	let previousMainImage = "{{ $previousMainImage }}";
+  function selectImage(element) {
+    let images = document.getElementsByClassName('thumbnail');
+    for (let i = 0; i < images.length; i++) {
+        images[i].classList.remove('selected');
+        images[i].classList.remove('selected-thumbnail');
+    }
+
+    element.classList.add('selected');
+    element.classList.add('selected-thumbnail');
+
+    let selectedImagePath = element.getAttribute('src');
+    let thumbnail = document.getElementById('thumbnail');
+    thumbnail.setAttribute('src', selectedImagePath);
+}
 	
-    function changeMainImage(imageUrl) {
-        document.querySelector('#mainImage').src = imageUrl;
-        currentMainImage = imageUrl;
-    }
-	 function restorePreviousMainImage() {
-        document.querySelector('#mainImage').src = previousMainImage;
-        currentMainImage = previousMainImage;
-    }
 </script>
 
 <style>
 	/* img change  */
-	
+	.selected-thumbnail {
+        border: 2px solid red; /* Colore e dimensione del bordo per l'immagine selezionata */
+    }
 	/* details style */
 	.my-container{
 		
@@ -246,6 +248,9 @@
 		padding-top: 20px
 	}
 
+	.my-height{
+		max-height: 500px
+	}
 
 	/* plans style */
 

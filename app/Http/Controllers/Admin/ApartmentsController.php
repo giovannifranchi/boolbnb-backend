@@ -115,13 +115,14 @@ class ApartmentsController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        $defaultMainImage = $apartment->thumb;
+
         $plans = Plan::all();
         $images = Image::where('apartment_id', $apartment->id)->get();
+        $pics = $images->pluck('path')->toArray();
+        $thumb = $apartment->thumb;
+        $galleries = array_merge([$thumb], $pics);
 
-        $previousMainImage = $apartment->thumb;
-
-        return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'defaultMainImage', 'previousMainImage'));
+        return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'galleries'));
     }
 
     /**
