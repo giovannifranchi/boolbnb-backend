@@ -12,7 +12,7 @@
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $galleries as $gallery )
 							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($gallery) }}" id="thumbnail" alt="path" class="w-100 h-100 rounded "  onclick="selectImage(this)">
+								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail"  onclick="selectImage(this)">
 							</div>
 							@endforeach
 						</div>
@@ -205,18 +205,21 @@
 	
 </main>
 <script>
-  function selectImage(element) {
+ function selectImage(element) {
     let images = document.getElementsByClassName('thumbnail');
+    let thumbnail = document.getElementById('thumbnail');
+
     for (let i = 0; i < images.length; i++) {
-        images[i].classList.remove('selected');
         images[i].classList.remove('selected-thumbnail');
+        if (images[i].classList.contains('selected')) {
+            images[i].classList.remove('selected');
+        }
     }
 
     element.classList.add('selected');
     element.classList.add('selected-thumbnail');
 
     let selectedImagePath = element.getAttribute('src');
-    let thumbnail = document.getElementById('thumbnail');
     thumbnail.setAttribute('src', selectedImagePath);
 }
 	
@@ -249,7 +252,7 @@
 	}
 
 	.my-height{
-		max-height: 500px
+		max-height: 485px;
 	}
 
 	/* plans style */
