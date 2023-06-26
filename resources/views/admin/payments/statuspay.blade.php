@@ -15,9 +15,9 @@
                     <h3>Pagamento non riuscito</h3>
                     <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
                     @endif
-                    @if ($success)
-                    <button id="redirectButton" class="btn btn-primary">Reindirizzamento automatico in corso...</button>
-                    @endif
+                   
+                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-primary">Torna alla Home</a>
+                   
                 </div>
             </div>
         </div>
@@ -25,9 +25,3 @@
 </div>
 
 @endsection
-
-<script>
-    setTimeout(function() {
-        window.location.href = "{{ route('admin.apartments.index')}}";
-    }, 5000);
-</script>
