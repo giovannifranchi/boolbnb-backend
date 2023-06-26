@@ -1,33 +1,71 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <main>
+	<div class="container px-3">
+		<div class="row justify-content-center mt-5">
+			<div class="col-12  rounded p-0" style="border: 1px solid #000;">
+				<div class="row">
+					<div class="col-12 col-md-6 d-flex flex-column">
+						<img src="{{ asset($apartment->thumb) }}" alt="" class="img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
+						<div class="preview p-3 d-flex gap-2">
+							@foreach ( $images as $image )
+							<div class="box w-100" style="height: 100px;">
+								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded">
+							</div>
+							@endforeach
+						</div>
+					</div>
+					<div class="col-12 col-md-6 d-flex flex-column gap-3">
+						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
+						<h3> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
+						<div class="row">
+							<div class="col-3">
+								m²:
+								<strong>{{$apartment->square_meters}}</strong>
+							</div>
+							<div class="col-3">
+								BATHS:
+								<strong>{{$apartment->bathrooms}}</strong>
+							</div>
+							<div class="col-3">
+								ROOMS:
+								<strong>{{$apartment->rooms}}</strong>
+							</div>
+							<div class="col-3">
+								BEDS:
+								<strong>{{$apartment->beds}}</strong>
+							</div>
+						</div>
+						<h3>Serives:</h3>
+						<ul class="list-unstyled d-flex flex-wrap gap-3">
+							@foreach ($apartment->services as $service)
+							<li>
+								<strong>
+									{{$service->name}}
+								</strong>
+							</li>
+							@endforeach
+						</ul>
+						<h3>Despription:</h3>
+						<p>{{$apartment->description}}</p>
+						<h3>Price: {{$apartment->price}} €</h3>
+					</div>
+				</div>
 
-    <div class="projcard-container">
-
-        <div class="projcard projcard-blue">
-            <div class="projcard-innerbox">
-                <img class="projcard-img" src="https://picsum.photos/800/600?image=1041" />
-                <div class="projcard-textbox">
-                    <div class="projcard-title">Card Title</div>
-                    <div class="projcard-subtitle">This explains the card in more detail</div>
-                    <div class="projcard-bar"></div>
-                    <div class="projcard-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                    <div class="projcard-tagbox">
-                        <span class="projcard-tag">HTML</span>
-                        <span class="projcard-tag">CSS</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 
 
 
 
 
 
-    <!-- <div class="container py-3">
+
+
+	<!-- <div class="container py-3">
         <div class="row justify-content-center">
             <div class="col-6">
                 <div class="card mb-3">
@@ -47,6 +85,7 @@
                             <div class="col-6 col-lg-4">
                                 <h5 class="text-center">Beds: {{$apartment->beds}}</h5>
                             </div>
+
                         </div>
 
 
@@ -60,206 +99,560 @@
                 </div>
             </div>
         </div> -->
-    {{-- put the condition if services are not set --}}
+	{{-- put the condition if services are not set --}}
 
-    <section>
-        <div class='pricing pricing-palden'>
-            @foreach ($plans as $key=>$plan)
-            <div class='pricing-item {{$key === 1 ? 'pricing__item--featured' : ''}}'>
-                <div class='pricing-deco'>
-                    <svg class='pricing-deco-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
-                        <path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729&#x000A;	c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
-                        <path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729&#x000A;	c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z' fill='#FFFFFF' opacity='0.6'></path>
-                        <path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716&#x000A;	H42.401L43.415,98.342z' fill='#FFFFFF' opacity='0.7'></path>
-                        <path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428&#x000A;	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
-                    </svg>
-                    <div class='pricing-price'><span class='pricing-currency'></span>{{ $plan->price }} €
-                        <span class='pricing-period'>/ mo</span>
-                    </div>
-                    <h3 class='pricing-title'>{{ $plan->name }}</h3>
-                </div>
-                <ul class='pricing-feature-list'>
+	<!-- <section>
+		<div class='pricing pricing-palden'>
+			@foreach ($plans as $key=>$plan)
+			<div class='pricing-item {{$key === 1 ? 'pricing__item--featured' : ''}}'>
+				<div class='pricing-deco'>
+					<svg class='pricing-deco-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
+						<path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729&#x000A;	c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
+						<path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729&#x000A;	c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z' fill='#FFFFFF' opacity='0.6'></path>
+						<path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716&#x000A;	H42.401L43.415,98.342z' fill='#FFFFFF' opacity='0.7'></path>
+						<path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428&#x000A;	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
+					</svg>
+					<div class='pricing-price'><span class='pricing-currency'></span>{{ $plan->price }} €
+						<span class='pricing-period'>/ mo</span>
+					</div>
+					<h3 class='pricing-title'>{{ $plan->name }}</h3>
+				</div>
+				<ul class='pricing-feature-list'>
 
-                    <li class='pricing-feature'>{{ $plan->duration }} hours</li>
-                </ul>
-                <a href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}" class='pricing-action'>Choose plan</a>
-            </div>
-            @endforeach
-        </div>
-    </section>
+					<li class='pricing-feature'>{{ $plan->duration }} hours</li>
+				</ul>
+				<a href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}" class='pricing-action'>Choose plan</a>
+			</div>
+			@endforeach
+		</div>
+	</section>
+ -->
 
-    </div>
+	<div id="generic_price_table">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<!--PRICE HEADING START-->
+						<div class="price-heading clearfix">
+							<h1>Choose your Plan</h1>
+						</div>
+						<!--//PRICE HEADING END-->
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<!--BLOCK ROW START-->
+				<div class="row">
+					@foreach ($plans as $key=>$plan)
+					<div class="col-md-4 {{$key === 1 ? 'pricing__item--featured' : ''}}">
+
+						<!--PRICE CONTENT START-->
+						<div class="generic_content clearfix">
+
+							<!--HEAD PRICE DETAIL START-->
+							<div class="generic_head_price clearfix">
+
+								<!--HEAD CONTENT START-->
+								<div class="generic_head_content clearfix">
+
+									<!--HEAD START-->
+									<div class="head_bg"></div>
+									<div class="head">
+										<span>{{ $plan->name }}</span>
+									</div>
+									<!--//HEAD END-->
+
+								</div>
+								<!--//HEAD CONTENT END-->
+
+								<!--PRICE START-->
+								<div class="generic_price_tag clearfix">
+									<span class="price">
+										<span class="sign">€</span>
+										<span class="currency">{{ $plan->price }}</span>
+										<span class="month">/MON</span>
+									</span>
+								</div>
+								<!--//PRICE END-->
+
+							</div>
+							<!--//HEAD PRICE DETAIL END-->
+
+							<!--FEATURE LIST START-->
+							<div class="generic_feature_list">
+								<ul>
+									<li><span>{{ $plan->duration }} hours</span> Sponsorship</li>
+									<li><span>24/7</span> Support</li>
+								</ul>
+							</div>
+							<!--//FEATURE LIST END-->
+
+							<!--BUTTON START-->
+							<div class="generic_price_btn clearfix">
+								<a class="" href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}">Sign up</a>
+							</div>
+							<!--//BUTTON END-->
+
+						</div>
+						<!--//PRICE CONTENT END-->
+
+					</div>
+					<!--//BLOCK ROW END-->
+					@endforeach
+
+				</div>
+		</section>
+	</div>
+
+
+
+
+	</div>
 </main>
 
+
 <style>
-   
+	/* details style */
 
 
-    /* plans style */
-    section {
-        color: #7a90ff;
-        padding: 2em 0 8em;
-        position: relative;
-        -webkit-font-smoothing: antialiased;
-    }
 
-    .pricing {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-        flex-wrap: wrap;
-        -webkit-justify-content: center;
-        justify-content: center;
-        width: 100%;
-        margin: 0 auto 3em;
-    }
 
-    .pricing-item {
-        position: relative;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: column;
-        flex-direction: column;
-        -webkit-align-items: stretch;
-        align-items: stretch;
-        text-align: center;
-        -webkit-flex: 0 1 330px;
-        flex: 0 1 330px;
-    }
+	/* plans style */
 
-    .pricing-action {
-        color: inherit;
-        border: none;
-        background: none;
-    }
+	#generic_price_table {
+		background-color: #EAEAEA;
+	}
 
-    .pricing-action:focus {
-        outline: none;
-    }
+	/*PRICE COLOR CODE START*/
+	#generic_price_table .generic_content {
+		background-color: #fff;
+	}
 
-    .pricing-feature-list {
-        text-align: left;
-    }
+	#generic_price_table .generic_content .generic_head_price {
+		background-color: #f6f6f6;
+	}
 
-    .pricing-palden .pricing-item {
-        font-family: "Open Sans", sans-serif;
-        cursor: default;
-        color: #84697c;
-        background: #fff;
-        box-shadow: 0 0 10px rgba(46, 59, 125, 0.23);
-        border-radius: 20px 20px 10px 10px;
-        margin: 1em;
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg {
+		border-color: #e4e4e4 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #e4e4e4;
+	}
 
-    @media screen and (min-width: 66.25em) {
-        .pricing-palden .pricing-item {
-            margin: 1em -0.5em;
-        }
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head span {
+		color: #525252;
+	}
 
-        .pricing-palden .pricing__item--featured {
-            margin: 0;
-            z-index: 10;
-            box-shadow: 0 0 20px rgba(46, 59, 125, 0.23);
-        }
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign {
+		color: #414141;
+	}
 
-    .pricing-palden .pricing-deco {
-        border-radius: 10px 10px 0 0;
-        background: rgba(76, 70, 101, 0.99);
-        padding: 4em 0 9em;
-        position: relative;
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency {
+		color: #414141;
+	}
 
-    .pricing-palden .pricing-deco-img {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 160px;
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent {
+		color: #414141;
+	}
 
-    .pricing-palden .pricing-title {
-        font-size: 0.75em;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 5px;
-        color: #fff;
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .month {
+		color: #414141;
+	}
 
-    .pricing-palden .deco-layer {
-        -webkit-transition: -webkit-transform 0.5s;
-        transition: transform 0.5s;
-    }
+	#generic_price_table .generic_content .generic_feature_list ul li {
+		color: #a7a7a7;
+	}
 
-    .pricing-palden .pricing-item:hover .deco-layer--1 {
-        -webkit-transform: translate3d(15px, 0, 0);
-        transform: translate3d(15px, 0, 0);
-    }
+	#generic_price_table .generic_content .generic_feature_list ul li span {
+		color: #414141;
+	}
 
-    .pricing-palden .pricing-item:hover .deco-layer--2 {
-        -webkit-transform: translate3d(-15px, 0, 0);
-        transform: translate3d(-15px, 0, 0);
-    }
+	#generic_price_table .generic_content .generic_feature_list ul li:hover {
+		background-color: #e4e4e4;
+		border-left: 5px solid #2ecc71;
+	}
 
-    .pricing-palden .icon {
-        font-size: 2.5em;
-    }
+	#generic_price_table .generic_content .generic_price_btn a {
+		border: 1px solid #2ecc71;
+		color: #2ecc71;
+	}
 
-    .pricing-palden .pricing-price {
-        font-size: 3em;
-        font-weight: bold;
-        padding: 0;
-        color: #fff;
-        margin: 0 0 0.25em 0;
-        line-height: 0.75;
-    }
+	#generic_price_table .generic_content.active .generic_head_price .generic_head_content .head_bg,
+	#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head_bg {
+		border-color: #2ecc71 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #2ecc71;
+		color: #fff;
+	}
 
-    .pricing-palden .pricing-currency {
-        font-size: 0.15em;
-        vertical-align: top;
-    }
+	#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head span,
+	#generic_price_table .generic_content.active .generic_head_price .generic_head_content .head span {
+		color: #fff;
+	}
 
-    .pricing-palden .pricing-period {
-        font-size: 0.15em;
-        padding: 0 0 0 0.5em;
-        font-style: italic;
-    }
+	#generic_price_table .generic_content:hover .generic_price_btn a,
+	#generic_price_table .generic_content.active .generic_price_btn a {
+		background-color: #2ecc71;
+		color: #fff;
+	}
 
-    .pricing-palden .pricing__sentence {
-        font-weight: bold;
-        margin: 0 0 1em 0;
-        padding: 0 0 0.5em;
-    }
+	#generic_price_table {
+		margin: 50px 0 50px 0;
+		font-family: "Raleway", sans-serif;
+	}
 
-    .pricing-palden .pricing-feature-list {
-        margin: 0;
-        padding: 0.25em 0 2.5em;
-        list-style: none;
-        text-align: center;
-    }
+	.row .table {
+		padding: 28px 0;
+	}
 
-    .pricing-palden .pricing-feature {
-        padding: 1em 0;
-    }
+	/*PRICE BODY CODE START*/
 
-    .pricing-palden .pricing-action {
-        font-weight: bold;
-        margin: auto 3em 2em 3em;
-        padding: 1em 2em;
-        color: #fff;
-        border-radius: 30px;
-        background: #4d4766;
-        -webkit-transition: background-color 0.3s;
-        transition: background-color 0.3s;
-    }
+	#generic_price_table .generic_content {
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+	}
 
-    .pricing-palden .pricing-action:hover,
-    .pricing-palden .pricing-action:focus {
-        background-color: #100A13;
-    }
+	#generic_price_table .generic_content .generic_head_price {
+		margin: 0 0 20px 0;
+	}
 
-    .pricing-palden .pricing-item--featured .pricing-deco {
-        padding: 5em 0 8.885em 0;
-    }
+	#generic_price_table .generic_content .generic_head_price .generic_head_content {
+		margin: 0 0 50px 0;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg {
+		border-style: solid;
+		border-width: 90px 1411px 23px 399px;
+		position: absolute;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head {
+		padding-top: 40px;
+		position: relative;
+		z-index: 1;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head span {
+		font-family: "Raleway", sans-serif;
+		font-size: 28px;
+		font-weight: 400;
+		letter-spacing: 2px;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag {
+		padding: 0 0 20px;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price {
+		display: block;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .sign {
+		display: inline-block;
+		font-family: "Lato", sans-serif;
+		font-size: 28px;
+		font-weight: 400;
+		vertical-align: middle;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .currency {
+		font-family: "Lato", sans-serif;
+		font-size: 60px;
+		font-weight: 300;
+		letter-spacing: -2px;
+		line-height: 60px;
+		padding: 0;
+		vertical-align: middle;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .price .cent {
+		display: inline-block;
+		font-family: "Lato", sans-serif;
+		font-size: 24px;
+		font-weight: 400;
+		vertical-align: bottom;
+	}
+
+	#generic_price_table .generic_content .generic_head_price .generic_price_tag .month {
+		font-family: "Lato", sans-serif;
+		font-size: 18px;
+		font-weight: 400;
+		letter-spacing: 3px;
+		vertical-align: bottom;
+	}
+
+	#generic_price_table .generic_content .generic_feature_list ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	#generic_price_table .generic_content .generic_feature_list ul li {
+		font-family: "Lato", sans-serif;
+		font-size: 18px;
+		padding: 15px 0;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table .generic_content .generic_feature_list ul li:hover {
+		transition: all 0.3s ease-in-out 0s;
+		-moz-transition: all 0.3s ease-in-out 0s;
+		-ms-transition: all 0.3s ease-in-out 0s;
+		-o-transition: all 0.3s ease-in-out 0s;
+		-webkit-transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table .generic_content .generic_feature_list ul li .fa {
+		padding: 0 10px;
+	}
+
+	#generic_price_table .generic_content .generic_price_btn {
+		margin: 20px 0 32px;
+	}
+
+	#generic_price_table .generic_content .generic_price_btn a {
+		border-radius: 50px;
+		-moz-border-radius: 50px;
+		-ms-border-radius: 50px;
+		-o-border-radius: 50px;
+		-webkit-border-radius: 50px;
+		display: inline-block;
+		font-family: "Lato", sans-serif;
+		font-size: 18px;
+		outline: medium none;
+		padding: 12px 30px;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+
+	#generic_price_table .generic_content,
+	#generic_price_table .generic_content:hover,
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head_bg,
+	#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head_bg,
+	#generic_price_table .generic_content .generic_head_price .generic_head_content .head h2,
+	#generic_price_table .generic_content:hover .generic_head_price .generic_head_content .head h2,
+	#generic_price_table .generic_content .price,
+	#generic_price_table .generic_content:hover .price,
+	#generic_price_table .generic_content .generic_price_btn a,
+	#generic_price_table .generic_content:hover .generic_price_btn a {
+		transition: all 0.3s ease-in-out 0s;
+		-moz-transition: all 0.3s ease-in-out 0s;
+		-ms-transition: all 0.3s ease-in-out 0s;
+		-o-transition: all 0.3s ease-in-out 0s;
+		-webkit-transition: all 0.3s ease-in-out 0s;
+	}
+
+	@media (max-width: 320px) {}
+
+	@media (max-width: 767px) {
+		#generic_price_table .generic_content {
+			margin-bottom: 75px;
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 991px) {
+		#generic_price_table .col-md-3 {
+			float: left;
+			width: 50%;
+		}
+
+		#generic_price_table .col-md-4 {
+			float: left;
+			width: 50%;
+		}
+
+		#generic_price_table .generic_content {
+			margin-bottom: 75px;
+		}
+	}
+
+	@media (min-width: 992px) and (max-width: 1199px) {}
+
+	@media (min-width: 1200px) {}
+
+	#generic_price_table_home {
+		font-family: "Raleway", sans-serif;
+	}
+
+	.text-center h1,
+	.text-center h1 a {
+		color: #7885cb;
+		font-size: 30px;
+		font-weight: 300;
+		text-decoration: none;
+	}
+
+	.demo-pic {
+		margin: 0 auto;
+	}
+
+	.demo-pic:hover {
+		opacity: 0.7;
+	}
+
+	#generic_price_table_home ul {
+		margin: 0 auto;
+		padding: 0;
+		list-style: none;
+		display: table;
+	}
+
+	#generic_price_table_home li {
+		float: left;
+	}
+
+	#generic_price_table_home li+li {
+		margin-left: 10px;
+		padding-bottom: 10px;
+	}
+
+	#generic_price_table_home li a {
+		display: block;
+		width: 50px;
+		height: 50px;
+		font-size: 0px;
+	}
+
+	#generic_price_table_home .blue {
+		background: #3498db;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .emerald {
+		background: #2ecc71;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .grey {
+		background: #7f8c8d;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .midnight {
+		background: #34495e;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .orange {
+		background: #e67e22;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .purple {
+		background: #9b59b6;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .red {
+		background: #e74c3c;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .turquoise {
+		background: #1abc9c;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .blue:hover,
+	#generic_price_table_home .emerald:hover,
+	#generic_price_table_home .grey:hover,
+	#generic_price_table_home .midnight:hover,
+	#generic_price_table_home .orange:hover,
+	#generic_price_table_home .purple:hover,
+	#generic_price_table_home .red:hover,
+	#generic_price_table_home .turquoise:hover {
+		border-bottom-left-radius: 50px;
+		border-bottom-right-radius: 50px;
+		border-top-left-radius: 50px;
+		border-top-right-radius: 50px;
+		transition: all 0.3s ease-in-out 0s;
+	}
+
+	#generic_price_table_home .divider {
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 20px;
+		padding: 20px;
+	}
+
+	#generic_price_table_home .divider span {
+		width: 100%;
+		display: table;
+		height: 2px;
+		background: #ddd;
+		margin: 50px auto;
+		line-height: 2px;
+	}
+
+	#generic_price_table_home .itemname {
+		text-align: center;
+		font-size: 50px;
+		padding: 50px 0 20px;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 40px;
+		text-decoration: none;
+		font-weight: 300;
+	}
+
+	#generic_price_table_home .itemnametext {
+		text-align: center;
+		font-size: 20px;
+		padding-top: 5px;
+		text-transform: uppercase;
+		display: inline-block;
+	}
+
+	#generic_price_table_home .footer {
+		padding: 40px 0;
+	}
+
+	.price-heading {
+		text-align: center;
+	}
+
+	.price-heading h1 {
+		color: #666;
+		margin: 0;
+		padding: 0 0 50px 0;
+	}
+
+	.demo-button {
+		background-color: #333333;
+		color: #ffffff;
+		display: table;
+		font-size: 20px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 20px;
+		margin-bottom: 50px;
+		outline-color: -moz-use-text-color;
+		outline-style: none;
+		outline-width: medium;
+		padding: 10px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.bottom_btn {
+		background-color: #333333;
+		color: #ffffff;
+		display: table;
+		font-size: 28px;
+		margin: 60px auto 20px;
+		padding: 10px 25px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.demo-button:hover {
+		background-color: #666;
+		color: #fff;
+		text-decoration: none;
+	}
+
+	.bottom_btn:hover {
+		background-color: #666;
+		color: #fff;
+		text-decoration: none;
+	}
 </style>
 @endsection

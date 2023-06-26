@@ -189,15 +189,13 @@
 
             }
         }
+
     }
 
     footer {
         background-color: var(--custom-black);
 /*         height: 135px; */  /* todo: fix height footer and main */
         color: $custom-white;
-
-
-
         .footer-text {
             font-size: 1.25rem;
         }

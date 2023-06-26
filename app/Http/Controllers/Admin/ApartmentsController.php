@@ -13,6 +13,7 @@ use App\Models\Plan;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -29,9 +30,11 @@ class ApartmentsController extends Controller
     {
 
         $user = $request->user();
-        $apartments = Apartment::where('user_id', $user->id)->get();
+        $apartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
+        $services = Service::all();
+        
 
-        return view('admin.apartments.index', compact('apartments'));
+        return view('admin.apartments.index', compact('apartments', 'services'));
     }
 
     /**
@@ -54,6 +57,7 @@ class ApartmentsController extends Controller
      */
     public function store(ApartmentStoreRequest $request)
     {
+
         $data = $request->validated();
         $user = $request->user();
         $apartment = new Apartment();
@@ -72,6 +76,10 @@ class ApartmentsController extends Controller
         $apartment->longitude = $request['longitude'];
         $apartment->latitude = $request['latitude'];
 
+        if (!$request->is_visible) {
+
+            $apartment->is_visible = false;
+        }
 
         $apartment->save();
 
@@ -85,7 +93,7 @@ class ApartmentsController extends Controller
                 $path = $additionalImage->store('images', 'public');
                 $image = new Image();
                 $image->apartment_id = $apartment->id;
-                $image->path = "storage/".$path;
+                $image->path = "storage/" . $path;
                 $image->save();
             }
 
@@ -108,7 +116,8 @@ class ApartmentsController extends Controller
     public function show(Apartment $apartment)
     {
         $plans = Plan::all();
-        return view('admin.apartments.show', compact('apartment', 'plans'));
+        $images = Image::where('apartment_id', $apartment->id)->get();
+        return view('admin.apartments.show', compact('apartment', 'plans', 'images'));
     }
 
     /**
@@ -143,13 +152,18 @@ class ApartmentsController extends Controller
             $path = $thumb->store('images', 'public');
             $data['thumb'] = "storage/" . $path;
         }
+        if (!$request->is_visible) {
 
+            $apartment->is_visible = false;
+        } elseif ($request->is_visible) {
+            $apartment->is_visible = true;
+        }
 
         $apartment->update($data);
 
-         // Salvataggio delle immagini aggiuntive
+        // Salvataggio delle immagini aggiuntive
 
-         if ($request->hasFile('additional_images')) {
+        if ($request->hasFile('additional_images')) {
             $additionalImages = $request->file('additional_images');
             $additionalImageNames = [];
 
@@ -157,7 +171,7 @@ class ApartmentsController extends Controller
                 $path = $additionalImage->store('images', 'public');
                 $image = new Image();
                 $image->apartment_id = $apartment->id;
-                $image->path = "storage/".$path;
+                $image->path = "storage/" . $path;
                 $image->save();
             }
 
@@ -171,7 +185,7 @@ class ApartmentsController extends Controller
         }
 
 
-        
+
         return redirect()->route('admin.apartments.show', $apartment);
     }
 
