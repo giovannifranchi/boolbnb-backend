@@ -60,12 +60,16 @@ class BraintreeController extends Controller
             $now = Carbon::now();
         
             $expiration = $now->addHours($amount->duration);
+
+            $user = $request->user();
+
+            $data = ['name' => $user->name, 'amount'=>$price, 'apartment_id', $apartment->id, 'date' => now(), 'expires'=> $expiration];
     
             $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
             
-            return redirect()->back()->with('success', 'Transaction successful with plan'.$amount->name);
+            return view('admin.payments.statuspay', compact('data'))->with('success', 'Transaction successful with plan'.$amount->name);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Transaction failed']);
+            return view('admin.payments.statuspay')->with('error', 'Transaction Failed');
         }
     }
 }
