@@ -56,8 +56,8 @@
             <div>Services</div>
             @foreach ($services as $service)
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="services[]" id="services" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
-                <label class="form-check-label" for="services">{{ $service->name }}</label>
+                <input class="form-check-input" type="checkbox" name="services[]" id="services{{ $service->id }}" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+                <label class="form-check-label" for="services{{ $service->id }}">{{ $service->name }}</label>
             </div>
             @endforeach
         </div>
@@ -66,8 +66,8 @@
             <div>Services</div>
             @foreach ($services as $service)
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="services[]" id="services" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : '' }}>
-                <label class="form-check-label" for="services">{{ $service->name }}</label>
+                <input class="form-check-input" type="checkbox" name="services[]" id="services{{ $service->id }}" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : '' }}>
+                <label class="form-check-label" for="services{{ $service->id }}">{{ $service->name }}</label>
             </div>
             @endforeach
         </div>
@@ -120,6 +120,12 @@
         </div>
     </form>
 </main>
+
+<style>
+    label{
+        color: #000;
+    }
+</style>
 
 <script>
     function previewImage(event, previewId) {
