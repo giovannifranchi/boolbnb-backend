@@ -12,7 +12,7 @@
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $galleries as $gallery )
 							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail"  onclick="selectImage(this)">
+								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
 						</div>
@@ -222,13 +222,22 @@
     let selectedImagePath = element.getAttribute('src');
     thumbnail.setAttribute('src', selectedImagePath);
 }
+function enlargeImage(element) {
+    element.style.transform = "scale(1.1)";
+}
+
+function resetImageSize(element) {
+    element.style.transform = "scale(1)";
+}
 	
 </script>
 
 <style>
 	/* img change  */
-	.selected-thumbnail {
-        border: 2px solid red; /* Colore e dimensione del bordo per l'immagine selezionata */
+	.thumbnail {
+        width: 100px;
+    height: 100px;
+    transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
     }
 	/* details style */
 	.my-container{
