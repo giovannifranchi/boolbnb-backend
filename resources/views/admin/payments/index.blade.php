@@ -58,7 +58,7 @@
         <button id="submit-button" class="mt-3 d-flex justify-content-center" type="button">Purchase</button>
     </form>
 
-    @if (session('success'))
+    @if (session('error'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>

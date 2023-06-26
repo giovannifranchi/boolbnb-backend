@@ -8,7 +8,7 @@
                 <div class="card-header">Risultato del pagamento</div>
 
                 <div class="card-body">
-                    @if (session('success'))
+                    @if (!session('error'))
                     <h3>Pagamento avvenuto con successo!</h3>
                     <p>Grazie per il tuo pagamento. Il tuo ordine è stato elaborato correttamente.</p>
                     @else
@@ -16,7 +16,7 @@
                     <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
                     @endif
 
-                    @if (session('success'))
+                    @if (!session('error'))
                     <button id="redirectButton" class="btn btn-primary">Reindirizzamento automatico in corso...</button>
                     @endif
                 </div>
