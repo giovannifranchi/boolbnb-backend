@@ -10,15 +10,15 @@
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
-							@foreach ( $galleries as $gallery )
+							@foreach ( $galleries as $key =>$gallery )
 							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
 						</div>
 					</div>
 					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
-						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
+						<h1 class="fs-2">{{$apartment->name}}</h1>
 						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
 							<div class="col-3">
@@ -48,7 +48,7 @@
 						</ul>
 						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
-						<h3 class="d-flex justify-content-end my-price-container">Price: {{$apartment->price}} €</h3>
+						<h3 class="d-flex justify-content-end my-price-container">{{$apartment->price}} €/night</h3>
 					</div>
 				</div>
 
@@ -234,6 +234,13 @@ function resetImageSize(element) {
 
 <style>
 	/* img change  */
+	.selected-thumbnail{
+		max-width: 250px;
+  padding: 1rem;
+  position: relative;
+  background: linear-gradient(to right, red, purple);
+  padding: 2px;
+	}
 	.thumbnail {
         width: 100px;
     height: 100px;
@@ -241,9 +248,17 @@ function resetImageSize(element) {
     }
 	/* details style */
 	.my-container{
-		
-		background-color: white;
+		background: rgb(227,227,227);
+		background: linear-gradient(177deg, rgba(227,227,227,1) 45%, rgba(255,255,255,1) 45%);
+		transition: all 0.3s ease-in-out 0s;
 	}
+	.my-container:hover{
+
+		background: rgb(46,204,113);
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
+
+	}
+	
 	.my-image-container{
 		padding: 10px 0 0 22px;
 		 
