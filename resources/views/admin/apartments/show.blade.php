@@ -48,7 +48,10 @@
 						</ul>
 						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
-						<h3 class="d-flex justify-content-end my-price-container">{{$apartment->price}} €/night</h3>
+						<div class="d-flex justify-content-end ">
+							<h3 class="my-price-container">{{$apartment->price}} €/<small>night</small></h3>
+						</div>
+						
 					</div>
 				</div>
 
@@ -235,29 +238,25 @@ function resetImageSize(element) {
 <style>
 	/* img change  */
 	.selected-thumbnail{
-		max-width: 250px;
-  padding: 1rem;
-  position: relative;
-  background: linear-gradient(to right, red, purple);
-  padding: 2px;
+	border: 3px solid rgba(46,204,113,1) ;
 	}
 	.thumbnail {
         width: 100px;
-    height: 100px;
-    transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
+		height: 100px;
+		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
     }
 	/* details style */
 	.my-container{
-		background: rgb(227,227,227);
-		background: linear-gradient(177deg, rgba(227,227,227,1) 45%, rgba(255,255,255,1) 45%);
-		transition: all 0.3s ease-in-out 0s;
-	}
-	.my-container:hover{
-
-		background: rgb(46,204,113);
+		
 		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
-
+		transition: 0.3s ease-in-out;
 	}
+	/* .my-container:hover{
+
+		
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
+
+	} */
 	
 	.my-image-container{
 		padding: 10px 0 0 22px;
@@ -269,6 +268,10 @@ function resetImageSize(element) {
 	}
 	.my-price-container{
 		margin-right: 15px;
+		background-color: rgba(46,204,113,1);
+		padding: 3px 20px 3px 20px;
+		color: white;
+		border-radius: 5px
 	}
 	.my-detail-container{
 		padding-left: 50px;
