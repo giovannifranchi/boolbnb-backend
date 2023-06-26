@@ -32,7 +32,7 @@ class ApartmentsController extends Controller
         $user = $request->user();
         $apartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
         $services = Service::all();
-        
+
 
         return view('admin.apartments.index', compact('apartments', 'services'));
     }
@@ -115,9 +115,13 @@ class ApartmentsController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $defaultMainImage = $apartment->thumb;
         $plans = Plan::all();
         $images = Image::where('apartment_id', $apartment->id)->get();
-        return view('admin.apartments.show', compact('apartment', 'plans', 'images'));
+
+        $previousMainImage = $apartment->thumb;
+
+        return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'defaultMainImage', 'previousMainImage'));
     }
 
     /**

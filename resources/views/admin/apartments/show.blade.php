@@ -7,17 +7,20 @@
 		<div class="row justify-content-center mt-5">
 			<div class="col-12  rounded p-0 my-container">
 				<div class="row">
-					<div class="col-12 col-md-6 d-flex flex-column">
-						<img src="{{ asset($apartment->thumb) }}" alt="" class="img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
+					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
+						<img src="{{ asset($apartment->thumb) }}" id="mainImage" alt="" class="main-image img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $images as $image )
 							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded">
+								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded thumbnail-image" onclick="changeMainImage('{{ $image->path }}')">
 							</div>
 							@endforeach
+							<div class="box w-100 my-box-image">
+								<img class="w-100 h-100 rounded thumbnail-image" src="{{ $previousMainImage }}" alt="Immagine in miniatura precedente" onclick="restorePreviousMainImage()">
+							</div>
 						</div>
 					</div>
-					<div class="col-12 col-md-6 d-flex flex-column gap-3">
+					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
 						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
 						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
@@ -42,9 +45,7 @@
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
 							<li class="projcard-tag text-decoration-none">
-								
-									{{$service->name}}
-								
+								{{$service->name}}	
 							</li>
 							@endforeach
 						</ul>
@@ -204,25 +205,45 @@
 				</div>
 		</section>
 	</div>
-
-
-
-
-	</div>
+	
 </main>
-
+<script>
+    let defaultMainImage = "{{ $apartment->thumb }}";
+    let currentMainImage = defaultMainImage;
+	let previousMainImage = "{{ $previousMainImage }}";
+	
+    function changeMainImage(imageUrl) {
+        document.querySelector('#mainImage').src = imageUrl;
+        currentMainImage = imageUrl;
+    }
+	 function restorePreviousMainImage() {
+        document.querySelector('#mainImage').src = previousMainImage;
+        currentMainImage = previousMainImage;
+    }
+</script>
 
 <style>
+	/* img change  */
+	
 	/* details style */
 	.my-container{
 		
 		background-color: white;
 	}
+	.my-image-container{
+		padding: 10px 0 0 22px;
+		 
+	}
 	.my-box-image{
 		height: 100px;
+		cursor: pointer;
 	}
 	.my-price-container{
 		margin-right: 15px;
+	}
+	.my-detail-container{
+		padding-left: 50px;
+		padding-top: 20px
 	}
 
 
