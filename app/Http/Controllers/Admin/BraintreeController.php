@@ -64,7 +64,7 @@ class BraintreeController extends Controller
 
             $user = $request->user();
 
-            $data = ['name' => $user->name, 'amount'=>$price, 'apartment_id', $apartment->id, 'date' => now(), 'expires'=> $expiration];
+            $data = ['name' => $user->name, 'amount'=>$price, 'apartment_id'=> $apartment->name, 'date' => now(), 'expires'=> $expiration];
     
             $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
             
