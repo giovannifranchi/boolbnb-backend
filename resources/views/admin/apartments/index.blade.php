@@ -78,9 +78,9 @@
                             </div>
 
                         </div>
-                        <div class="col-12 col-lg-5">
+                        <div class="col-12 col-lg-5 ms-img-container">
                             <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
-                                class="img-fluid h-100 ms-img">
+                                class="w-100 h-100 ms-img">
                         </div>
                     </div>
                 </div>
@@ -271,9 +271,13 @@
             color: #252A34;
         }
 
+        .ms-img-container {
+            height: auto;
+        }
+
         .detail-container {
             border-radius: 30px;
-            height: 400px;
+            height: auto;
             /* background: linear-gradient(#) */
             /* background-color: #ffffff */
             box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
@@ -372,6 +376,14 @@
                 border-top-right-radius: 20px;
                 border-bottom-right-radius: 20px;
                 border-bottom-left-radius: 0;
+            }
+
+            .ms-img-container {
+                height: 350px;
+            }
+
+            .detail-container {
+                height: 350px;
             }
         }
     </style>
