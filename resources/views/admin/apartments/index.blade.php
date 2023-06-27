@@ -38,7 +38,7 @@
                                     <span>{{ count($apartment->messages) }}</span>
                                 </div>
                             </div>
-                            <div class="d-flex gap-3">
+                            <div class="d-flex flex-wrap gap-3">
                                 <div class="box">
                                     <a class="ms-link"
                                         href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
@@ -272,7 +272,7 @@
         }
 
         .ms-img-container {
-            height: auto;
+            height: 300px;
         }
 
 
