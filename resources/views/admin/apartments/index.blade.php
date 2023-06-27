@@ -6,8 +6,8 @@
 
 
 
-        <div class="container p-3">
-            <button class="btn btn-success mb-3 radius-50 fs-1" type="button" data-bs-toggle="offcanvas"
+        <div class="container p-3 position-relative">
+            <button class="btn fs-1 ms-button" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">+</button>
             @foreach ($apartments as $apartment)
                 <div class="detail-container w-100 mb-5 info">
@@ -262,6 +262,19 @@
             .w-50-desktop {
                 width: 27% !important;
             }
+        }
+
+        .ms-button {
+            position: fixed;
+            right: 5px;
+            top: : 0;
+            z-index: 999;
+            background-color: #2ecc71;
+            border-radius: 30px;
+        }
+
+        .ms-button:hover {
+            background-color: #2ecc71;
         }
 
         h3,
