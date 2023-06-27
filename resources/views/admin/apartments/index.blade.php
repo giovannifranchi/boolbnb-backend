@@ -211,7 +211,7 @@
                         <label for="additional_images" class="form-label">Additional Images</label>
                         <input class="form-control" type="file" id="additional_images" name="additional_images[]"
                             onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-                        <div class="preview" id="additional-images-preview" style="display: flex; width: 200px;"></div>
+                        <div class="preview" id="additional-images-preview" style="display: flex; width: 200px; height: 50px; margin-top: 10px"></div>
                     </div>
 
                     <div class="mb-3">
