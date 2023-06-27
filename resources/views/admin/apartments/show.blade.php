@@ -11,8 +11,8 @@
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $galleries as $key =>$gallery )
-							<div class="box w-100 my-box-image" >
-								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+							<div class="box w-100 my-box-image">
+								<img src="{{ asset($gallery) }}" alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}" onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
 						</div>
@@ -42,7 +42,7 @@
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
 							<li class="projcard-tag text-decoration-none">
-								{{$service->name}}	
+								{{$service->name}}
 							</li>
 							@endforeach
 						</ul>
@@ -51,7 +51,7 @@
 						<div class="d-flex justify-content-end ">
 							<h3 class="" id="my-price-id">{{$apartment->price}} €/<small>night</small></h3>
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -205,105 +205,109 @@
 				</div>
 		</section>
 	</div>
-	
+
 </main>
 <script>
- function selectImage(element) {
-    let images = document.getElementsByClassName('thumbnail');
-    let thumbnail = document.getElementById('thumbnail');
+	function selectImage(element) {
+		let images = document.getElementsByClassName('thumbnail');
+		let thumbnail = document.getElementById('thumbnail');
 
-    for (let i = 0; i < images.length; i++) {
-        images[i].classList.remove('selected-thumbnail');
-        if (images[i].classList.contains('selected')) {
-            images[i].classList.remove('selected');
-        }
-    }
+		for (let i = 0; i < images.length; i++) {
+			images[i].classList.remove('selected-thumbnail');
+			if (images[i].classList.contains('selected')) {
+				images[i].classList.remove('selected');
+			}
+		}
 
-    element.classList.add('selected');
-    element.classList.add('selected-thumbnail');
+		element.classList.add('selected');
+		element.classList.add('selected-thumbnail');
 
-    let selectedImagePath = element.getAttribute('src');
-    thumbnail.setAttribute('src', selectedImagePath);
-}
-function enlargeImage(element) {
-    element.style.transform = "scale(1.1)";
-}
+		let selectedImagePath = element.getAttribute('src');
+		thumbnail.setAttribute('src', selectedImagePath);
+	}
 
-function resetImageSize(element) {
-    element.style.transform = "scale(1)";
-}
+	function enlargeImage(element) {
+		element.style.transform = "scale(1.1)";
+	}
 
-function aggiungiClassi() {
-	document.getElementById('my-price-id').classList.add('my-price-container');
-	let element = document.querySelectorAll('.change-color')
-	element.forEach((element) => {
-  	element.classList.add('text-color');
-});
-}
+	function resetImageSize(element) {
+		element.style.transform = "scale(1)";
+	}
 
-function rimuoviClassi() {
-	let element = document.querySelectorAll('.change-color')
- 	document.getElementById('my-price-id').classList.remove('my-price-container');
-	element.forEach((element) => {
-  	element.classList.remove('text-color');
-});
-}
+// function aggiungiClassi() {
+// 	document.getElementById('my-price-id').classList.add('my-price-container');
+// 	let element = document.querySelector('.change-color')
+// 	element.classList.add('text-color')	
+// }
+
+// function rimuoviClassi() {
+// 	let element = document.querySelector('.change-color')
+//  	document.getElementById('my-price-id').classList.remove('my-price-container');
+// 	element.classList.remove('text-color');
+// }
 	
 
 </script>
 
 <style>
 	/* img change  */
-	.selected-thumbnail{
-	border: 3px solid rgba(46,204,113,1) ;
+	.selected-thumbnail {
+		border: 3px solid rgba(46, 204, 113, 1);
 	}
+
 	.thumbnail {
-        width: 100px;
+		width: 100px;
 		height: 100px;
-		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
-    }
+		transition: transform 0.2s ease-in-out;
+		/* Colore e dimensione del bordo per l'immagine selezionata */
+	}
+
 	/* details style */
-	.text-color{
+	.text-color {
 		color: white
 	}
-	.my-container{
+	/* .my-container{
 		
-		background: rgb(46,204,113);
-background: linear-gradient(270deg, rgba(46,204,113,1) 49%, rgba(255,255,255,1) 51%);
+		background: linear-gradient(177deg, rgb(245, 245, 245) 45%, rgba(255,255,255,1) 45%);
 		transition: all 0.3s ease-in-out 0s;
 	}
-	.my-container:hover{
 
-		scale: 1.02;
-		
+	/* .my-container:hover {
 
-	}
+		/* transition: 0.3s ease-in-out; */
+		/* background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%); */
+
 	
-	.my-image-container{
+
+	.my-image-container {
 		padding: 10px 0 0 22px;
-		 
+
 	}
-	.my-box-image{
+
+	.my-box-image {
 		height: 100px;
 		cursor: pointer;
 	}
-	#my-price-id{
+
+	#my-price-id {
 		padding: 3px 10px 3px 10px;
 		margin-right: 15px;
 		border-radius: 5px;
 		transition: transform 0.3s ease;
 	}
-	.my-price-container{
-		
-		background-color: rgba(46,204,113,1);
+
+	.my-price-container {
+
+		background-color: rgba(46, 204, 113, 1);
 		color: white;
 	}
-	.my-detail-container{
+
+	.my-detail-container {
 		padding-left: 50px;
 		padding-top: 20px
 	}
 
-	.my-height{
+	.my-height {
 		max-height: 485px;
 	}
 
@@ -745,31 +749,30 @@ background: linear-gradient(270deg, rgba(46,204,113,1) 49%, rgba(255,255,255,1) 
 	}
 
 	/* tag style  */
-  
-    .projcard-tag {
-        display: inline-block;
-        background-color: rgba(224, 224, 224, 1);
-        color: #777;
-        border-radius: 3px 3px 3px 3px;
-        line-height: 26px;
-        padding: 0 10px 0 23px;
-        position: relative;
-        margin-right: 20px;
-        user-select: none;
-        
-    }
 
-    .projcard-tag::before {
-        content: "";
-        position: absolute;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-        height: 6px;
-        left: 10px;
-        width: 6px;
-        top: 10px;
-    }
+	.projcard-tag {
+		display: inline-block;
+		background-color: rgba(224, 224, 224, 1);
+		color: #777;
+		border-radius: 3px 3px 3px 3px;
+		line-height: 26px;
+		padding: 0 10px 0 23px;
+		position: relative;
+		margin-right: 20px;
+		user-select: none;
 
+	}
+
+	.projcard-tag::before {
+		content: "";
+		position: absolute;
+		background: #fff;
+		border-radius: 10px;
+		box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+		height: 6px;
+		left: 10px;
+		width: 6px;
+		top: 10px;
+	}
 </style>
 @endsection
