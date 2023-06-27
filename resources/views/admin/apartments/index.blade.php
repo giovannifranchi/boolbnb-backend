@@ -273,7 +273,7 @@
 
         .detail-container {
             border-radius: 30px;
-
+            height: 400px;
             /* background: linear-gradient(#) */
             /* background-color: #ffffff */
             box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
