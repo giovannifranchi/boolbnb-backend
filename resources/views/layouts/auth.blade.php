@@ -114,7 +114,7 @@
                         <p class="mb-1">BoolBnb 2023 | Classe 89</p>
                         <p  class="mb-1"> Created with  
                             <font-awesome-icon icon="fa-face-sad-cry" />
-                             by Filippo Bonafini, Giovanni Franchi, Riccardo Turella, Cosimo Petrarca, Giulia Tognali & Giovanni Franchi
+                             by Filippo Bonafini, Giovanni Franchi, Cosimo Petrarca, Giulia Tognali & Riccardo Turella
                             </p>  
                     </div>
                 <div class="social d-flex justify-content-end">
