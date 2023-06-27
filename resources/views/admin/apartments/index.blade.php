@@ -44,17 +44,34 @@
                                         href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
                                 </div>
                                 <div class="box">
-                                    <a class="ms-link"
-                                        href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
+                                    <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment->id) }}">EDIT</a>
                                 </div>
                                 <div class="box">
                                     <a class="ms-link"
-                                        href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
+                                        href="{{ route('admin.messages.index', $apartment->id) }}">MESSAGES</a>
                                 </div>
                                 <div class="box">
-                                    <a class="ms-link"
-                                        href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
+                                    <button type="button" class="ms-link border-0" id="liveToastBtn{{$apartment->id}}">DELETE
+                                    </button>
                                 </div>
+
+                                {{-- Toast --}}
+
+                                <div class="toast-container position-fixed bottom-0 end-0 p-3 z-index-100">
+                                    <div id="liveToast{{$apartment->id}}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                      <div class="toast-header">
+                                        <img src="..." class="rounded me-2" alt="...">
+                                        <strong class="me-auto">Bootstrap</strong>
+                                        <small>11 mins ago</small>
+                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                      </div>
+                                      <div class="toast-body">
+                                        Hello, world! This is a toast message.
+                                      </div>
+                                    </div>
+                                  </div>
+
+                            
                             </div>
 
                         </div>
@@ -119,8 +136,8 @@
                     {{-- inserimento metri quadri appartamento  --}}
                     <div class="mb-3">
                         <label for="square_meters" class="form-label">Square Meters</label>
-                        <input type="number" class="form-control" id="square_meters" value="{{ old('square_meters') }}"
-                            name="square_meters" path="^(?!-)[0-9]+$">
+                        <input type="number" class="form-control" id="square_meters"
+                            value="{{ old('square_meters') }}" name="square_meters" path="^(?!-)[0-9]+$">
                     </div>
                     {{-- inserimento numero bagni --}}
                     <div class="mb-3">
@@ -302,7 +319,7 @@
             background-color: #c1c1c1;
             padding: 3px 10px;
             border-radius: 10px;
-            transition: all .4s ease-in-out;
+            transition: all .2s ease-in-out;
         }
 
         .box:hover {
@@ -345,7 +362,7 @@
                 border-bottom-right-radius: 20px;
                 border-bottom-left-radius: 0;
             }
-    }
+        }
     </style>
 
 
