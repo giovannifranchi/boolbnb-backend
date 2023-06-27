@@ -19,7 +19,7 @@
                     <div class="container" style="margin-top: 60px;">
                         <div class="row">
                             <div class="col-md-7 col-xs-7" style="text-align: right;">
-                                <img style="width: 100px;height: 120px;" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRbZgKHGaz0dz4KSnKtlhqXH4yBf5MEQpi7M-68lK6WGJf7TUBH4fzFIw" alt="" />
+                                <img style="width: 100px;height: 120px;" src="/images/boolbnb-logo.png" alt="" />
                             </div>
                         </div>
                     </div>
