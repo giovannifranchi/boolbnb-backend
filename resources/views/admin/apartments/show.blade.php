@@ -179,16 +179,11 @@ function resetImageSize(element) {
     }
 	/* details style */
 	.my-container{
-		
-		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
+		color: black;
+		background: linear-gradient(to left, white, #2ecc71);
 		transition: 0.3s ease-in-out;
 	}
-	/* .my-container:hover{
-
-		
-		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
-
-	} */
+	
 	
 	.my-image-container{
 		padding: 10px 0 0 22px;
