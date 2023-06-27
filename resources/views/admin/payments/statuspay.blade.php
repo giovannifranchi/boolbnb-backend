@@ -86,7 +86,7 @@
                     <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
                     @endif
 
-                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-primary">Torna alla Home</a>
+                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Torna alla Home</a>
 
                 </div>
             </div>
@@ -94,4 +94,15 @@
     </div>
 </div>
 
+
+
+<style>
+    .btn-home{
+        background-color: var(--custom-green);
+        margin: 20px 50px; 
+    }
+</style>
+
 @endsection
+
+
