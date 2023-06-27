@@ -78,9 +78,9 @@
                             </div>
 
                         </div>
-                        <div class="col-12 col-lg-5">
+                        <div class="col-12 col-lg-5 ms-img-container">
                             <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
-                                class="img-fluid h-100 ms-img">
+                                class="w-100 h-100 ms-img">
                         </div>
                     </div>
                 </div>
@@ -271,6 +271,9 @@
             color: #252A34;
         }
 
+        .ms-img-container{
+            height: 400px;
+        }
         .detail-container {
             border-radius: 30px;
             height: 400px;
