@@ -203,7 +203,7 @@
                         <input class="form-control" type="file" id="cover_image" name="thumb"
                             onchange="previewImage(event, 'file-image-preview')" multiple>
                         <div class="preview">
-                            <img id="file-image-preview" class="img-fluid" style="width: 200px;">
+                            <img id="file-image-preview" style="width: 200px; margin-top:10px">
                         </div>
                     </div>
                     {{-- inserimento immagini aggiuntive --}}
@@ -228,6 +228,7 @@
             reader.onload = function() {
                 const preview = document.getElementById(previewId);
                 preview.src = reader.result;
+                preview.style.height = '50px';
             };
             reader.readAsDataURL(event.target.files[0]);
         }
