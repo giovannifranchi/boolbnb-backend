@@ -12,7 +12,7 @@
 						<div class="preview p-3 d-flex gap-2">
 							@foreach ( $galleries as $key =>$gallery )
 							<div class="box w-100 my-box-image">
-								<img src="{{ asset($gallery) }}" alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}" onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+								<img src="{{ asset($gallery) }}" alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}">
 							</div>
 							@endforeach
 						</div>
@@ -234,17 +234,7 @@
 		element.style.transform = "scale(1)";
 	}
 
-// function aggiungiClassi() {
-// 	document.getElementById('my-price-id').classList.add('my-price-container');
-// 	let element = document.querySelector('.change-color')
-// 	element.classList.add('text-color')	
-// }
 
-// function rimuoviClassi() {
-// 	let element = document.querySelector('.change-color')
-//  	document.getElementById('my-price-id').classList.remove('my-price-container');
-// 	element.classList.remove('text-color');
-// }
 	
 
 </script>
@@ -263,20 +253,13 @@
 	}
 
 	/* details style */
-	.text-color {
-		color: white
-	}
-	/* .my-container{
+	.my-container{
 		
-		background: linear-gradient(177deg, rgb(245, 245, 245) 45%, rgba(255,255,255,1) 45%);
-		transition: all 0.3s ease-in-out 0s;
+		background: linear-gradient( to right, #2ecc70, #ffffff);
+		transition: 0.3s ease-in-out;
 	}
 
-	/* .my-container:hover {
-
-		/* transition: 0.3s ease-in-out; */
-		/* background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%); */
-
+	
 	
 
 	.my-image-container {
@@ -294,13 +277,11 @@
 		margin-right: 15px;
 		border-radius: 5px;
 		transition: transform 0.3s ease;
-	}
-
-	.my-price-container {
-
 		background-color: rgba(46, 204, 113, 1);
 		color: white;
 	}
+
+	
 
 	.my-detail-container {
 		padding-left: 50px;
