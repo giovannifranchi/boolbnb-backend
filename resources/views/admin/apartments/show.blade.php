@@ -9,9 +9,9 @@
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
-						<div class="preview p-3 d-flex gap-2">
+						<div class="preview p-3 row gap-2">
 							@foreach ( $galleries as $key =>$gallery )
-							<div class="box w-25 my-box-image" >
+							<div class="box col-3 my-box-image" >
 								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
