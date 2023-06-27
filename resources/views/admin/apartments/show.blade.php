@@ -5,7 +5,7 @@
 <main>
 	<div class="container px-3">
 		<div class="row justify-content-center mt-5">
-			<div class="col-12  rounded p-0 my-container">
+			<div class="col-12  rounded p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
@@ -18,27 +18,27 @@
 						</div>
 					</div>
 					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
-						<h1 class="fs-2">{{$apartment->name}}</h1>
-						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
+						<h1 class="fs-2 change-color">{{$apartment->name}}</h1>
+						<h4 class="change-color"> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
-							<div class="col-3">
+							<div class="col-3 change-color">
 								m²:
 								<strong>{{$apartment->square_meters}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								BATHS:
 								<strong>{{$apartment->bathrooms}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								ROOMS:
 								<strong>{{$apartment->rooms}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								BEDS:
 								<strong>{{$apartment->beds}}</strong>
 							</div>
 						</div>
-						<h3>Services:</h3>
+						<h3 class="change-color">Services:</h3>
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
 							<li class="projcard-tag text-decoration-none">
@@ -49,7 +49,7 @@
 						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
 						<div class="d-flex justify-content-end ">
-							<h3 class="my-price-container">{{$apartment->price}} €/<small>night</small></h3>
+							<h3 class="" id="my-price-id">{{$apartment->price}} €/<small>night</small></h3>
 						</div>
 						
 					</div>
@@ -232,7 +232,20 @@ function enlargeImage(element) {
 function resetImageSize(element) {
     element.style.transform = "scale(1)";
 }
+
+function aggiungiClassi() {
+	document.getElementById('my-price-id').classList.add('my-price-container');
+	let element = document.querySelector('.change-color')
+	element.classList.add('text-color')	
+}
+
+function rimuoviClassi() {
+	let element = document.querySelector('.change-color')
+ 	document.getElementById('my-price-id').classList.remove('my-price-container');
+	element.classList.remove('text-color');
+}
 	
+
 </script>
 
 <style>
@@ -246,17 +259,20 @@ function resetImageSize(element) {
 		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
     }
 	/* details style */
+	.text-color{
+		color: white
+	}
 	.my-container{
 		
-		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
-		transition: 0.3s ease-in-out;
+		background: linear-gradient(177deg, rgb(245, 245, 245) 45%, rgba(255,255,255,1) 45%);
+		transition: all 0.3s ease-in-out 0s;
 	}
-	/* .my-container:hover{
+	.my-container:hover{
 
-		
+		/* transition: 0.3s ease-in-out; */
 		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
 
-	} */
+	}
 	
 	.my-image-container{
 		padding: 10px 0 0 22px;
@@ -266,12 +282,16 @@ function resetImageSize(element) {
 		height: 100px;
 		cursor: pointer;
 	}
-	.my-price-container{
+	#my-price-id{
+		padding: 3px 10px 3px 10px;
 		margin-right: 15px;
+		border-radius: 5px;
+		transition: transform 0.3s ease;
+	}
+	.my-price-container{
+		
 		background-color: rgba(46,204,113,1);
-		padding: 3px 20px 3px 20px;
 		color: white;
-		border-radius: 5px
 	}
 	.my-detail-container{
 		padding-left: 50px;
