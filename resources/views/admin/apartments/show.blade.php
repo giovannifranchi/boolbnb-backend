@@ -235,14 +235,18 @@ function resetImageSize(element) {
 
 function aggiungiClassi() {
 	document.getElementById('my-price-id').classList.add('my-price-container');
-	let element = document.querySelector('.change-color')
-	element.classList.add('text-color')	
+	let element = document.querySelectorAll('.change-color')
+	element.forEach((element) => {
+  	element.classList.add('text-color');
+});
 }
 
 function rimuoviClassi() {
-	let element = document.querySelector('.change-color')
+	let element = document.querySelectorAll('.change-color')
  	document.getElementById('my-price-id').classList.remove('my-price-container');
-	element.classList.remove('text-color');
+	element.forEach((element) => {
+  	element.classList.remove('text-color');
+});
 }
 	
 
@@ -264,13 +268,14 @@ function rimuoviClassi() {
 	}
 	.my-container{
 		
-		background: linear-gradient(177deg, rgb(245, 245, 245) 45%, rgba(255,255,255,1) 45%);
+		background: rgb(46,204,113);
+background: linear-gradient(270deg, rgba(46,204,113,1) 49%, rgba(255,255,255,1) 51%);
 		transition: all 0.3s ease-in-out 0s;
 	}
 	.my-container:hover{
 
-		/* transition: 0.3s ease-in-out; */
-		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
+		scale: 1.02;
+		
 
 	}
 	
