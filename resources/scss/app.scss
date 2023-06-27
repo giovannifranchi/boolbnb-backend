@@ -1,13 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 
-:root{
+:root {
     --custom-blu: #08D9D6;
     --custom-black: #252A34;
     --custom-red: #FF2E63;
     --custom-white: #EAEAEA;
-}
-
-.main{
-    overflow-y: auto;
-    height: calc(100vh - 220px);
 }
