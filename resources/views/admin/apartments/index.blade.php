@@ -275,6 +275,7 @@
             height: auto;
         }
 
+
         .detail-container {
             border-radius: 30px;
             height: auto;
