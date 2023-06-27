@@ -51,8 +51,11 @@
                                         href="{{ route('admin.messages.index', $apartment->id) }}">MESSAGES</a>
                                 </div>
                                 <div class="box">
-                                    <button type="button" class="ms-link border-0" id="liveToastBtn{{$apartment->id}}">DELETE
-                                    </button>
+                                    <form class="ms-link" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" class="border-0 ms-delete" value="DELETE">
+                                    </form>
                                 </div>
 
                                 {{-- Toast --}}
@@ -355,6 +358,14 @@
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
         }
+
+        .ms-delete {
+            background-color: inherit;
+            font-family: inherit;
+            color: #252A34;
+            margin-left: -10px;
+        }
+        
 
         @media (min-width: 992px) {
             .ms-img {
