@@ -57,7 +57,7 @@
     <!-- Offcanvas -->
 
     <!-- TODO: FIX offcanvas with media queries to match w-100 when mobile -->
-    <div class="offcanvas offcanvas-end w-25 {{$errors->any() ? 'show' : ''}} ms-offcanva" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas offcanvas-end  {{$errors->any() ? 'show' : ''}} ms-offcanva w-50-desktop" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Create New Apartment</h5>
             <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -68,7 +68,6 @@
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
-
                     @endforeach
                 </ul>
             </div>
@@ -208,6 +207,12 @@
         background-color: #EAEAEA;
         color: #252A34;
     }
+
+    @media (min-width: 992px) {
+    .w-50-desktop {
+      width: 27% !important;
+    }
+  }
 
     /* Actual Code: */
     .projcard-container,
