@@ -82,6 +82,18 @@
                             <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
                                 class="w-100 h-100 ms-img">
                         </div>
+
+                    </div>
+                    <div class="projcard-tagbox d-flex">
+                        <a href="{{ route('admin.apartments.show', $apartment)}}" class="projcard-tag text-decoration-none"><strong>DETAILS</strong></a>
+                        <a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="projcard-tag text-decoration-none"><strong>EDIT</strong></a>
+                        <a href="{{ route('admin.messages.index', ['id'=> $apartment->id])}}" class="projcard-tag text-decoration-none"><strong>MESSAGES</strong></a>
+                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" id="form">
+                            @csrf
+                            @method('DELETE')
+                            <button class="projcard-tag border-0"><strong>DELETE</strong></button>
+                        </form>
+
                     </div>
                 </div>
             @endforeach
