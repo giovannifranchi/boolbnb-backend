@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
+use Spatie\FlareClient\Http\Exceptions\NotFound;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -131,8 +131,17 @@ class ApartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        // $user = $request->user();
+
+        // $apartment = Apartment::where('user_id', $user->id)->get();
+
+        // if(!in_array($id, $apartment)){
+        //     return view('admin.apartments.index');
+        // }
+
+        
         $apartment = Apartment::where('id', $id)->first();
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'services'));
