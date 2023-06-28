@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class BraintreeController extends Controller
 {
-    public function token($plan, $apartment)
+    public function token($plan, Apartment $apartment)
     {
         $gateway = new Gateway([
             'environment' => 'sandbox', // use 'production' for production environment

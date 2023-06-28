@@ -40,7 +40,7 @@ Route::middleware(['auth', 'verified', 'checkApartmentOwner'])->name('admin.')->
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
     Route::delete('/gallery/{image}', [GalleryImagesController::class, 'destroy'])->name('admin.gallery.destroy');
-    Route::get('/messages/{id}', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{apartment}', [MessageController::class, 'index'])->name('messages.index');
     Route::delete('/messages/delete/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
 
