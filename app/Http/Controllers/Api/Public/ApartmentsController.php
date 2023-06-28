@@ -26,6 +26,7 @@ class ApartmentsController extends Controller
         $highlightedApartments = Apartment::whereHas('latestPlan', function ($query) use ($now) {
             $query->where('expire_date', '>', $now);
         })
+        ->where('is_visible', true)
         ->with(['services', 'images'])
         ->get();
     
@@ -70,7 +71,7 @@ class ApartmentsController extends Controller
             }, '=', count($services));
         }
     
-        $apartments = $filteredByDistance->with(['images', 'services'])->get();
+        $apartments = $filteredByDistance->where('is_visible', true)->with(['images', 'services'])->get();
     
         return response($apartments, 200);
         // return response($request);
