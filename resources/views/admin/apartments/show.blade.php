@@ -123,7 +123,7 @@
 
 							<!--BUTTON START-->
 							<div class="generic_price_btn clearfix">
-								<a class="" href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}">Sign up</a>
+								<a class="" href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment])}}">Sign up</a>
 							</div>
 							<!--//BUTTON END-->
 

@@ -7,8 +7,8 @@
 
 
         <div class="container p-3 position-relative">
-            <button class="btn fs-1 ms-button" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">+</button>
+            <button class="btn fs-1 ms-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                aria-controls="offcanvasScrolling">+</button>
             @foreach ($apartments as $apartment)
                 <div class="detail-container w-100 mb-5 info">
                     <div class="row">
@@ -17,6 +17,11 @@
                             <h5
                                 class="mb-3 sponsor d-flex align-items-center gap-1 {{ $apartment->is_sponsored ? 'ms-active' : 'ms-inactive' }}">
                                 SPONSORED</h5>
+                            @if ($apartment->latestPlan())
+                                <h3>{{ $apartment->latestPlan()->pivot->expire_date }}</h3>
+                            @else
+                                <p>No plans available</p>
+                            @endif
                             <div class="bar mb-3"></div>
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
                             <h6>PRICE: <strong>{{ $apartment->price }}</strong></h6>
@@ -40,18 +45,17 @@
                             </div>
                             <div class="d-flex flex-wrap gap-3">
                                 <div class="box">
-                                    <a class="ms-link"
-                                        href="{{ route('admin.apartments.show', $apartment) }}">DETAILS</a>
+                                    <a class="ms-link" href="{{ route('admin.apartments.show', $apartment) }}">DETAILS</a>
                                 </div>
                                 <div class="box">
                                     <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment) }}">EDIT</a>
                                 </div>
                                 <div class="box">
-                                    <a class="ms-link"
-                                        href="{{ route('admin.messages.index', $apartment) }}">MESSAGES</a>
+                                    <a class="ms-link" href="{{ route('admin.messages.index', $apartment) }}">MESSAGES</a>
                                 </div>
                                 <div class="box">
-                                    <form class="ms-link" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
+                                    <form class="ms-link" action="{{ route('admin.apartments.destroy', $apartment->id) }}"
+                                        method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <input type="submit" class="border-0 ms-delete" value="DELETE">
@@ -61,20 +65,22 @@
                                 {{-- Toast --}}
 
                                 <div class="toast-container position-fixed bottom-0 end-0 p-3 z-index-100">
-                                    <div id="liveToast{{$apartment->id}}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                                      <div class="toast-header">
-                                        <img src="..." class="rounded me-2" alt="...">
-                                        <strong class="me-auto">Bootstrap</strong>
-                                        <small>11 mins ago</small>
-                                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                                      </div>
-                                      <div class="toast-body">
-                                        Hello, world! This is a toast message.
-                                      </div>
+                                    <div id="liveToast{{ $apartment->id }}" class="toast" role="alert"
+                                        aria-live="assertive" aria-atomic="true">
+                                        <div class="toast-header">
+                                            <img src="..." class="rounded me-2" alt="...">
+                                            <strong class="me-auto">Bootstrap</strong>
+                                            <small>11 mins ago</small>
+                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="toast-body">
+                                            Hello, world! This is a toast message.
+                                        </div>
                                     </div>
-                                  </div>
+                                </div>
 
-                            
+
                             </div>
 
                         </div>
@@ -84,7 +90,7 @@
                         </div>
 
                     </div>
-{{--                     <div class="projcard-tagbox d-flex">
+                    {{--                     <div class="projcard-tagbox d-flex">
                         <a href="{{ route('admin.apartments.show', $apartment)}}" class="projcard-tag text-decoration-none"><strong>DETAILS</strong></a>
                         <a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="projcard-tag text-decoration-none"><strong>EDIT</strong></a>
                         <a href="{{ route('admin.messages.index', ['id'=> $apartment->id])}}" class="projcard-tag text-decoration-none"><strong>MESSAGES</strong></a>
@@ -125,12 +131,14 @@
                     {{-- inserimento nome appartamento --}}
                     <div class="mb-3">
                         <label for="name" class="form-label">Apartment Name</label>
-                        <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" minlength="3" required>
+                        <input type="text" class="form-control" id="name" value="{{ old('name') }}"
+                            name="name" minlength="3" required>
                     </div>
                     {{-- inserimento indirizzo --}}
                     <div class="mb-3">
                         <label for="address-input" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address-input" value="{{ old('address') }}" required>
+                        <input type="text" class="form-control" id="address-input" value="{{ old('address') }}"
+                            required>
                     </div>
                     {{-- lista dinamica di autocompletamento --}}
                     <ul class="list-unstyled d-none" id="autocompleteContainer"></ul>
@@ -151,13 +159,15 @@
                     <div class="mb-3">
                         <label for="square_meters" class="form-label">Square Meters</label>
                         <input type="number" class="form-control" id="square_meters"
-                            value="{{ old('square_meters') }}" name="square_meters" step="1" min="30" pattern="^(?!-)[0-9]+$" required>
+                            value="{{ old('square_meters') }}" name="square_meters" step="1" min="30"
+                            pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento numero bagni --}}
                     <div class="mb-3">
                         <label for="bathrooms" class="form-label">Bathrooms Number</label>
                         <input type="number" step="0.01" class="form-control" id="bathrooms"
-                            value="{{ old('bathrooms') }}" name="bathrooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
+                            value="{{ old('bathrooms') }}" name="bathrooms" step="1" min="1"
+                            pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento numero stanze --}}
                     <div class="mb-3">
@@ -181,7 +191,8 @@
                     <div class="mb-3">
                         <label for="discount" class="form-label">Discount Value</label>
                         <input type="number" class="form-control" id="discount" value="{{ old('discount') }}"
-                            name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$" required>
+                            name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$"
+                            required>
                     </div>
 
                     <div class="mb-3">
@@ -222,7 +233,8 @@
                         <label for="additional_images" class="form-label">Additional Images</label>
                         <input class="form-control" type="file" id="additional_images" name="additional_images[]"
                             onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-                        <div class="preview" id="additional-images-preview" style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
+                        <div class="preview" id="additional-images-preview"
+                            style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
                     </div>
 
                     <div class="mb-3">
@@ -394,7 +406,7 @@
             color: #252A34;
             margin-left: -10px;
         }
-        
+
 
         @media (min-width: 992px) {
             .ms-img {

@@ -43,31 +43,41 @@ class BraintreeController extends Controller
 
         $amount = json_decode($request->amount);
 
+        $currentApartment = json_decode($request->apartment);
+
         $price = floatval($amount->price);
 
 
         $result = $gateway->transaction()->sale([
-            'amount' => $price,  
+            'amount' => $price,
             'paymentMethodNonce' => $nonce,
             'options' => [
-            'submitForSettlement' => true
+                'submitForSettlement' => true
             ]
         ]);
 
         if ($result->success) {
 
-            $apartment = Apartment::where('id', $request->apartment)->first();
-
-            $now = Carbon::now();
-        
-            $expiration = $now->addHours($amount->duration);
-
+            $apartment = Apartment::where('id', $currentApartment->id)->first();
             $user = $request->user();
 
-            $data = ['name' => $user->name, 'amount'=>$price, 'apartment_id'=> $apartment->name, 'date' => now(), 'expires'=> $expiration];
-    
-            $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
             
+            $currentPlan = $apartment->latestPlan();
+
+            $expiration = now();
+            if ($currentPlan) {
+                
+                $expiration = Carbon::parse($currentPlan->pivot->expire_date)->addHours($amount->duration)->startOfDay();
+
+            } else {
+                $expiration = $expiration->addHours($amount->duration)->startOfDay();
+            }
+
+            $data = ['name' => $user->name, 'amount' => $price, 'apartment_id' => $apartment->name, 'date' => now(), 'expires' => $expiration];
+
+            
+            $apartment->plans()->attach($amount->id, ['expire_date' => $expiration]);
+
             return view('admin.payments.statuspay', compact('data'))->with('success', true);
         } else {
             return view('admin.payments.statuspay')->with('success', false);
