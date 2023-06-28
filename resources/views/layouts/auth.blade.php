@@ -30,7 +30,7 @@
             <div class="container d-flex justify-content-between align-items-center">
                 <a class="navbar-brand d-flex align-items-center p-0" href="{{ url('/') }}">
                     <div class="logo">
-                        <img class="logo-img" src="/images/logo-no-background.png" alt="boolbnb">
+                        <img class="logo-img" src="/images/boolbnb-name-logo.png" alt="boolbnb">
                     </div>
                     
                 </a>
@@ -58,18 +58,6 @@
                                 <a href="{{ route('admin.apartments.index') }}"
                                     class="nav-link">{{ __('Apartments') }}</a>
                             </li>
-
-
-                            {{-- <li class="nav-item">
-                                    <a href="{{route('admin.services.index')}}" class="nav-link">{{__('Services')}}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{route('admin.tags.index')}}" class="nav-link">{{__('Tags')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{route('admin.plans.index')}}" class="nav-link">{{__('Plans')}}</a>
-                        </li> --}}
 
                         @endauth
                     </ul>
@@ -113,16 +101,24 @@
                 </div>
             </div>
         </header>
+
         <main class="main">
             @yield('content')
         </main>
 
         <footer>
-            <div class="container d-flex justify-content-between align-items-center p-5">
-                <div class="footer-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </div>
-                <div class="social d-flex">
+            <div class="container">
+                <div class="row">
+                <div class="d-flex justify-content-between align-items-center py-4">
+                    <div class="footer-text col-lg-6 col-md-12 ">
+                        <p class="mb-1">BoolBnb 2023 | Classe 89</p>
+                        <p  class="mb-1"> Created with  
+                            <font-awesome-icon icon="fa-face-sad-cry" />
+                             by Filippo Bonafini, Giovanni Franchi, Cosimo Petrarca, Giulia Tognali & Riccardo Turella
+                            </p>  
+                    </div>
+                <div class="social d-flex justify-content-end">
+                    <div></div>
                     <a href="#">{{-- instagram --}}
                         <div class="social-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="37px" height="37px" viewBox="0 0 24 24">
@@ -163,6 +159,7 @@
                     </a>
                 </div>
             </div>
+            </div>
 
             </div>
         </footer>
@@ -172,9 +169,16 @@
 </html>
 
 <style>
+    header{
+        height: 80px;
+    }
+    main{
+        min-height:calc(100vh - 210px);
+    }
     body {
         background-color: #EAEAEA;
         color: #EAEAEA;
+
 
         .navbar {
             border-bottom: 0.125rem solid var(--custom-black);
@@ -191,13 +195,12 @@
         }
 
     }
-
     footer {
         background-color: var(--custom-black);
-
+        height: 130px;
         color: $custom-white;
         .footer-text {
-            font-size: 1.25rem;
+            font-size: 1rem;
         }
 
         .social-icon {
@@ -205,9 +208,25 @@
             padding: 8px;
 
             &:hover {
-                color: var(--custom-red);
+                color: var(--custom-green);
 
             }
         }
+        @media(min-width:992px){
+        .footer-text{
+            text-align: start;
+        }
+    .social-icons{
+        justify-content: end;
+    }
+}
+@media(max-width:992px){
+    .footer-text{
+            text-align: center;
+        }
+    .social-icons{
+        justify-content: center;
+    }
+}
     }
 </style>

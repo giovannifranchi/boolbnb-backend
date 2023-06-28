@@ -82,7 +82,19 @@
                             <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
                                 class="w-100 h-100 ms-img">
                         </div>
+
                     </div>
+{{--                     <div class="projcard-tagbox d-flex">
+                        <a href="{{ route('admin.apartments.show', $apartment)}}" class="projcard-tag text-decoration-none"><strong>DETAILS</strong></a>
+                        <a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="projcard-tag text-decoration-none"><strong>EDIT</strong></a>
+                        <a href="{{ route('admin.messages.index', ['id'=> $apartment->id])}}" class="projcard-tag text-decoration-none"><strong>MESSAGES</strong></a>
+                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" id="form">
+                            @csrf
+                            @method('DELETE')
+                            <button class="projcard-tag border-0"><strong>DELETE</strong></button>
+                        </form>
+
+                    </div> --}}
                 </div>
             @endforeach
         </div>
@@ -113,13 +125,12 @@
                     {{-- inserimento nome appartamento --}}
                     <div class="mb-3">
                         <label for="name" class="form-label">Apartment Name</label>
-                        <input type="text" class="form-control" id="name" value="{{ old('name') }}"
-                            name="name">
+                        <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" minlength="3" required>
                     </div>
                     {{-- inserimento indirizzo --}}
                     <div class="mb-3">
                         <label for="address-input" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="address-input" value="{{ old('address') }}">
+                        <input type="text" class="form-control" id="address-input" value="{{ old('address') }}" required>
                     </div>
                     {{-- lista dinamica di autocompletamento --}}
                     <ul class="list-unstyled d-none" id="autocompleteContainer"></ul>
@@ -140,37 +151,37 @@
                     <div class="mb-3">
                         <label for="square_meters" class="form-label">Square Meters</label>
                         <input type="number" class="form-control" id="square_meters"
-                            value="{{ old('square_meters') }}" name="square_meters" path="^(?!-)[0-9]+$">
+                            value="{{ old('square_meters') }}" name="square_meters" step="1" min="30" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento numero bagni --}}
                     <div class="mb-3">
                         <label for="bathrooms" class="form-label">Bathrooms Number</label>
                         <input type="number" step="0.01" class="form-control" id="bathrooms"
-                            value="{{ old('bathrooms') }}" name="bathrooms" path="^(?!-)[0-9]+$">
+                            value="{{ old('bathrooms') }}" name="bathrooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento numero stanze --}}
                     <div class="mb-3">
                         <label for="rooms" class="form-label">Rooms Number</label>
                         <input type="number" class="form-control" id="rooms" value="{{ old('rooms') }}"
-                            name="rooms" path="^(?!-)[0-9]+$">
+                            name="rooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento numero letti --}}
                     <div class="mb-3">
                         <label for="beds" class="form-label">Beds Number</label>
                         <input type="number" class="form-control" id="beds" value="{{ old('beds') }}"
-                            name="beds" path="^(?!-)[0-9]+$">
+                            name="beds" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento prezzo appartamento  --}}
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" class="form-control" id="price" value="{{ old('price') }}"
-                            name="price" path="^(?!-)[0-9]+$">
+                            name="price"min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento valore percentuale dello sconto --}}
                     <div class="mb-3">
                         <label for="discount" class="form-label">Discount Value</label>
                         <input type="number" class="form-control" id="discount" value="{{ old('discount') }}"
-                            name="discount" path="^(?!-)[0-9]+$">
+                            name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$" required>
                     </div>
 
                     <div class="mb-3">
@@ -203,7 +214,7 @@
                         <input class="form-control" type="file" id="cover_image" name="thumb"
                             onchange="previewImage(event, 'file-image-preview')" multiple>
                         <div class="preview">
-                            <img id="file-image-preview" style="width: 200px; margin-top:10px">
+                            <img id="file-image-preview" style="width: 100px; height: 100px; margin-top:10px">
                         </div>
                     </div>
                     {{-- inserimento immagini aggiuntive --}}
@@ -211,7 +222,7 @@
                         <label for="additional_images" class="form-label">Additional Images</label>
                         <input class="form-control" type="file" id="additional_images" name="additional_images[]"
                             onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-                        <div class="preview" id="additional-images-preview" style="display: flex; width: 200px; height: 50px; margin-top: 10px"></div>
+                        <div class="preview" id="additional-images-preview" style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
                     </div>
 
                     <div class="mb-3">
@@ -228,7 +239,6 @@
             reader.onload = function() {
                 const preview = document.getElementById(previewId);
                 preview.src = reader.result;
-                preview.style.height = '50px';
             };
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -267,7 +277,7 @@
         .ms-button {
             position: fixed;
             right: 5px;
-            top: : 0;
+            top: 0;
             z-index: 999;
             background-color: #2ecc71;
             border-radius: 30px;
