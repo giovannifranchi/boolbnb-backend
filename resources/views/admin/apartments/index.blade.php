@@ -7,15 +7,19 @@
 
 
         <div class="container p-3 position-relative">
-            <button class="btn fs-1 ms-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
-                aria-controls="offcanvasScrolling">+</button>
+            <button class="ms-button add-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+                <div class="add-icon"></div>
+                <div class="btn-txt">Add</div>
+            </button>
             @foreach ($apartments as $apartment)
                 <div class="detail-container w-100 mb-5 info">
                     <div class="row">
                         <div class="col-12 col-lg-7 p-5">
                             <h5 class="mb-2">{{ $apartment->name }}</h5>
                             @if ($apartment->lastPlan())
-                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}</h5>
+                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
+                                </h5>
                             @else
                                 <h5 class="sponsor mb-3">No plans available</h3>
                             @endif
@@ -87,17 +91,6 @@
                         </div>
 
                     </div>
-                    {{--                     <div class="projcard-tagbox d-flex">
-                        <a href="{{ route('admin.apartments.show', $apartment)}}" class="projcard-tag text-decoration-none"><strong>DETAILS</strong></a>
-                        <a href="{{ route('admin.apartments.edit', $apartment->id)}}" class="projcard-tag text-decoration-none"><strong>EDIT</strong></a>
-                        <a href="{{ route('admin.messages.index', ['id'=> $apartment->id])}}" class="projcard-tag text-decoration-none"><strong>MESSAGES</strong></a>
-                        <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST" id="form">
-                            @csrf
-                            @method('DELETE')
-                            <button class="projcard-tag border-0"><strong>DELETE</strong></button>
-                        </form>
-
-                    </div> --}}
                 </div>
             @endforeach
         </div>
@@ -283,7 +276,7 @@
             }
         }
 
-        .ms-button {
+/*         .ms-button {
             position: fixed;
             right: 5px;
             top: 0;
@@ -294,7 +287,7 @@
 
         .ms-button:hover {
             background-color: #2ecc71;
-        }
+        } */
 
         h3,
         h4,
@@ -404,6 +397,96 @@
                 height: 350px;
             }
         }
+
+.ms-button {
+position: fixed;
+right: 5px;
+top: 10px;
+z-index: 999;
+background-color: #2ecc71;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #cdcdcd;
+  border-radius: 25px;
+  overflow: hidden;
+  transition: width 0.2s ease-in-out;
+}
+.add-btn:hover {
+  width: 120px;
+}
+.add-btn::before,
+.add-btn::after {
+  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 10px;
+  top: calc(50% - 2px);
+  background: white;
+}
+.add-btn::after {
+  right: 14px;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.add-btn::before {
+  left: 14px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.ms-button:focus {
+  outline: none;
+}
+.btn-txt {
+  opacity: 0;
+  font-size: 16px
+  transition: opacity 0.2s;
+  color:white;
+  font-weight: bold;
+}
+.add-btn:hover::before,
+.add-btn:hover::after {
+  width: 4px;
+  border-radius: 2px;
+}
+.add-btn:hover .btn-txt {
+  opacity: 1;
+}
+.add-icon::after,
+.add-icon::before {
+  transition: all 0.2s ease-in-out;
+  content: "";
+  position: absolute;
+  height: 20px;
+  width: 2px;
+  top: calc(50% - 10px);
+  background: white;
+  overflow: hidden;
+}
+.add-icon::before {
+  left: 22px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.add-icon::after {
+  right: 22px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+.add-btn:hover .add-icon::before {
+  left: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+.add-btn:hover .add-icon::after {
+  right: 15px;
+  height: 4px;
+  top: calc(50% - 2px);
+}
+
+
+        
     </style>
 
 
