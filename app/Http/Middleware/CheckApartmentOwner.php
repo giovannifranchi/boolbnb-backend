@@ -17,7 +17,7 @@ class CheckApartmentOwner
      */
     public function handle(Request $request, Closure $next)
     {
-        $apartment = $request->route('apartments');
+        $apartment = $request->route('apartment');
         if($apartment && $apartment->user_id !== Auth::id()){
             return redirect()->route('admin.apartments.index');
         }

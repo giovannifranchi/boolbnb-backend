@@ -41,14 +41,14 @@
                             <div class="d-flex flex-wrap gap-3">
                                 <div class="box">
                                     <a class="ms-link"
-                                        href="{{ route('admin.apartments.show', $apartment->id) }}">DETAILS</a>
+                                        href="{{ route('admin.apartments.show', $apartment) }}">DETAILS</a>
                                 </div>
                                 <div class="box">
-                                    <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment->id) }}">EDIT</a>
+                                    <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment) }}">EDIT</a>
                                 </div>
                                 <div class="box">
                                     <a class="ms-link"
-                                        href="{{ route('admin.messages.index', $apartment->id) }}">MESSAGES</a>
+                                        href="{{ route('admin.messages.index', $apartment) }}">MESSAGES</a>
                                 </div>
                                 <div class="box">
                                     <form class="ms-link" action="{{route('admin.apartments.destroy', $apartment->id)}}" method="POST">
