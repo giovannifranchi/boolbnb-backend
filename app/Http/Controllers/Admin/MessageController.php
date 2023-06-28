@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index(Request $request)
+    public function index($id)
     {
+       
+       
+        $newMessages = Message::where('apartment_id', $id)->get();
 
-        $newMessage = Message::where('apartment_id', $request->apartment_id)->get();
-
-        return view('admin.messages.index', compact('apartments', 'message'));
+        return view('admin.messages.index', compact( 'newMessages'));
     }
 
 

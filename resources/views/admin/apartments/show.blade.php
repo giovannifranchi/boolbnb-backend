@@ -5,53 +5,54 @@
 <main>
 	<div class="container px-3">
 		<div class="row justify-content-center mt-5">
-			<div class="col-12  rounded p-0 my-container">
+			<div class="col-12  rounded p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
 						<div class="preview p-3 row gap-2">
 							@foreach ( $galleries as $key =>$gallery )
-							<div class="box my-box-image {{count($galleries) > 1 ? 'col' : 'col-3'}}" >
-								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
+							<div class="box w-100 my-box-image">
+								<img src="{{ asset($gallery) }}" alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}">
+
 							</div>
 							@endforeach
 						</div>
 					</div>
 					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
-						<h1 class="fs-2">{{$apartment->name}}</h1>
-						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
+						<h1 class="fs-2 change-color">{{$apartment->name}}</h1>
+						<h4 class="change-color"> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
-							<div class="col-3">
+							<div class="col-3 change-color">
 								m²:
 								<strong>{{$apartment->square_meters}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								BATHS:
 								<strong>{{$apartment->bathrooms}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								ROOMS:
 								<strong>{{$apartment->rooms}}</strong>
 							</div>
-							<div class="col-3">
+							<div class="col-3 change-color">
 								BEDS:
 								<strong>{{$apartment->beds}}</strong>
 							</div>
 						</div>
-						<h3>Services:</h3>
+						<h3 class="change-color">Services:</h3>
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
 							<li class="projcard-tag text-decoration-none">
-								{{$service->name}}	
+								{{$service->name}}
 							</li>
 							@endforeach
 						</ul>
 						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
 						<div class="d-flex justify-content-end ">
-							<h3 class="my-price-container">{{$apartment->price}} €/<small>night</small></h3>
+							<h3 class="" id="my-price-id">{{$apartment->price}} €/<small>night</small></h3>
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -137,75 +138,90 @@
 				</div>
 		</section>
 	</div>
-	
+
 </main>
 <script>
- function selectImage(element) {
-    let images = document.getElementsByClassName('thumbnail');
-    let thumbnail = document.getElementById('thumbnail');
+	function selectImage(element) {
+		let images = document.getElementsByClassName('thumbnail');
+		let thumbnail = document.getElementById('thumbnail');
 
-    for (let i = 0; i < images.length; i++) {
-        images[i].classList.remove('selected-thumbnail');
-        if (images[i].classList.contains('selected')) {
-            images[i].classList.remove('selected');
-        }
-    }
+		for (let i = 0; i < images.length; i++) {
+			images[i].classList.remove('selected-thumbnail');
+			if (images[i].classList.contains('selected')) {
+				images[i].classList.remove('selected');
+			}
+		}
 
-    element.classList.add('selected');
-    element.classList.add('selected-thumbnail');
+		element.classList.add('selected');
+		element.classList.add('selected-thumbnail');
 
-    let selectedImagePath = element.getAttribute('src');
-    thumbnail.setAttribute('src', selectedImagePath);
-}
-function enlargeImage(element) {
-    element.style.transform = "scale(1.1)";
-}
+		let selectedImagePath = element.getAttribute('src');
+		thumbnail.setAttribute('src', selectedImagePath);
+	}
 
-function resetImageSize(element) {
-    element.style.transform = "scale(1)";
-}
+	function enlargeImage(element) {
+		element.style.transform = "scale(1.1)";
+	}
+
+	function resetImageSize(element) {
+		element.style.transform = "scale(1)";
+	}
+
+
 	
+
 </script>
 
 <style>
 	/* img change  */
-	.selected-thumbnail{
-	border: 3px solid rgba(46,204,113,1) ;
+	.selected-thumbnail {
+		border: 3px solid rgba(46, 204, 113, 1);
 	}
+
 	.thumbnail {
-        width: 100px;
+		width: 100px;
 		height: 100px;
-		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
-    }
+		transition: transform 0.2s ease-in-out;
+		/* Colore e dimensione del bordo per l'immagine selezionata */
+	}
+
 	/* details style */
 	.my-container{
 		color: black;
 		background: linear-gradient(to left, white, #2ecc71);
 		transition: 0.3s ease-in-out;
 	}
+
 	
 	
-	.my-image-container{
+
+	.my-image-container {
 		padding: 10px 0 0 22px;
-		 
+
 	}
-	.my-box-image{
+
+	.my-box-image {
 		height: 100px;
 		cursor: pointer;
 	}
-	.my-price-container{
+
+	#my-price-id {
+		padding: 3px 10px 3px 10px;
 		margin-right: 15px;
-		background-color: rgba(46,204,113,1);
-		padding: 3px 20px 3px 20px;
+		border-radius: 5px;
+		transition: transform 0.3s ease;
+		background-color: rgba(46, 204, 113, 1);
 		color: white;
-		border-radius: 5px
 	}
-	.my-detail-container{
+
+	
+
+	.my-detail-container {
 		padding-left: 50px;
 		padding-top: 20px
 	}
 
-	.my-height{
+	.my-height {
 		max-height: 485px;
 	}
 
@@ -647,31 +663,30 @@ function resetImageSize(element) {
 	}
 
 	/* tag style  */
-  
-    .projcard-tag {
-        display: inline-block;
-        background-color: rgba(224, 224, 224, 1);
-        color: #777;
-        border-radius: 3px 3px 3px 3px;
-        line-height: 26px;
-        padding: 0 10px 0 23px;
-        position: relative;
-        margin-right: 20px;
-        user-select: none;
-        
-    }
 
-    .projcard-tag::before {
-        content: "";
-        position: absolute;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-        height: 6px;
-        left: 10px;
-        width: 6px;
-        top: 10px;
-    }
+	.projcard-tag {
+		display: inline-block;
+		background-color: rgba(224, 224, 224, 1);
+		color: #777;
+		border-radius: 3px 3px 3px 3px;
+		line-height: 26px;
+		padding: 0 10px 0 23px;
+		position: relative;
+		margin-right: 20px;
+		user-select: none;
 
+	}
+
+	.projcard-tag::before {
+		content: "";
+		position: absolute;
+		background: #fff;
+		border-radius: 10px;
+		box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+		height: 6px;
+		left: 10px;
+		width: 6px;
+		top: 10px;
+	}
 </style>
 @endsection
