@@ -214,7 +214,7 @@
                         <input class="form-control" type="file" id="cover_image" name="thumb"
                             onchange="previewImage(event, 'file-image-preview')" multiple>
                         <div class="preview">
-                            <img id="file-image-preview" style="width: 200px; margin-top:10px">
+                            <img id="file-image-preview" style="width: 100px; height: 100px; margin-top:10px">
                         </div>
                     </div>
                     {{-- inserimento immagini aggiuntive --}}
@@ -222,7 +222,7 @@
                         <label for="additional_images" class="form-label">Additional Images</label>
                         <input class="form-control" type="file" id="additional_images" name="additional_images[]"
                             onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-                        <div class="preview" id="additional-images-preview" style="display: flex; width: 200px; height: 50px; margin-top: 10px"></div>
+                        <div class="preview" id="additional-images-preview" style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
                     </div>
 
                     <div class="mb-3">
@@ -239,7 +239,6 @@
             reader.onload = function() {
                 const preview = document.getElementById(previewId);
                 preview.src = reader.result;
-                preview.style.height = '50px';
             };
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -278,7 +277,7 @@
         .ms-button {
             position: fixed;
             right: 5px;
-            top: : 0;
+            top: 0;
             z-index: 999;
             background-color: #2ecc71;
             border-radius: 30px;
