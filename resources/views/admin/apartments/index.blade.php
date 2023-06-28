@@ -14,13 +14,10 @@
                     <div class="row">
                         <div class="col-12 col-lg-7 p-5">
                             <h5 class="mb-2">{{ $apartment->name }}</h5>
-                            <h5
-                                class="mb-3 sponsor d-flex align-items-center gap-1 {{ $apartment->is_sponsored ? 'ms-active' : 'ms-inactive' }}">
-                                SPONSORED</h5>
                             @if ($apartment->latestPlan())
-                                <h3>{{ $apartment->latestPlan()->pivot->expire_date }}</h3>
+                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->latestPlan()->pivot->expire_date }}</h5>
                             @else
-                                <p>No plans available</p>
+                                <h5 class="sponsor mb-3">No plans available</h3>
                             @endif
                             <div class="bar mb-3"></div>
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
@@ -341,22 +338,6 @@
         .detail-container .sponsor {
             color: #c1c1c1;
             font-weight: 300;
-        }
-
-        .sponsor::before {
-            content: '';
-            display: block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .sponsor.ms-active::before {
-            background-color: green;
-        }
-
-        .sponsor.ms-inactive::before {
-            background-color: red;
         }
 
         .box {
