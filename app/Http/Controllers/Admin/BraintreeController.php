@@ -62,7 +62,7 @@ class BraintreeController extends Controller
             $user = $request->user();
 
             
-            $currentPlan = $apartment->latestPlan();
+            $currentPlan = $apartment->lastPlan();
 
             $expiration = now();
             if ($currentPlan) {

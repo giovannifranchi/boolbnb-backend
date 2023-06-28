@@ -10,7 +10,7 @@ class Apartment extends Model
 {
     use HasFactory;
     protected $guarded = ['slug', 'longitude', 'latitude', 'user_id'];
-    protected $appends = ['is_sponsored'];
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,7 +44,14 @@ class Apartment extends Model
     public function latestPlan()
     {
         return $this->belongsToMany(Plan::class)
-            ->withPivot('expire_date')
+            ->withTimestamps()
+            ->orderBy('expire_date', 'desc')
+            ->take(1);
+    }
+
+    public function lastPlan()
+    {
+        return $this->belongsToMany(Plan::class)
             ->withTimestamps()
             ->withPivot('expire_date')
             ->orderBy('expire_date', 'desc')
@@ -83,9 +90,5 @@ class Apartment extends Model
         );
     }
 
-    public function getIsSponsoredAttribute()
-    {
-        $latestPlan = $this->latestPlan();
-        return $latestPlan && $latestPlan->pivot->expire_date > now();
-    }
+
 }
