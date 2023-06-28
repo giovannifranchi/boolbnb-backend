@@ -29,7 +29,8 @@
                     <td>
 
                         {{-- Elimina --}}
-                        <button class="bi bi-trash3-fill text-danger btn-icon" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
+                            DELETE
                         </button>
                     </td>
                 </tr>
@@ -62,7 +63,7 @@
             <div class="modal-footer modal-bg">
 
                 <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
-                    <i class="bi bi-file-arrow-down"></i>
+                    <i class=""></i>
                     Annulla
                 </button>
 

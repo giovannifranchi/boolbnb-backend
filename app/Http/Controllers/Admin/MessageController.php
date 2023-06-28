@@ -22,6 +22,5 @@ class MessageController extends Controller
     public function destroy($id){
         $message = Message::where('id', $id)->first();
         $message->delete();
-        
     }
 }
