@@ -5,21 +5,21 @@
 <main>
 	<div class="container px-3">
 		<div class="row justify-content-center mt-5">
-			<div class="col-12  rounded p-0" style="border: 1px solid #000;">
+			<div class="col-12  rounded p-0 my-container">
 				<div class="row">
-					<div class="col-12 col-md-6 d-flex flex-column">
-						<img src="{{ asset($apartment->thumb) }}" alt="" class="img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
-						<div class="preview p-3 d-flex gap-2">
-							@foreach ( $images as $image )
-							<div class="box w-100" style="height: 100px;">
-								<img src="{{ asset($image->path) }}" alt="path" class="w-100 h-100 rounded">
+					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
+						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
+						<div class="preview p-3 row gap-2">
+							@foreach ( $galleries as $key =>$gallery )
+							<div class="box my-box-image {{count($galleries) > 1 ? 'col' : 'col-3'}}" >
+								<img src="{{ asset($gallery) }}"  alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}"  onclick="selectImage(this)" onmouseover="enlargeImage(this)" onmouseout="resetImageSize(this)">
 							</div>
 							@endforeach
 						</div>
 					</div>
-					<div class="col-12 col-md-6 d-flex flex-column gap-3">
-						<h1 class="text-center fs-2">{{$apartment->name}}</h1>
-						<h3> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
+					<div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
+						<h1 class="fs-2">{{$apartment->name}}</h1>
+						<h4> {{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h4>
 						<div class="row">
 							<div class="col-3">
 								m²:
@@ -38,19 +38,20 @@
 								<strong>{{$apartment->beds}}</strong>
 							</div>
 						</div>
-						<h3>Serives:</h3>
+						<h3>Services:</h3>
 						<ul class="list-unstyled d-flex flex-wrap gap-3">
 							@foreach ($apartment->services as $service)
-							<li>
-								<strong>
-									{{$service->name}}
-								</strong>
+							<li class="projcard-tag text-decoration-none">
+								{{$service->name}}	
 							</li>
 							@endforeach
 						</ul>
-						<h3>Despription:</h3>
+						<h3>Description:</h3>
 						<p>{{$apartment->description}}</p>
-						<h3>Price: {{$apartment->price}} €</h3>
+						<div class="d-flex justify-content-end ">
+							<h3 class="my-price-container">{{$apartment->price}} €/<small>night</small></h3>
+						</div>
+						
 					</div>
 				</div>
 
@@ -59,74 +60,6 @@
 	</div>
 
 
-
-
-
-
-
-
-	<!-- <div class="container py-3">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="card mb-3">
-                    <img src="{{ asset($apartment->thumb) }}" alt="">
-                    <div class="p-3">
-                        <h3 class="card-title">Apartment Name: {{$apartment->name}}</h3>
-                        <h4><strong>Address:</strong> {{$apartment->address}}</h4>
-                        <h4><strong>City:</strong> {{$apartment->city}}</h4>
-                        <h4><strong>State:</strong> {{$apartment->state}}</h4>
-                        <div class="row">
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Bathrooms: {{$apartment->bathrooms}}</h5>
-                            </div>
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Rooms: {{$apartment->rooms}}</h5>
-                            </div>
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Beds: {{$apartment->beds}}</h5>
-                            </div>
-
-                        </div>
-
-
-                        <div>Price: {{$apartment->price}}</div>
-
-                        <div>Latitude: {{$apartment->latitude}}</div>
-                        <div>Longitude: {{$apartment->longitude}}</div>
-                        <div>Description: {{$apartment->description}}</div>
-                        <a href="{{ route('admin.gallery.index', ['apartment' => $apartment])}}" class="btn btn-primary">Images Gallery</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-	{{-- put the condition if services are not set --}}
-
-	<!-- <section>
-		<div class='pricing pricing-palden'>
-			@foreach ($plans as $key=>$plan)
-			<div class='pricing-item {{$key === 1 ? 'pricing__item--featured' : ''}}'>
-				<div class='pricing-deco'>
-					<svg class='pricing-deco-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
-						<path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729&#x000A;	c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
-						<path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729&#x000A;	c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z' fill='#FFFFFF' opacity='0.6'></path>
-						<path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716&#x000A;	H42.401L43.415,98.342z' fill='#FFFFFF' opacity='0.7'></path>
-						<path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428&#x000A;	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
-					</svg>
-					<div class='pricing-price'><span class='pricing-currency'></span>{{ $plan->price }} €
-						<span class='pricing-period'>/ mo</span>
-					</div>
-					<h3 class='pricing-title'>{{ $plan->name }}</h3>
-				</div>
-				<ul class='pricing-feature-list'>
-
-					<li class='pricing-feature'>{{ $plan->duration }} hours</li>
-				</ul>
-				<a href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}" class='pricing-action'>Choose plan</a>
-			</div>
-			@endforeach
-		</div>
-	</section>
- -->
 
 	<div id="generic_price_table">
 		<section>
@@ -204,19 +137,82 @@
 				</div>
 		</section>
 	</div>
-
-
-
-
-	</div>
+	
 </main>
+<script>
+ function selectImage(element) {
+    let images = document.getElementsByClassName('thumbnail');
+    let thumbnail = document.getElementById('thumbnail');
 
+    for (let i = 0; i < images.length; i++) {
+        images[i].classList.remove('selected-thumbnail');
+        if (images[i].classList.contains('selected')) {
+            images[i].classList.remove('selected');
+        }
+    }
+
+    element.classList.add('selected');
+    element.classList.add('selected-thumbnail');
+
+    let selectedImagePath = element.getAttribute('src');
+    thumbnail.setAttribute('src', selectedImagePath);
+}
+function enlargeImage(element) {
+    element.style.transform = "scale(1.1)";
+}
+
+function resetImageSize(element) {
+    element.style.transform = "scale(1)";
+}
+	
+</script>
 
 <style>
+	/* img change  */
+	.selected-thumbnail{
+	border: 3px solid rgba(46,204,113,1) ;
+	}
+	.thumbnail {
+        width: 100px;
+		height: 100px;
+		transition: transform 0.2s ease-in-out; /* Colore e dimensione del bordo per l'immagine selezionata */
+    }
 	/* details style */
+	.my-container{
+		
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgba(255,255,255,1) 45%);
+		transition: 0.3s ease-in-out;
+	}
+	/* .my-container:hover{
 
+		
+		background: linear-gradient(177deg, rgba(46,204,113,1) 45%, rgb(255, 255, 255) 45%);
 
+	} */
+	
+	.my-image-container{
+		padding: 10px 0 0 22px;
+		 
+	}
+	.my-box-image{
+		height: 100px;
+		cursor: pointer;
+	}
+	.my-price-container{
+		margin-right: 15px;
+		background-color: rgba(46,204,113,1);
+		padding: 3px 20px 3px 20px;
+		color: white;
+		border-radius: 5px
+	}
+	.my-detail-container{
+		padding-left: 50px;
+		padding-top: 20px
+	}
 
+	.my-height{
+		max-height: 485px;
+	}
 
 	/* plans style */
 
@@ -654,5 +650,33 @@
 		color: #fff;
 		text-decoration: none;
 	}
+
+	/* tag style  */
+  
+    .projcard-tag {
+        display: inline-block;
+        background-color: rgba(224, 224, 224, 1);
+        color: #777;
+        border-radius: 3px 3px 3px 3px;
+        line-height: 26px;
+        padding: 0 10px 0 23px;
+        position: relative;
+        margin-right: 20px;
+        user-select: none;
+        
+    }
+
+    .projcard-tag::before {
+        content: "";
+        position: absolute;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+        height: 6px;
+        left: 10px;
+        width: 6px;
+        top: 10px;
+    }
+
 </style>
 @endsection

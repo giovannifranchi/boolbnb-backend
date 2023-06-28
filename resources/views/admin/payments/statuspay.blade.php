@@ -19,7 +19,7 @@
                     <div class="container" style="margin-top: 60px;">
                         <div class="row">
                             <div class="col-md-7 col-xs-7" style="text-align: right;">
-                                <img style="width: 100px;height: 120px;" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRbZgKHGaz0dz4KSnKtlhqXH4yBf5MEQpi7M-68lK6WGJf7TUBH4fzFIw" alt="" />
+                                <img style="width: 100px;height: 120px;" src="/images/boolbnb-logo.png" alt="" />
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
                     @endif
 
-                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-primary">Torna alla Home</a>
+                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Torna alla Home</a>
 
                 </div>
             </div>
@@ -94,4 +94,15 @@
     </div>
 </div>
 
+
+
+<style>
+    .btn-home{
+        background-color: var(--custom-green);
+        margin: 20px 50px; 
+    }
+</style>
+
 @endsection
+
+
