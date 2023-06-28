@@ -14,8 +14,8 @@
                     <div class="row">
                         <div class="col-12 col-lg-7 p-5">
                             <h5 class="mb-2">{{ $apartment->name }}</h5>
-                            @if ($apartment->latestPlan())
-                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->latestPlan()->pivot->expire_date }}</h5>
+                            @if ($apartment->lastPlan())
+                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}</h5>
                             @else
                                 <h5 class="sponsor mb-3">No plans available</h3>
                             @endif
