@@ -187,8 +187,8 @@
 
 	/* details style */
 	.my-container{
-		
-		background: linear-gradient( to right, #2ecc70, #ffffff);
+		color: black;
+		background: linear-gradient(to left, white, #2ecc71);
 		transition: 0.3s ease-in-out;
 	}
 
