@@ -9,10 +9,11 @@
 				<div class="row">
 					<div class="col-12 col-md-6 d-flex flex-column my-image-container">
 						<img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="my-height img-fluid rounded {{count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100'}}">
-						<div class="preview p-3 d-flex gap-2">
+						<div class="preview p-3 row gap-2">
 							@foreach ( $galleries as $key =>$gallery )
 							<div class="box w-100 my-box-image">
 								<img src="{{ asset($gallery) }}" alt="path" class="w-100 h-100 rounded thumbnail {{$key === 0 ? 'selected-thumbnail' : ''}}">
+
 							</div>
 							@endforeach
 						</div>
@@ -60,74 +61,6 @@
 	</div>
 
 
-
-
-
-
-
-
-	<!-- <div class="container py-3">
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <div class="card mb-3">
-                    <img src="{{ asset($apartment->thumb) }}" alt="">
-                    <div class="p-3">
-                        <h3 class="card-title">Apartment Name: {{$apartment->name}}</h3>
-                        <h4><strong>Address:</strong> {{$apartment->address}}</h4>
-                        <h4><strong>City:</strong> {{$apartment->city}}</h4>
-                        <h4><strong>State:</strong> {{$apartment->state}}</h4>
-                        <div class="row">
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Bathrooms: {{$apartment->bathrooms}}</h5>
-                            </div>
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Rooms: {{$apartment->rooms}}</h5>
-                            </div>
-                            <div class="col-6 col-lg-4">
-                                <h5 class="text-center">Beds: {{$apartment->beds}}</h5>
-                            </div>
-
-                        </div>
-
-
-                        <div>Price: {{$apartment->price}}</div>
-
-                        <div>Latitude: {{$apartment->latitude}}</div>
-                        <div>Longitude: {{$apartment->longitude}}</div>
-                        <div>Description: {{$apartment->description}}</div>
-                        <a href="{{ route('admin.gallery.index', ['apartment' => $apartment])}}" class="btn btn-primary">Images Gallery</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-	{{-- put the condition if services are not set --}}
-
-	<!-- <section>
-		<div class='pricing pricing-palden'>
-			@foreach ($plans as $key=>$plan)
-			<div class='pricing-item {{$key === 1 ? 'pricing__item--featured' : ''}}'>
-				<div class='pricing-deco'>
-					<svg class='pricing-deco-img' enable-background='new 0 0 300 100' height='100px' id='Layer_1' preserveAspectRatio='none' version='1.1' viewBox='0 0 300 100' width='300px' x='0px' xml:space='preserve' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns='http://www.w3.org/2000/svg' y='0px'>
-						<path class='deco-layer deco-layer--1' d='M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729&#x000A;	c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z' fill='#FFFFFF' opacity='0.6'></path>
-						<path class='deco-layer deco-layer--2' d='M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729&#x000A;	c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z' fill='#FFFFFF' opacity='0.6'></path>
-						<path class='deco-layer deco-layer--3' d='M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716&#x000A;	H42.401L43.415,98.342z' fill='#FFFFFF' opacity='0.7'></path>
-						<path class='deco-layer deco-layer--4' d='M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428&#x000A;	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
-					</svg>
-					<div class='pricing-price'><span class='pricing-currency'></span>{{ $plan->price }} €
-						<span class='pricing-period'>/ mo</span>
-					</div>
-					<h3 class='pricing-title'>{{ $plan->name }}</h3>
-				</div>
-				<ul class='pricing-feature-list'>
-
-					<li class='pricing-feature'>{{ $plan->duration }} hours</li>
-				</ul>
-				<a href="{{route('admin.braintree.token', ['plan' => $plan, 'apartment' => $apartment->id])}}" class='pricing-action'>Choose plan</a>
-			</div>
-			@endforeach
-		</div>
-	</section>
- -->
 
 	<div id="generic_price_table">
 		<section>

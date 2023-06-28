@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\Public\ApartmentsController;
 
 use App\Http\Controllers\Api\Private\ApartmentController;
 use App\Http\Controllers\Api\Private\UploadController;
+use App\Http\Controllers\Api\Public\MessageController;
 use App\Http\Controllers\Api\Public\PlanController;
 use App\Http\Controllers\Api\Public\ServiceController;
 use App\Http\Controllers\Api\Public\ViewsController;
@@ -40,6 +41,10 @@ Route::post('/login', [AuthController::class, 'login']);
 //upload routes
 
 Route::post('/upload', [UploadController::class, 'upload']);
+
+//message routes
+
+Route::post('apartment/message', [MessageController::class , 'store']);
 
 //public routes
 Route::get('/apartments', [ApartmentsController::class, 'index']);

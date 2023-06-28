@@ -9,14 +9,19 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index(Request $request)
+    public function index($id)
     {
+       
+       
+        $newMessages = Message::where('apartment_id', $id)->get();
 
-        $user = $request->user();
-        $apartments = Apartment::where('user_id', $user->id)->orderBy('created_at', 'DESC')->get();
-        $message = Message::all();
+        return view('admin.messages.index', compact( 'newMessages'));
+    }
+
+
+    public function destroy($id){
+        $message = Message::where('id', $id)->first();
+        $message->delete();
         
-
-        return view('admin.messages.index', compact('apartments', 'message'));
     }
 }

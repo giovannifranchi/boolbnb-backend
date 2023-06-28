@@ -50,22 +50,27 @@ class BraintreeController extends Controller
             'amount' => $price,  
             'paymentMethodNonce' => $nonce,
             'options' => [
-                'submitForSettlement' => true
+            'submitForSettlement' => true
             ]
         ]);
 
         if ($result->success) {
+
             $apartment = Apartment::where('id', $request->apartment)->first();
 
             $now = Carbon::now();
         
             $expiration = $now->addHours($amount->duration);
+
+            $user = $request->user();
+
+            $data = ['name' => $user->name, 'amount'=>$price, 'apartment_id'=> $apartment->name, 'date' => now(), 'expires'=> $expiration];
     
             $apartment->plans()->attach($amount->id, ['expire_date'=>$expiration]);
             
-            return redirect()->back()->with('success', 'Transaction successful with plan'.$amount->name);
+            return view('admin.payments.statuspay', compact('data'))->with('success', true);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Transaction failed']);
+            return view('admin.payments.statuspay')->with('success', false);
         }
     }
 }
