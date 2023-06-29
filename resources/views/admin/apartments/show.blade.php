@@ -691,23 +691,11 @@
 		color: #777;
 		border-radius: 3px 3px 3px 3px;
 		line-height: 26px;
-		padding: 0 10px 0 23px;
+		padding: 0 10px;
 		position: relative;
 		margin-right: 20px;
 		user-select: none;
 
-	}
-
-	.projcard-tag::before {
-		content: "";
-		position: absolute;
-		background: #fff;
-		border-radius: 10px;
-		box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
-		height: 6px;
-		left: 10px;
-		width: 6px;
-		top: 10px;
 	}
 </style>
 @endsection

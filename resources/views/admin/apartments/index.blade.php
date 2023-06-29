@@ -28,7 +28,7 @@
                             @endif
                             {{-- <div class="bar mb-3"></div> --}}
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
-                            <h6>PRICE: <strong>{{ $apartment->price }} $</strong></h6>
+                            <h6>PRICE: <strong>{{ $apartment->price }} €</strong></h6>
                             <div class="icons d-flex gap-3 mb-4">
                                 
                                 <div class="d-flex align-items-center gap-2">
