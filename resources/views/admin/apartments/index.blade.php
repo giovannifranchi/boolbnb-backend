@@ -3,12 +3,14 @@
 @section('content')
 
     <main class="py-3">
+        <div class="container mb-5">
+            <h1>Appartment List </h1>
+        </div>
 
 
-
-        <div class="container p-3 position-relative">
-            <button class="ms-button add-btn" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+        <div class="container position-relative">
+            <button class="ms-button add-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                aria-controls="offcanvasScrolling">
                 <div class="add-icon"></div>
                 <div class="btn-txt">Add</div>
             </button>
@@ -16,17 +18,19 @@
                 <div class="detail-container w-100 mb-5 info">
                     <div class="row">
                         <div class="col-12 col-lg-7 p-5">
-                            <h5 class="mb-2">{{ $apartment->name }}</h5>
-                            @if ($apartment->lastPlan())
+                            <h3 class="mb-2">{{ $apartment->name }}</h3>
+                            <div class="bar mb-3"></div>
+                            @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
                                 <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
                                 </h5>
                             @else
                                 <h5 class="sponsor mb-3">No plans available</h3>
                             @endif
-                            <div class="bar mb-3"></div>
+                            {{-- <div class="bar mb-3"></div> --}}
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
                             <h6>PRICE: <strong>{{ $apartment->price }} $</strong></h6>
-                            <div class="icons d-flex gap-3 mb-3">
+                            <div class="icons d-flex gap-3 mb-4">
+                                
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -45,20 +49,25 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-wrap gap-3">
-                                <div class="box">
-                                    <a class="ms-link" href="{{ route('admin.apartments.show', $apartment) }}">DETAILS</a>
+                                <div class="box  details">
+                                    <a class="ms-link" href="{{ route('admin.apartments.show', $apartment) }}"><i
+                                            class="fa-solid fa-list"></i>DETAILS</a>
                                 </div>
-                                <div class="box">
-                                    <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment) }}">EDIT</a>
+                                <div class="box edit">
+                                    <a class="ms-link" href="{{ route('admin.apartments.edit', $apartment) }}"><i
+                                            class="fa-solid fa-pen"></i> EDIT</a>
                                 </div>
-                                <div class="box">
-                                    <a class="ms-link" href="{{ route('admin.messages.index', $apartment) }}">MESSAGES</a>
+                                <div class="box messages">
+                                    <a class="ms-link" href="{{ route('admin.messages.index', $apartment) }}"> <i
+                                            class="fa-regular fa-message"></i> MESSAGES</a>
                                 </div>
-                                <div class="box">
+                                <div class="box delete">
+
                                     <form class="ms-link" action="{{ route('admin.apartments.destroy', $apartment->id) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <i class="fa-solid fa-trash"></i>
                                         <input type="submit" class="border-0 ms-delete" value="DELETE">
                                     </form>
                                 </div>
@@ -180,7 +189,7 @@
                     {{-- inserimento descrizione appartamento  --}}
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" rows="3" name="description">{{ old('description') }}</textarea>
+                        <textarea class="form-control" id="description" rows="3" name="description" required maxlength="500">{{ old('description') }}</textarea>
                     </div>
 
                     {{-- Longitude --}}
@@ -254,7 +263,7 @@
                 width: 27% !important;
             }
         }
-
+        h1,
         h3,
         h4,
         h5,
@@ -269,7 +278,6 @@
 
 
         .detail-container {
-            border-radius: 15px;
             height: auto;
             background-color: white;
             box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
@@ -299,9 +307,7 @@
         }
 
         .box {
-            background-color: #c1c1c1;
             padding: 3px 10px;
-            border-radius: 10px;
             transition: all .2s ease-in-out;
         }
 
@@ -309,36 +315,32 @@
             scale: 1.1;
 
         }
+        .details{
+            border: 2px solid var(--custom-green);
+        }
+        .edit{
+            border:2px solid rgb(230, 230, 42);
+        }
 
+        .messages{
+            border: 2px solid rgb(103, 103, 255);
+        }
+        .delete{
+            border: 2px solid rgb(177, 33, 33);
+        }
+        .ms-link i {
+            padding-right: 5px;
+        }
         a {
             text-decoration: none;
             color: #252A34;
         }
-
-        .ms-link::before {
-            content: '';
-            display: inline-block;
-            width: 5px;
-            height: 5px;
-            background-color: #fff;
-            vertical-align: middle;
-            margin-right: 5px;
-            border-radius: 50%;
+        i {
+            color: black;
         }
-
         a:hover {
             color: #3b4251
         }
-
-/*         .info {
-            background: linear-gradient(to right, white, #2ecc71);
-        } */
-
-        .ms-img {
-            border-bottom-left-radius: 20px;
-            border-bottom-right-radius: 20px;
-        }
-
         .ms-delete {
             background-color: inherit;
             font-family: inherit;
@@ -346,13 +348,7 @@
             margin-left: -10px;
         }
 
-
         @media (min-width: 992px) {
-            .ms-img {
-                border-top-right-radius: 15px;
-                border-bottom-right-radius: 15px;
-                border-bottom-left-radius: 0;
-            }
 
             .ms-img-container {
                 height: 350px;
@@ -362,96 +358,104 @@
                 height: 350px;
             }
         }
+       .ms-button {
+            position: fixed;
+            right: 5px;
+            top: 10px;
+            z-index: 999;
+            background-color: #2ecc71;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #cdcdcd;
+            border-radius: 25px;
+            overflow: hidden;
+            transition: width 0.2s ease-in-out;
+        }
 
-.ms-button {
-position: fixed;
-right: 5px;
-top: 10px;
-z-index: 999;
-background-color: #2ecc71;
-  width: 50px;
-  height: 50px;
-  border: 1px solid #cdcdcd;
-  border-radius: 25px;
-  overflow: hidden;
-  transition: width 0.2s ease-in-out;
-}
-.add-btn:hover {
-  width: 120px;
-}
-.add-btn::before,
-.add-btn::after {
-  transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
-  content: "";
-  position: absolute;
-  height: 4px;
-  width: 10px;
-  top: calc(50% - 2px);
-  background: white;
-}
-.add-btn::after {
-  right: 14px;
-  overflow: hidden;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-.add-btn::before {
-  left: 14px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-}
-.ms-button:focus {
-  outline: none;
-}
-.btn-txt {
-  opacity: 0;
-  font-size: 16px
-  transition: opacity 0.2s;
-  color:white;
-  font-weight: bold;
-}
-.add-btn:hover::before,
-.add-btn:hover::after {
-  width: 4px;
-  border-radius: 2px;
-}
-.add-btn:hover .btn-txt {
-  opacity: 1;
-}
-.add-icon::after,
-.add-icon::before {
-  transition: all 0.2s ease-in-out;
-  content: "";
-  position: absolute;
-  height: 20px;
-  width: 2px;
-  top: calc(50% - 10px);
-  background: white;
-  overflow: hidden;
-}
-.add-icon::before {
-  left: 22px;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
-}
-.add-icon::after {
-  right: 22px;
-  border-top-right-radius: 2px;
-  border-bottom-right-radius: 2px;
-}
-.add-btn:hover .add-icon::before {
-  left: 15px;
-  height: 4px;
-  top: calc(50% - 2px);
-}
-.add-btn:hover .add-icon::after {
-  right: 15px;
-  height: 4px;
-  top: calc(50% - 2px);
-}
+        .add-btn:hover {
+            width: 120px;
+        }
 
+        .add-btn::before,
+        .add-btn::after {
+            transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+            content: "";
+            position: absolute;
+            height: 4px;
+            width: 10px;
+            top: calc(50% - 2px);
+            background: white;
+        }
 
-        
+        .add-btn::after {
+            right: 14px;
+            overflow: hidden;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+
+        .add-btn::before {
+            left: 14px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .ms-button:focus {
+            outline: none;
+        }
+
+        .btn-txt {
+            opacity: 0;
+            font-size: 16px transition: opacity 0.2s;
+            color: white;
+            font-weight: bold;
+        }
+
+        .add-btn:hover::before,
+        .add-btn:hover::after {
+            width: 4px;
+            border-radius: 2px;
+        }
+
+        .add-btn:hover .btn-txt {
+            opacity: 1;
+        }
+
+        .add-icon::after,
+        .add-icon::before {
+            transition: all 0.2s ease-in-out;
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 2px;
+            top: calc(50% - 10px);
+            background: white;
+            overflow: hidden;
+        }
+
+        .add-icon::before {
+            left: 22px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .add-icon::after {
+            right: 22px;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+
+        .add-btn:hover .add-icon::before {
+            left: 15px;
+            height: 4px;
+            top: calc(50% - 2px);
+        }
+
+        .add-btn:hover .add-icon::after {
+            right: 15px;
+            height: 4px;
+            top: calc(50% - 2px);
+        }
     </style>
 
 
