@@ -3,7 +3,11 @@
 @section('content')
 
 <main>
-	<div class="container px-3">
+	<div class="container px-3">                                
+		<button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}"
+		class="nav-link">{{ __('Go back to your apartment list') }} </a></button>
+		
+		
 		<div class="row justify-content-center mt-5">
 			<div class="col-12  rounded p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
 				<div class="row">
@@ -172,9 +176,26 @@
 </script>
 
 <style>
+	.btn-back{
+		margin-top: 20px;
+		border: 1px solid var(--custom-green);
+		padding:10px 20px;
+		color:var(--custom-green);
+		border-radius: 25px;
+		font-weight: 600;
+
+
+	}
+	.btn-back:hover{
+		/* scale: 1.05; */
+		transition: transform 0.2s ease-in-out;
+		background-color: var(--custom-green);
+		color:white;
+		
+	}
 	/* img change  */
 	.selected-thumbnail {
-		border: 3px solid white;
+		border: 3px solid var(--custom-green);
 	}
 
 	.thumbnail {
@@ -187,7 +208,8 @@
 	/* details style */
 	.my-container{
 		color: black;
-		background: linear-gradient(to left, white, #2ecc71);
+		/* background: linear-gradient(to left, white, #2ecc71); */
+		background-color: white;
 		transition: 0.3s ease-in-out;
 	}
 

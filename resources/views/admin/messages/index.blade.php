@@ -50,14 +50,14 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-bg">
-                <h1 class="modal-title fs-5 text-primary" id="exampleModalLabel">Il messaggio n°
+                <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">Il messaggio n°
                     {{ $newMessage->id }} sta per essere cestinato
                 </h1>
                 <a type="button" class="text-light" data-bs-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-circle"></i>
                 </a>
             </div>
-            <div class="modal-body modal-bg">
+            <div class="modal-body modal-bg ms-text-light">
                 Sei sicuro di voler proseguire?
             </div>
             <div class="modal-footer modal-bg">
@@ -83,3 +83,12 @@
 @endforeach
 
 @endsection
+<style>
+
+    .ms-text-primary{
+        color: var(--custom-black);
+    }
+    .ms-text-light{
+        color: var(--custom-black);
+    }
+</style>
