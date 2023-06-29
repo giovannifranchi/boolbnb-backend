@@ -407,7 +407,7 @@
 
         .btn-txt {
             opacity: 0;
-            font-size: 16px transition: opacity 0.2s;
+            font-size: 16px transition opacity 0.2s;
             color: white;
             font-weight: bold;
         }
