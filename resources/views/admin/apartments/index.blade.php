@@ -25,7 +25,7 @@
                             @endif
                             <div class="bar mb-3"></div>
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
-                            <h6>PRICE: <strong>{{ $apartment->price }}</strong></h6>
+                            <h6>PRICE: <strong>{{ $apartment->price }} $</strong></h6>
                             <div class="icons d-flex gap-3 mb-3">
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
@@ -62,28 +62,7 @@
                                         <input type="submit" class="border-0 ms-delete" value="DELETE">
                                     </form>
                                 </div>
-
-                                {{-- Toast --}}
-
-                                <div class="toast-container position-fixed bottom-0 end-0 p-3 z-index-100">
-                                    <div id="liveToast{{ $apartment->id }}" class="toast" role="alert"
-                                        aria-live="assertive" aria-atomic="true">
-                                        <div class="toast-header">
-                                            <img src="..." class="rounded me-2" alt="...">
-                                            <strong class="me-auto">Bootstrap</strong>
-                                            <small>11 mins ago</small>
-                                            <button type="button" class="btn-close" data-bs-dismiss="toast"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="toast-body">
-                                            Hello, world! This is a toast message.
-                                        </div>
-                                    </div>
-                                </div>
-
-
                             </div>
-
                         </div>
                         <div class="col-12 col-lg-5 ms-img-container">
                             <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
@@ -276,19 +255,6 @@
             }
         }
 
-/*         .ms-button {
-            position: fixed;
-            right: 5px;
-            top: 0;
-            z-index: 999;
-            background-color: #2ecc71;
-            border-radius: 30px;
-        }
-
-        .ms-button:hover {
-            background-color: #2ecc71;
-        } */
-
         h3,
         h4,
         h5,
@@ -303,10 +269,9 @@
 
 
         .detail-container {
-            border-radius: 30px;
+            border-radius: 15px;
             height: auto;
-            /* background: linear-gradient(#) */
-            /* background-color: #ffffff */
+            background-color: white;
             box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
             transition: box-shadow 0.2s ease, transform 0.2s ease;
         }
@@ -324,7 +289,7 @@
             height: 7px;
             width: 50px;
             background-color: #2ecc71;
-            border-radius: 30px;
+            border-radius: 15px;
             transition: all .2s ease-in-out
         }
 
@@ -365,9 +330,9 @@
             color: #3b4251
         }
 
-        .info {
+/*         .info {
             background: linear-gradient(to right, white, #2ecc71);
-        }
+        } */
 
         .ms-img {
             border-bottom-left-radius: 20px;
@@ -384,8 +349,8 @@
 
         @media (min-width: 992px) {
             .ms-img {
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;
+                border-top-right-radius: 15px;
+                border-bottom-right-radius: 15px;
                 border-bottom-left-radius: 0;
             }
 
