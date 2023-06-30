@@ -116,8 +116,7 @@
 
     <!-- Offcanvas -->
 
-    <!-- TODO: FIX offcanvas with media queries to match w-100 when mobile -->
-    <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop  w-100-mobile" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
         <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Create New Apartment</h5>
             <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -299,12 +298,6 @@
         color: #252A34;
     }
 
-    @media (min-width: 992px) {
-        .w-50-desktop {
-            width: 27% !important;
-        }
-    }
-
     h1,
     h3,
     h4,
@@ -396,19 +389,6 @@
         font-family: inherit;
         color: #252A34;
         margin-left: -10px;
-    }
-
-    @media (min-width: 992px) {
-
-
-        .ms-img-container {
-            height: 350px;
-        }
-
-        .detail-container {
-
-            height: 350px;
-        }
     }
 
     .ms-button {
@@ -618,7 +598,11 @@
                 right:10px;
             }
         }
-
+        @media (max-width: 576px) {
+  .w-100-mobile {
+    width: 100% !important;
+  }
+}
     .add-btn:hover .add-icon::before {
         left: 15px;
         height: 4px;
