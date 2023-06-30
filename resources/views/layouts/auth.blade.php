@@ -8,8 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>My Area</title>
+{{-- {{ config('app.name', 'Laravel') }} questo va nel <title> --}}
     <link rel="icon" href="{{ URL::asset('favicon.svg') }}" type="image/x-icon" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
