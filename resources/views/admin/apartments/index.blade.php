@@ -21,7 +21,8 @@
                             <h3 class="mb-2">{{ $apartment->name }}</h3>
                             <div class="bar mb-3"></div>
                             @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
-                                <h5 class="sponsor active mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
+                                <h5 class="sponsor active mb-3">SPONSOR
+                                    expires:{{ $apartment->lastPlan()->pivot->expire_date }}
                                 </h5>
                             @else
                                 <h5 class="sponsor not-active mb-3">No active plans</h3>
@@ -30,7 +31,7 @@
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
                             <h6>PRICE: <strong>{{ $apartment->price }} €</strong></h6>
                             <div class="icons d-flex gap-3 mb-4">
-                                
+
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -258,30 +259,27 @@
             background-color: #EAEAEA;
             color: #252A34;
         }
-        .active::before{
-        content: "";
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin-right: 5px;
-        border-radius: 50%;
-        background-color:var(--custom-green);
+
+        .active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: var(--custom-green);
         }
 
-        .not-active::before{
-        content: "";
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin-right: 5px;
-        border-radius: 50%;
-        background-color:grey;
+        .not-active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: grey;
         }
-        @media (min-width: 992px) {
-            .w-50-desktop {
-                width: 27% !important;
-            }
-        }
+
         h1,
         h3,
         h4,
@@ -334,32 +332,40 @@
             scale: 1.1;
 
         }
-        .details{
+
+        .details {
             border: 2px solid var(--custom-green);
         }
-        .edit{
-            border:2px solid rgb(230, 230, 42);
+
+        .edit {
+            border: 2px solid rgb(230, 230, 42);
         }
 
-        .messages{
+        .messages {
             border: 2px solid rgb(103, 103, 255);
         }
-        .delete{
+
+        .delete {
             border: 2px solid rgb(177, 33, 33);
         }
+
         .ms-link i {
             padding-right: 5px;
         }
+
         a {
             text-decoration: none;
             color: #252A34;
         }
+
         i {
             color: black;
         }
+
         a:hover {
             color: #3b4251
         }
+
         .ms-delete {
             background-color: inherit;
             font-family: inherit;
@@ -367,17 +373,9 @@
             margin-left: -10px;
         }
 
-        @media (min-width: 992px) {
 
-            .ms-img-container {
-                height: 350px;
-            }
 
-            .detail-container {
-                height: 350px;
-            }
-        }
-       .ms-button {
+        .ms-button {
             position: fixed;
             right: 5px;
             top: 10px;
@@ -474,6 +472,29 @@
             right: 15px;
             height: 4px;
             top: calc(50% - 2px);
+        }
+
+        @media (min-width: 992px) {
+
+            .w-50-desktop {
+                width: 27% !important;
+            }
+
+            .ms-img-container {
+                height: 350px;
+            }
+
+            .detail-container {
+                height: 350px;
+            }
+            
+
+        }
+        @media (max-width: 992px) {
+            .ms-button {
+                top: 85px;
+                right:10px;
+            }
         }
     </style>
 
