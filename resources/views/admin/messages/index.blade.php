@@ -25,7 +25,7 @@
                     <td class="d-none d-md-table-cell">{{ $newMessage->lastname }}</td>
                     <td>{{ $newMessage->email }}</td>
                     <td class="d-none d-md-table-cell">{{ $newMessage->text }}</td>
-                    <td>{{ $newMessage->created_at }}</td>
+                    <td>{{\Carbon\Carbon::parse($newMessage->created_at)->setTimezone('Europe/Rome')->format('H:m d M Y')  }}</td>
                     <td>
 
                         {{-- Elimina --}}
