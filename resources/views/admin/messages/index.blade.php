@@ -53,21 +53,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-bg">
-                <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">Il messaggio n°
-                    {{ $newMessage->id }} sta per essere cestinato
+                <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">The message from {{ $newMessage->name }} will be deleted!
                 </h1>
                 <a type="button" class="text-light" data-bs-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-circle"></i>
                 </a>
             </div>
             <div class="modal-body modal-bg ms-text-light">
-                Sei sicuro di voler proseguire?
+                Are you sure to continue?
             </div>
             <div class="modal-footer modal-bg">
 
                 <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
                     <i class=""></i>
-                    Annulla
+                    Back
                 </button>
 
                 <form action="{{route('admin.messages.destroy', ['id'=>$newMessage->id, 'apartment'=> $apartment])}}" method="POST">
@@ -76,7 +75,7 @@
 
                     <button class="btn btn-outline-danger">
                         <i class="bi bi-trash3-fill"></i>
-                        Elimina
+                        Delete
                     </button>
                 </form>
             </div>
