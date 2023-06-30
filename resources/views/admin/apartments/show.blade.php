@@ -177,7 +177,7 @@
 
 <style>
 	.btn-back{
-		margin-top: 20px;
+		margin-top: 35px;
 		border: 1px solid var(--custom-green);
 		padding:10px 20px;
 		color:var(--custom-green);

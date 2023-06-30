@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header text-center">Risultato del pagamento</div>
+                <div class="card-header text-center"> Payment result</div>
 
                 <div class="card-body">
                     @if ($success)
@@ -17,8 +17,8 @@
                     </div>
 
                     <div class="container" style="margin-top: 60px;">
-                        <div class="row">
-                            <div class="col-md-7 col-xs-7" style="text-align: right;">
+                        <div class="row justify-content-center">
+                            <div class="col-12 text-center">
                                 <img style="width: 100px;height: 100px;" src="/images/boolbnb-logo.png" alt="" />
                             </div>
                         </div>
@@ -82,11 +82,16 @@
                     </div>
                    
                     @else
-                    <h3>Pagamento non riuscito</h3>
-                    <p>Si è verificato un problema durante l'elaborazione del pagamento. Si prega di riprovare più tardi.</p>
+                    <div class="row">
+                        <div class="col-12 px-4">
+                    <h3>Payment failed</h3>
+                    <p>There was a problem processing your payment. Please try again later.</p>
                     @endif
-
-                    <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Torna alla Home</a>
+                </div>
+                    <div class="col-12 text-center">
+                        <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Torna alla Home</a>
+                    </div>
+                </div>
 
                 </div>
             </div>
@@ -99,7 +104,7 @@
 <style>
     .btn-home{
         background-color: var(--custom-green);
-        margin: 20px 50px; 
+        margin: 30px; 
     }
 </style>
 
