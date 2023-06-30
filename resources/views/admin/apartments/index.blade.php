@@ -3,8 +3,8 @@
 @section('content')
 
     <main class="py-3">
-        <div class="container mb-5">
-            <h1>Appartment List </h1>
+        <div class="container mb-5 mt-2">
+            <h1>Your apartments </h1>
         </div>
 
 
