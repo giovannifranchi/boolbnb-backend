@@ -21,7 +21,7 @@
                             <h3 class="mb-2">{{ $apartment->name }}</h3>
                             <div class="bar mb-3"></div>
                             @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
-                                <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
+                                <h5 class="sponsor mb-3">SPONSOR expires: {{ \Carbon\Carbon::parse($apartment->lastPlan()->pivot->expire_date)->format('d M Y')  }}
                                 </h5>
                             @else
                                 <h5 class="sponsor mb-3">No active plans</h3>
@@ -225,6 +225,8 @@
     </main>
 
     <script>
+        
+        
         function previewImage(event, previewId) {
             const reader = new FileReader();
             reader.onload = function() {
@@ -250,6 +252,7 @@
                 reader.readAsDataURL(files[i]);
             }
         }
+       
     </script>
 
     <style>
