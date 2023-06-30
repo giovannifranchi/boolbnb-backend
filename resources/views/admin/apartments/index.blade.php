@@ -21,10 +21,10 @@
                     <h3 class="mb-2">{{ $apartment->name }}</h3>
                     <div class="bar mb-3"></div>
                     @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
-                    <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
+                    <h5 class="sponsor active mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
                     </h5>
                     @else
-                    <h3 class="sponsor mb-3">No active plans</h3>
+                    <h5 class="sponsor not-active mb-3">No active plans</h5>
                     @endif
                     {{-- <div class="bar mb-3"></div> --}}
                     <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
@@ -259,6 +259,27 @@
 </script>
 
 <style>
+    .active::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background-color: var(--custom-green);
+    }
+
+    .not-active::before {
+        content: "";
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background-color: grey;
+    }
+
+
     .ms-text-primary {
         color: var(--custom-black);
     }
@@ -318,7 +339,7 @@
     }
 
     .detail-container .sponsor {
-        color: #c1c1c1;
+        color: var(--custom-black);
         font-weight: 300;
     }
 
