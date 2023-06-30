@@ -13,7 +13,7 @@
                     <th scope="col">Email</th>
                     <th scope="col" class="d-none d-md-table-cell">Testo</th>
                     <th scope="col">Ricevuto</th>
-                    <th scope="col">Action</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,8 +30,11 @@
 
                         {{-- Elimina --}}
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
-                            DELETE
+                            <i class="fa-solid fa-trash"></i>
                         </button>
+{{--                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
+                            DELETE
+                        </button> --}}
                     </td>
                 </tr>
                 @endforeach
