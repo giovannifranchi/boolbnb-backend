@@ -24,7 +24,7 @@
                                 <h5 class="sponsor mb-3">SPONSOR expires:{{ $apartment->lastPlan()->pivot->expire_date }}
                                 </h5>
                             @else
-                                <h5 class="sponsor mb-3">No plans available</h3>
+                                <h5 class="sponsor mb-3">No active plans</h3>
                             @endif
                             {{-- <div class="bar mb-3"></div> --}}
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
