@@ -67,7 +67,7 @@
                     Annulla
                 </button>
 
-                <form action="{{route('admin.messages.destroy', ['id'=>$newMessage->id])}}" method="POST">
+                <form action="{{route('admin.messages.destroy', ['id'=>$newMessage->id, 'apartment'=> $apartment])}}" method="POST">
                     @csrf
                     @method('DELETE')
 

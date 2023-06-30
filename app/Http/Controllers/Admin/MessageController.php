@@ -11,16 +11,20 @@ class MessageController extends Controller
 {
     public function index(Apartment $apartment)
     {
-       
-       
+
         $newMessages = Message::where('apartment_id', $apartment->id)->get();
 
-        return view('admin.messages.index', compact( 'newMessages'));
+        return view('admin.messages.index', compact( 'apartment' ,'newMessages'));
     }
 
 
-    public function destroy($id){
+    public function destroy($id, Apartment $apartment){
+
         $message = Message::where('id', $id)->first();
         $message->delete();
+
+        $newMessages = Message::where('apartment_id', $apartment->id)->get();
+
+        return view('admin.messages.index', compact('apartment', 'newMessages'));
     }
 }
