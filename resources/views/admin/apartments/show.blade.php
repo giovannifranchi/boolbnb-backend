@@ -3,7 +3,8 @@
 @section('content')
 
 <main>
-	<div class="container px-3">                                
+	<div class="container px-3">      
+		                          
 		<button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}"
 		class="nav-link">{{ __('Go back to your apartment list') }} </a></button>
 		

@@ -18,8 +18,8 @@ class CheckApartmentOwner
     public function handle(Request $request, Closure $next)
     {
         $apartment = $request->route('apartment');
-        if($apartment && $apartment->user_id !== Auth::id()){
-            return redirect()->route('admin.apartments.index');
+        if ($apartment && $apartment->user_id !== Auth::id()) {
+            return redirect()->route('admin.apartments.index')->with('error', 'Operation not permitted');;
         }
         return $next($request);
     }

@@ -122,6 +122,7 @@ class ApartmentsController extends Controller
         $thumb = $apartment->thumb;
         $galleries = array_merge([$thumb], $pics);
 
+
         return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'galleries'));
     }
 
@@ -133,7 +134,7 @@ class ApartmentsController extends Controller
      */
     public function edit(Request $request, Apartment $apartment)
     {
-        
+
         $services = Service::all();
         return view('admin.apartments.edit', compact('apartment', 'services'));
     }
