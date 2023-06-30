@@ -62,377 +62,328 @@
                                     <a class="ms-link" href="{{ route('admin.messages.index', $apartment) }}"> <i
                                             class="fa-regular fa-message"></i> MESSAGES</a>
                                 </div>
-                        <div class="box delete">
-                            <a href="#" class="ms-link" data-bs-toggle="modal" data-bs-target="#apartment-{{ $apartment->id }}"><i class="fa-solid fa-trash"></i> DELETE</a>
+                                <div class="box delete">
+                                    <a href="#" class="ms-link" data-bs-toggle="modal"
+                                        data-bs-target="#apartment-{{ $apartment->id }}"><i class="fa-solid fa-trash"></i>
+                                        DELETE</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5 ms-img-container">
+                            <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}"
+                                class="w-100 h-100 ms-img">
+                        </div>
+
+                    </div>
+                </div>
+            @endforeach
+        </div>
+
+        <!-- Modal -->
+        @foreach ($apartments as $apartment)
+            <div class="modal fade" id="apartment-{{ $apartment->id }}" tabindex="-1" data-bs-backdrop="static"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header modal-bg">
+                            <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">The apartment
+                                {{ $apartment->name }} will be deleted!
+                            </h1>
+                            <a type="button" class="text-light" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="bi bi-x-circle"></i>
+                            </a>
+                        </div>
+                        <div class="modal-body modal-bg ms-text-light">
+                            Are you sure to continue?
+                        </div>
+                        <div class="modal-footer modal-bg">
+
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+                                <i class=""></i>
+                                Back
+                            </button>
+
+                            <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3-fill"></i>
+                                    Delete
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-5 ms-img-container">
-                    <img src="{{ asset($apartment->thumb) }}" alt="{{ $apartment->name }}" class="w-100 h-100 ms-img">
-                </div>
-
             </div>
-        </div>
         @endforeach
-    </div>
 
-    <!-- Modal -->
-    @foreach ($apartments as $apartment)
-    <div class="modal fade" id="apartment-{{ $apartment->id }}" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header modal-bg">
-                    <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">The apartment {{ $apartment->name }} will be deleted!
-                    </h1>
-                    <a type="button" class="text-light" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="bi bi-x-circle"></i>
-                    </a>
-                </div>
-                <div class="modal-body modal-bg ms-text-light">
-                    Are you sure to continue?
-                </div>
-                <div class="modal-footer modal-bg">
 
-                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
-                        <i class=""></i>
-                        Back
-                    </button>
+        <!-- Offcanvas -->
 
-                    <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
+        <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop  w-100-mobile"
+            data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling"
+            aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Create New Apartment</h5>
+                <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-                        <button class="btn btn-outline-danger">
-                            <i class="bi bi-trash3-fill"></i>
-                            Delete
-                        </button>
-                    </form>
-                </div>
+                    {{-- inserimento nome appartamento --}}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Apartment Name</label>
+                        <input type="text" class="form-control" id="name" value="{{ old('name') }}"
+                            name="name" minlength="3" required>
+                    </div>
+                    {{-- inserimento indirizzo --}}
+                    <div class="mb-3">
+                        <label for="address-input" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="address-input" value="{{ old('address') }}"
+                            required>
+                    </div>
+                    {{-- lista dinamica di autocompletamento --}}
+                    <ul class="list-unstyled d-none" id="autocompleteContainer"></ul>
+                    <input type="text" name="address" id="address" class="d-none">
+                    {{-- inserimento città --}}
+                    <div class="mb-3 d-none">
+                        <label for="city" class="form-label">City</label>
+                        <input type="text" class="form-control" id="city" value="{{ old('city') }}"
+                            name="city">
+                    </div>
+                    {{-- inserimento nazione  --}}
+                    <div class="mb-3 d-none">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control" id="state" value="{{ old('state') }}"
+                            name="state">
+                    </div>
+                    {{-- inserimento metri quadri appartamento  --}}
+                    <div class="mb-3">
+                        <label for="square_meters" class="form-label">Square Meters</label>
+                        <input type="number" class="form-control" id="square_meters"
+                            value="{{ old('square_meters') }}" name="square_meters" step="1" min="30"
+                            pattern="^(?!-)[0-9]+$" required>
+                    </div>
+                    {{-- inserimento numero bagni --}}
+                    <div class="mb-3">
+                        <label for="bathrooms" class="form-label">Bathrooms Number</label>
+                        <input type="number" step="0.01" class="form-control" id="bathrooms"
+                            value="{{ old('bathrooms') }}" name="bathrooms" step="1" min="1"
+                            pattern="^(?!-)[0-9]+$" required>
+                    </div>
+                    {{-- inserimento numero stanze --}}
+                    <div class="mb-3">
+                        <label for="rooms" class="form-label">Rooms Number</label>
+                        <input type="number" class="form-control" id="rooms" value="{{ old('rooms') }}"
+                            name="rooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
+                    </div>
+                    {{-- inserimento numero letti --}}
+                    <div class="mb-3">
+                        <label for="beds" class="form-label">Beds Number</label>
+                        <input type="number" class="form-control" id="beds" value="{{ old('beds') }}"
+                            name="beds" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
+                    </div>
+                    {{-- inserimento prezzo appartamento  --}}
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" class="form-control" id="price" value="{{ old('price') }}"
+                            name="price" min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
+                    </div>
+                    {{-- inserimento valore percentuale dello sconto --}}
+                    <div class="mb-3">
+                        <label for="discount" class="form-label">Discount Value</label>
+                        <input type="number" class="form-control" id="discount" value="{{ old('discount') }}"
+                            name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$"
+                            required>
+                    </div>
+
+                    <div class="mb-3">
+                        <div>Services</div>
+                        @foreach ($services as $key => $service)
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="services[]"
+                                    id="services{{ $key }}" value="{{ $service->id }}"
+                                    {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
+                                <label class="form-check-label"
+                                    for="services{{ $key }}">{{ $service->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    {{-- inserimento descrizione appartamento  --}}
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" rows="3" name="description" required maxlength="500">{{ old('description') }}</textarea>
+                    </div>
+
+                    {{-- Longitude --}}
+                    <input type="text" name="longitude" id="longitude" class="d-none">
+                    {{-- Latitude --}}
+                    <input type="text" name="latitude" id="latitude" class="d-none">
+
+                    {{-- inserimento immagine che si vuole avere come copertina  --}}
+                    <div class="mb-3">
+                        <label for="cover_image" class="form-label">Cover Image</label>
+                        <input class="form-control" type="file" id="cover_image" name="thumb"
+                            onchange="previewImage(event, 'file-image-preview')" multiple>
+                        <div class="preview">
+                            <img id="file-image-preview" style="width: 100px; height: 100px; margin-top:10px">
+                        </div>
+                    </div>
+                    {{-- inserimento immagini aggiuntive --}}
+                    <div class="mb-3">
+                        <label for="additional_images" class="form-label">Additional Images</label>
+                        <input class="form-control" type="file" id="additional_images" name="additional_images[]"
+                            onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
+                        <div class="preview" id="additional-images-preview"
+                            style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-submit">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
-    @endforeach
+    </main>
 
 
-    <!-- Offcanvas -->
-
-    <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop  w-100-mobile" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Create New Apartment</h5>
-            <button type="button" class="btn-close text-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-            <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-
-                {{-- inserimento nome appartamento --}}
-                <div class="mb-3">
-                    <label for="name" class="form-label">Apartment Name</label>
-                    <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" minlength="3" required>
-                </div>
-                {{-- inserimento indirizzo --}}
-                <div class="mb-3">
-                    <label for="address-input" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address-input" value="{{ old('address') }}" required>
-                </div>
-                {{-- lista dinamica di autocompletamento --}}
-                <ul class="list-unstyled d-none" id="autocompleteContainer"></ul>
-                <input type="text" name="address" id="address" class="d-none">
-                {{-- inserimento città --}}
-                <div class="mb-3 d-none">
-                    <label for="city" class="form-label">City</label>
-                    <input type="text" class="form-control" id="city" value="{{ old('city') }}" name="city">
-                </div>
-                {{-- inserimento nazione  --}}
-                <div class="mb-3 d-none">
-                    <label for="state" class="form-label">State</label>
-                    <input type="text" class="form-control" id="state" value="{{ old('state') }}" name="state">
-                </div>
-                {{-- inserimento metri quadri appartamento  --}}
-                <div class="mb-3">
-                    <label for="square_meters" class="form-label">Square Meters</label>
-                    <input type="number" class="form-control" id="square_meters" value="{{ old('square_meters') }}" name="square_meters" step="1" min="30" pattern="^(?!-)[0-9]+$" required>
-                </div>
-                {{-- inserimento numero bagni --}}
-                <div class="mb-3">
-                    <label for="bathrooms" class="form-label">Bathrooms Number</label>
-                    <input type="number" step="0.01" class="form-control" id="bathrooms" value="{{ old('bathrooms') }}" name="bathrooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
-                </div>
-                {{-- inserimento numero stanze --}}
-                <div class="mb-3">
-                    <label for="rooms" class="form-label">Rooms Number</label>
-                    <input type="number" class="form-control" id="rooms" value="{{ old('rooms') }}" name="rooms" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
-                </div>
-                {{-- inserimento numero letti --}}
-                <div class="mb-3">
-                    <label for="beds" class="form-label">Beds Number</label>
-                    <input type="number" class="form-control" id="beds" value="{{ old('beds') }}" name="beds" step="1" min="1" pattern="^(?!-)[0-9]+$" required>
-                </div>
-                {{-- inserimento prezzo appartamento  --}}
-                <div class="mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="price" value="{{ old('price') }}" name="price" min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
-                </div>
-                {{-- inserimento valore percentuale dello sconto --}}
-                <div class="mb-3">
-                    <label for="discount" class="form-label">Discount Value</label>
-                    <input type="number" class="form-control" id="discount" value="{{ old('discount') }}" name="discount" step="1" min="0" max="100" pattern="^(?!-)[0-9]+$" required>
-                </div>
-
-                <div class="mb-3">
-                    <div>Services</div>
-                    @foreach ($services as $key => $service)
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="services[]" id="services{{ $key }}" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : '' }}>
-                        <label class="form-check-label" for="services{{ $key }}">{{ $service->name }}</label>
-                    </div>
-                    @endforeach
-                </div>
-
-                {{-- inserimento descrizione appartamento  --}}
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="description" rows="3" name="description" required maxlength="500">{{ old('description') }}</textarea>
-                </div>
-
-                {{-- Longitude --}}
-                <input type="text" name="longitude" id="longitude" class="d-none">
-                {{-- Latitude --}}
-                <input type="text" name="latitude" id="latitude" class="d-none">
-
-                {{-- inserimento immagine che si vuole avere come copertina  --}}
-                <div class="mb-3">
-                    <label for="cover_image" class="form-label">Cover Image</label>
-                    <input class="form-control" type="file" id="cover_image" name="thumb" onchange="previewImage(event, 'file-image-preview')" multiple>
-                    <div class="preview">
-                        <img id="file-image-preview" style="width: 100px; height: 100px; margin-top:10px">
-                    </div>
-                </div>
-                {{-- inserimento immagini aggiuntive --}}
-                <div class="mb-3">
-                    <label for="additional_images" class="form-label">Additional Images</label>
-                    <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple>
-                    <div class="preview" id="additional-images-preview" style="display: flex; width: 100px; height: 100px; margin-top: 10px"></div>
-                </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</main>
-
-
-<script>
-    function previewImage(event, previewId) {
-        const reader = new FileReader();
-        reader.onload = function() {
-            const preview = document.getElementById(previewId);
-            preview.src = reader.result;
-        };
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    function previewMultipleImages(event, previewContainerId) {
-        const files = event.target.files;
-        const previewContainer = document.getElementById(previewContainerId);
-        previewContainer.innerHTML = "";
-
-        for (let i = 0; i < files.length; i++) {
+    <script>
+        function previewImage(event, previewId) {
             const reader = new FileReader();
             reader.onload = function() {
-                const img = document.createElement("img");
-                img.src = reader.result;
-                img.className = "img-fluid";
-                previewContainer.appendChild(img);
+                const preview = document.getElementById(previewId);
+                preview.src = reader.result;
             };
-
-            reader.readAsDataURL(files[i]);
+            reader.readAsDataURL(event.target.files[0]);
         }
-    }
-</script>
 
-<style>
-    .active::before {
-        content: "";
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin-right: 5px;
-        border-radius: 50%;
-        background-color: var(--custom-green);
-    }
+        function previewMultipleImages(event, previewContainerId) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById(previewContainerId);
+            previewContainer.innerHTML = "";
 
-    .not-active::before {
-        content: "";
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin-right: 5px;
-        border-radius: 50%;
-        background-color: grey;
-    }
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const img = document.createElement("img");
+                    img.src = reader.result;
+                    img.className = "img-fluid";
+                    previewContainer.appendChild(img);
+                };
+
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    </script>
+
+    <style>
+        /* show style */
+        h1,
+        h3,
+        h4,
+        h5,
+        h6,
+        span {
+            color: #252A34;
+        }
+
+        /* sponsor */
+        .active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: var(--custom-green);
+        }
+
+        .not-active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: grey;
+        }
+
+        /* /sponsor */
+
+        /* modal */
+        .ms-text-primary {
+            color: var(--custom-black);
+        }
+
+        .ms-text-light {
+            color: var(--custom-black);
+        }
+
+        /* /modal */
+
+        /* offcanvas */
+        .ms-offcanva {
+            background-color: #EAEAEA;
+            color: #252A34;
+        }
+
+        /* /offcanvas */
+
+        /* card */
+        .ms-img-container {
+            height: 300px;
+        }
 
 
-    .ms-text-primary {
-        color: var(--custom-black);
-    }
+        .detail-container {
+            height: auto;
+            background-color: white;
+            box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
 
-    .ms-text-light {
-        color: var(--custom-black);
-    }
+        .detail-container:hover {
+            box-shadow: 0 34px 32px -33px rgba(0, 0, 0, 0.18);
+            transform: translate(0px, -3px);
+        }
 
-    /* show style */
-    .ms-offcanva {
-        background-color: #EAEAEA;
-        color: #252A34;
-    }
+        .detail-container:hover .bar {
+            width: 70px;
+        }
 
-    h1,
-    h3,
-    h4,
-    h5,
-    h6,
-    span {
-        color: #252A34;
-    }
+        .detail-container .bar {
+            height: 7px;
+            width: 50px;
+            background-color: #2ecc71;
+            border-radius: 15px;
+            transition: all .2s ease-in-out
+        }
 
-    .ms-img-container {
-        height: 300px;
-    }
+        .detail-container .sponsor {
+            color: var(--custom-black);
+            font-weight: 300;
+        }
 
+        .box {
+            padding: 3px 10px;
+            transition: all .2s ease-in-out;
+        }
 
-    .detail-container {
-        height: auto;
-        background-color: white;
-        box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
-        transition: box-shadow 0.2s ease, transform 0.2s ease;
-    }
-
-    .detail-container:hover {
-        box-shadow: 0 34px 32px -33px rgba(0, 0, 0, 0.18);
-        transform: translate(0px, -3px);
-    }
-
-    .detail-container:hover .bar {
-        width: 70px;
-    }
-
-    .detail-container .bar {
-        height: 7px;
-        width: 50px;
-        background-color: #2ecc71;
-        border-radius: 15px;
-        transition: all .2s ease-in-out
-    }
-
-    .detail-container .sponsor {
-        color: var(--custom-black);
-        font-weight: 300;
-    }
-
-    .box {
-        padding: 3px 10px;
-        transition: all .2s ease-in-out;
-    }
-
-    .box:hover {
-        scale: 1.1;
-
-    }
-
-    .details {
-        border: 2px solid var(--custom-green);
-    }
-
-    .edit {
-        border: 2px solid rgb(230, 230, 42);
-    }
-
-    .messages {
-        border: 2px solid rgb(103, 103, 255);
-    }
-
-    .delete {
-        border: 2px solid rgb(177, 33, 33);
-    }
-
-    .ms-link i {
-        padding-right: 5px;
-    }
-
-    a {
-        text-decoration: none;
-        color: #252A34;
-    }
-
-    i {
-        color: black;
-    }
-
-    a:hover {
-        color: #3b4251
-    }
-
-    .ms-delete {
-        background-color: inherit;
-        font-family: inherit;
-        color: #252A34;
-        margin-left: -10px;
-    }
-
-    .ms-button {
-        position: fixed;
-        right: 5px;
-        top: 10px;
-        z-index: 999;
-        background-color: #2ecc71;
-        width: 50px;
-        height: 50px;
-        border: 1px solid #cdcdcd;
-        border-radius: 25px;
-        overflow: hidden;
-        transition: width 0.2s ease-in-out;
-    }
-
-    .add-btn:hover {
-        width: 120px;
-    }
-
-    .add-btn::before,
-    .add-btn::after {
-        transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
-        content: "";
-        position: absolute;
-        height: 4px;
-        width: 10px;
-        top: calc(50% - 2px);
-        background: white;
-    }
-
-    .add-btn::after {
-        right: 14px;
-        overflow: hidden;
-        border-top-right-radius: 2px;
-        border-bottom-right-radius: 2px;
-    }
-
-    .add-btn::before {
-        left: 14px;
-        border-top-left-radius: 2px;
-        border-bottom-left-radius: 2px;
-    }
-
+        .box:hover {
+            scale: 1.1;
+        }
 
         .details {
             border: 2px solid var(--custom-green);
@@ -474,8 +425,7 @@
             margin-left: -10px;
         }
 
-
-
+        /* add button */
         .ms-button {
             position: fixed;
             right: 5px;
@@ -490,11 +440,10 @@
             transition: width 0.2s ease-in-out;
         }
 
-    .add-icon::before {
-        left: 22px;
-        border-top-left-radius: 2px;
-        border-bottom-left-radius: 2px;
-    }
+        .add-btn:hover {
+            width: 120px;
+        }
+
         .add-btn::before,
         .add-btn::after {
             transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
@@ -576,6 +525,19 @@
             top: calc(50% - 2px);
         }
 
+        /* /add buttonn */
+        
+        /* submit btn offcanva */
+        .btn-submit {
+            background-color: var(--custom-green);
+            color: white;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        /* /submit btn offcanva */
+
+        /* mediaquery */
         @media (min-width: 992px) {
 
             .w-50-desktop {
@@ -589,30 +551,21 @@
             .detail-container {
                 height: 350px;
             }
-            
-
         }
+
         @media (max-width: 992px) {
             .ms-button {
                 top: 85px;
-                right:10px;
+                right: 10px;
             }
         }
-        @media (max-width: 576px) {
-  .w-100-mobile {
-    width: 100% !important;
-  }
-}
-    .add-btn:hover .add-icon::before {
-        left: 15px;
-        height: 4px;
-        top: calc(50% - 2px);
-    }
 
-    .add-btn:hover .add-icon::after {
-        right: 15px;
-        height: 4px;
-        top: calc(50% - 2px);
-    }
-</style>
+        @media (max-width: 576px) {
+            .w-100-mobile {
+                width: 100% !important;
+            }
+        }
+
+        /* /mediaquery */
+    </style>
 @endsection
