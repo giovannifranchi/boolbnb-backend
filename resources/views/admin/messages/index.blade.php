@@ -2,7 +2,10 @@
 
 
 @section('content')
-<section class="container pt-4">
+<div  class="container px-3">
+<button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}"
+    class="nav-link">{{ __('Go back to your apartments') }} </a></button>
+<section class="ms-container pt-5">
 
     <div class="table-responsive">
         <table id="message-table" class="table table-striped table-hover">
@@ -13,7 +16,7 @@
                     <th scope="col">Email</th>
                     <th scope="col" class="d-none d-md-table-cell">Testo</th>
                     <th scope="col">Ricevuto</th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +35,7 @@
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-{{--                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
+                    {{--<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $newMessage->id }}" title="Elimina">
                             DELETE
                         </button> --}}
                     </td>
@@ -41,7 +44,7 @@
             </tbody>
         </table>
     </div>
-
+</div>
 
 </section>
 
@@ -86,7 +89,24 @@
 
 @endsection
 <style>
+ .btn-back {
+            margin-top: 35px;
+            border: 1px solid var(--custom-green);
+            padding: 10px 20px;
+            color: var(--custom-green);
+            border-radius: 25px;
+            font-weight: 600;
 
+
+        }
+
+        .btn-back:hover {
+            /* scale: 1.05; */
+            transition: transform 0.2s ease-in-out;
+            background-color: var(--custom-green);
+            color: white;
+
+        }
     .ms-text-primary{
         color: var(--custom-black);
     }
