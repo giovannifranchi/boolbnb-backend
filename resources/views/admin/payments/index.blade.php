@@ -52,7 +52,7 @@
         class="d-flex flex-column align-items-center mt-4">
         @csrf
         <input type="hidden" id="nonce" name="payment_method_nonce" />
-        <input type="text" id="amount-display" name="amount-display" value="{{ $plan->price }}$" readonly />
+        <input type="text" id="amount-display" name="amount-display" value="{{ $plan->price }}€" readonly />
         <input type="hidden" id="amount" name="amount" value="{{ $plan }}" />
         <input type="hidden" id="apartment" name="apartment" value="{{ $apartment }}" />
         <button id="submit-button" class="mt-3 d-flex justify-content-center" type="button">Purchase</button>
