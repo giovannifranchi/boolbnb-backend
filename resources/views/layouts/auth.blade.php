@@ -57,7 +57,7 @@
                             <a href="{{ route('admin.stats.index') }}" class="nav-link">{{ __('Stats') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.apartments.index') }}" class="nav-link">{{ __('Apartments') }}</a>
+                            <a href="{{ route('admin.apartments.index') }}" class="nav-link">{{ __('Dashboard') }}</a>
                         </li>
 
                         @endauth

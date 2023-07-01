@@ -75,13 +75,32 @@
                 <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple value="{{ old('additional_images', $apartment->additional_images) }}">
 
                 <div class="preview mt-3" id="additional-images-preview" style="display: flex; gap: 15px;">
+                    @if (count($apartment->images) > 0)
+                    @foreach ($apartment->images as $image)
+                    <div>
+                        <img src="{{ asset($image->path) }}" alt="" style="width: 100px; height:100px;">
+                        <button class="delete-image" data-url="{{ route('admin.apartment.edit', $image) }}" data-token="{{ csrf_token() }}" type="button" class="btn btn-danger">X</button>
+                    </div>
+
+                    @endforeach
+
+                    @endif
+                </div>
+
+
+
+                {{-- <div class="mb-3">
+                <label for="additional_images" class="form-label">Additional Images</label>
+                <input class="form-control" type="file" id="additional_images" name="additional_images[]" onchange="previewMultipleImages(event, 'additional-images-preview')" multiple value="{{ old('additional_images', $apartment->additional_images) }}">
+
+                <div class="preview mt-3" id="additional-images-preview" style="display: flex; gap: 15px;">
                     @if (count($apartment->images)> 0)
                     @foreach ($apartment->images as $image)
                     <img src="{{asset($image->path)}}" alt="" style="width: 100px; height:100px;">
                     @endforeach
                     @endif
                 </div>
-            </div>
+            </div> --}}
             {{-- services --}}
             @if ($errors->any())
             <div class="mb-3">
@@ -115,13 +134,13 @@
 
         </div>
         <div class="form-check form-switch mb-3 ms-3">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
-                {{-- @dd($apartment->is_visible) --}}
-                <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
+            {{-- @dd($apartment->is_visible) --}}
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
         </div>
 
         <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
 </main>
@@ -133,6 +152,53 @@
 </style>
 
 <script>
+    
+
+
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        var deleteButtons = document.querySelectorAll('.delete-image');
+
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                var url = this.getAttribute('data-url');
+                var token = this.getAttribute('data-token');
+                var imageContainer = button.parentNode; // Riferimento all'elemento genitore dell'immagine
+
+                if (confirm('Sei sicuro di voler eliminare questa immagine?')) {
+                    fetch(url, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': token
+                            }
+                        })
+                        .then(function(response) {
+                            if (response.ok) {
+                                // Rimuovi l'elemento HTML dell'immagine dal DOM
+                                imageContainer.remove();
+                            } else {
+                                // Gestisci l'errore della richiesta
+                                console.error('Si è verificato un errore durante l\'eliminazione dell\'immagine.');
+                            }
+                        })
+                        .catch(function(error) {
+                            // Gestisci l'errore di rete
+                            console.error('Si è verificato un errore di rete durante l\'eliminazione dell\'immagine.');
+                        });
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
     function previewImage(event, previewId) {
         const reader = new FileReader();
         reader.onload = function() {

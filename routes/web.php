@@ -39,12 +39,11 @@ Route::middleware(['auth', 'verified', 'checkApartmentOwner'])->name('admin.')->
     Route::resource('services', ServicesController::class);
     Route::resource('tags', TagsController::class);
     Route::resource('plans', PlansController::class);
-    Route::delete('/gallery/{image}', [GalleryImagesController::class, 'destroy'])->name('admin.gallery.destroy');
     Route::get('/messages/{apartment}', [MessageController::class, 'index'])->name('messages.index');
     Route::delete('/messages/delete/{id}', [MessageController::class, 'destroy'])->name('messages.destroy');
 
-
-    Route::get('/gallery/{apartment}', [GalleryImagesController::class, 'index'])->name('gallery.index');
+    Route::delete('/gallery/{image}', [GalleryImagesController::class, 'destroy'])->name('apartment.destroy');
+    Route::get('/gallery/{apartment}', [GalleryImagesController::class, 'index'])->name('apartment.edit');
     Route::resource('payments', PaymentController::class);
     Route::get('braintree/{plan}/{apartment}', [BraintreeController::class, 'token'])->name('braintree.token');
     Route::post('braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
