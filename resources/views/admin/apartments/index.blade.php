@@ -3,8 +3,8 @@
 @section('content')
 
     <main class="py-3">
-        <div class="container mb-5">
-            <h1>Appartment List </h1>
+        <div class="container mb-5 mt-2">
+            <h1>Your apartments </h1>
         </div>
 
 
@@ -21,16 +21,18 @@
                             <h3 class="mb-2">{{ $apartment->name }}</h3>
                             <div class="bar mb-3"></div>
                             @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
+
                                 <h5 class="sponsor mb-3">SPONSOR expires: {{ \Carbon\Carbon::parse($apartment->lastPlan()->pivot->expire_date)->format('d M Y')  }}
+
                                 </h5>
                             @else
-                                <h5 class="sponsor mb-3">No active plans</h3>
+                                <h5 class="sponsor not-active mb-3">No active plans</h3>
                             @endif
                             {{-- <div class="bar mb-3"></div> --}}
                             <h3>{{ $apartment->address }}, {{ $apartment->city }}, {{ $apartment->state }}</h3>
                             <h6>PRICE: <strong>{{ $apartment->price }} €</strong></h6>
                             <div class="icons d-flex gap-3 mb-4">
-                                
+
                                 <div class="d-flex align-items-center gap-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512">
                                         <!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -62,14 +64,9 @@
                                             class="fa-regular fa-message"></i> MESSAGES</a>
                                 </div>
                                 <div class="box delete">
-
-                                    <form class="ms-link" action="{{ route('admin.apartments.destroy', $apartment->id) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <i class="fa-solid fa-trash"></i>
-                                        <input type="submit" class="border-0 ms-delete" value="DELETE">
-                                    </form>
+                                    <a href="#" class="ms-link" data-bs-toggle="modal"
+                                        data-bs-target="#apartment-{{ $apartment->id }}"><i class="fa-solid fa-trash"></i>
+                                        DELETE</a>
                                 </div>
                             </div>
                         </div>
@@ -79,15 +76,53 @@
                         </div>
 
                     </div>
-
                 </div>
             @endforeach
         </div>
 
+        <!-- Modal -->
+        @foreach ($apartments as $apartment)
+            <div class="modal fade" id="apartment-{{ $apartment->id }}" tabindex="-1" data-bs-backdrop="static"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header modal-bg">
+                            <h1 class="modal-title fs-5 ms-text-primary" id="exampleModalLabel">The apartment
+                                {{ $apartment->name }} will be deleted!
+                            </h1>
+                            <a type="button" class="text-light" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="bi bi-x-circle"></i>
+                            </a>
+                        </div>
+                        <div class="modal-body modal-bg ms-text-light">
+                            Are you sure to continue?
+                        </div>
+                        <div class="modal-footer modal-bg">
+
+                            <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">
+                                <i class=""></i>
+                                Back
+                            </button>
+
+                            <form action="{{ route('admin.apartments.destroy', $apartment->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+
+                                <button class="btn btn-outline-danger">
+                                    <i class="bi bi-trash3-fill"></i>
+                                    Delete
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+
+
         <!-- Offcanvas -->
 
-        <!-- TODO: FIX offcanvas with media queries to match w-100 when mobile -->
-        <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop"
+        <div class="offcanvas offcanvas-end  {{ $errors->any() ? 'show' : '' }} ms-offcanva w-50-desktop  w-100-mobile"
             data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling"
             aria-labelledby="offcanvasScrollingLabel">
             <div class="offcanvas-header">
@@ -164,7 +199,7 @@
                     <div class="mb-3">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" class="form-control" id="price" value="{{ old('price') }}"
-                            name="price"min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
+                            name="price" min="1" step="0.5" pattern="^(?!-)[0-9]+$" required>
                     </div>
                     {{-- inserimento valore percentuale dello sconto --}}
                     <div class="mb-3">
@@ -217,12 +252,13 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-submit">Submit</button>
                     </div>
                 </form>
             </div>
         </div>
     </main>
+
 
     <script>
         
@@ -249,6 +285,7 @@
                     img.className = "img-fluid";
                     previewContainer.appendChild(img);
                 };
+
                 reader.readAsDataURL(files[i]);
             }
         }
@@ -257,16 +294,6 @@
 
     <style>
         /* show style */
-        .ms-offcanva {
-            background-color: #EAEAEA;
-            color: #252A34;
-        }
-
-        @media (min-width: 992px) {
-            .w-50-desktop {
-                width: 27% !important;
-            }
-        }
         h1,
         h3,
         h4,
@@ -276,6 +303,49 @@
             color: #252A34;
         }
 
+        /* sponsor */
+        .active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: var(--custom-green);
+        }
+
+        .not-active::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            border-radius: 50%;
+            background-color: grey;
+        }
+
+        /* /sponsor */
+
+        /* modal */
+        .ms-text-primary {
+            color: var(--custom-black);
+        }
+
+        .ms-text-light {
+            color: var(--custom-black);
+        }
+
+        /* /modal */
+
+        /* offcanvas */
+        .ms-offcanva {
+            background-color: #EAEAEA;
+            color: #252A34;
+        }
+
+        /* /offcanvas */
+
+        /* card */
         .ms-img-container {
             height: 300px;
         }
@@ -306,7 +376,7 @@
         }
 
         .detail-container .sponsor {
-            color: #c1c1c1;
+            color: var(--custom-black);
             font-weight: 300;
         }
 
@@ -317,34 +387,41 @@
 
         .box:hover {
             scale: 1.1;
-
         }
-        .details{
+
+        .details {
             border: 2px solid var(--custom-green);
         }
-        .edit{
-            border:2px solid rgb(230, 230, 42);
+
+        .edit {
+            border: 2px solid rgb(230, 230, 42);
         }
 
-        .messages{
+        .messages {
             border: 2px solid rgb(103, 103, 255);
         }
-        .delete{
+
+        .delete {
             border: 2px solid rgb(177, 33, 33);
         }
+
         .ms-link i {
             padding-right: 5px;
         }
+
         a {
             text-decoration: none;
             color: #252A34;
         }
+
         i {
             color: black;
         }
+
         a:hover {
             color: #3b4251
         }
+
         .ms-delete {
             background-color: inherit;
             font-family: inherit;
@@ -352,17 +429,8 @@
             margin-left: -10px;
         }
 
-        @media (min-width: 992px) {
-
-            .ms-img-container {
-                height: 350px;
-            }
-
-            .detail-container {
-                height: 350px;
-            }
-        }
-       .ms-button {
+        /* add button */
+        .ms-button {
             position: fixed;
             right: 5px;
             top: 10px;
@@ -460,7 +528,48 @@
             height: 4px;
             top: calc(50% - 2px);
         }
+
+        /* /add buttonn */
+        
+        /* submit btn offcanva */
+        .btn-submit {
+            background-color: var(--custom-green);
+            color: white;
+            font-weight: 600;
+            border-radius: 0;
+        }
+
+        /* /submit btn offcanva */
+
+        /* mediaquery */
+        @media (min-width: 992px) {
+
+            .w-50-desktop {
+                width: 27% !important;
+            }
+
+            .ms-img-container {
+                height: 350px;
+            }
+
+            .detail-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .ms-button {
+                top: 85px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .w-100-mobile {
+                width: 100% !important;
+            }
+        }
+
+        /* /mediaquery */
     </style>
-
-
 @endsection

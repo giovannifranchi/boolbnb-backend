@@ -81,7 +81,7 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu dropdown-menu-end ms-dropdown" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
                                 <a class="dropdown-item" href="{{ url('profile') }}">{{ __('Profile') }}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -104,10 +104,11 @@
             @yield('content')
         </main>
 
-        <footer>
+        <footer >
             <div class="container">
-                <div class="row">
-                    <div class="d-flex justify-content-between align-items-center py-4">
+                <div class="row justify-content-between align-items-center py-4">
+                    {{-- row justify-content-between align-items-center py-4 --}}
+                    {{-- <div class=""> --}}
                         <div class="footer-text col-lg-6 col-md-12 ">
                             <p class="mb-1">BoolBnb 2023 | Classe 89</p>
                             <p class="mb-1"> Created with
@@ -116,8 +117,7 @@
                                 Turella
                             </p>
                         </div>
-                        <div class="social d-flex justify-content-end">
-                            <div></div>
+                        <div class="social col-lg-6 col-md-12 d-flex">
                             <a href="#">{{-- instagram --}}
                                 <div class="social-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="37px" height="37px" viewBox="0 0 24 24">
@@ -153,7 +153,7 @@
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    {{-- </div> --}}
                 </div>
 
             </div>
@@ -164,15 +164,8 @@
 </html>
 
 <style>
-    header {
-        height: 80px;
-    }
 
-    main {
-        min-height: calc(100vh - 210px);
-    }
-
-    body {
+body {
         background-color: #EAEAEA;
         color: #EAEAEA;
 
@@ -192,25 +185,30 @@
             }
         }
 
+    }/* 
+    header {
+        height: 80px;
     }
+ */
+ .ms-dropdown{
+    border-radius: 0;
+/*     background-color: var(--custom-white); */
+ }
+    main {
+        min-height: calc(100vh - 210px);
+    }
+
+
 
     .logo-img-small {
         display: none;
     }
 
-    @media (max-width: 576px) {
-        .logo-img {
-            display: none;
-        }
 
-        .logo-img-small {
-            display: block;
-        }
-    }
 
     footer {
         background-color: var(--custom-black);
-        height: 130px;
+/*         height: 130px; */
         color: $custom-white;
 
         .footer-text {
@@ -227,12 +225,13 @@
             }
         }
 
-
         @media(min-width:992px) {
             .footer-text {
                 text-align: start;
             }
-
+            .social{
+                justify-content: flex-end;
+            }
             .social-icons {
                 justify-content: end;
             }
@@ -242,10 +241,22 @@
             .footer-text {
                 text-align: center;
             }
-
+            .social{
+                justify-content: center;
+            }
             .social-icons {
                 justify-content: center;
             }
+        }
+
+    }
+            @media (max-width: 768px) {
+        .logo-img {
+            display: none;
+        }
+
+        .logo-img-small {
+            display: block;
         }
     }
 </style>
