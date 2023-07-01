@@ -49,8 +49,8 @@ addressField.addEventListener('input', async (e) => {
 
     if (searchText) {
         const response = await axios.get(`http://127.0.0.1:8000/api/search/${searchText}`);
-        if(response.data.results.length > 0){
-            if(container.children.length > 0){
+        if (response.data.results.length > 0) {
+            if (container.children.length > 0) {
                 container.innerHTML = '';
             }
             foundOptions = [];
@@ -62,7 +62,7 @@ addressField.addEventListener('input', async (e) => {
                 const listItem = document.createElement('li');
                 const text = `${result.address.streetName || ''} ${result.address.municipality} ${result.address.country}`
                 listItem.innerHTML = text;
-                listItem.addEventListener('click', ()=>{
+                listItem.addEventListener('click', () => {
                     addressField.value = text;
                     container.classList.remove('d-block');
                     container.classList.add('d-none');

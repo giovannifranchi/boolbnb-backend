@@ -12,7 +12,7 @@
                     <div class="container" style="margin-top: 40px;">
                         <div class="row">
                             <div class="col-md-6 col-xs-6">BoolBnB S.r.l.</div>
-                            <div class="col-md-6 col-xs-6" style="text-align: right;">{{ $data['date'] }}</div>
+                            <div class="col-md-6 col-xs-6" style="text-align: right;">{{\Carbon\Carbon::parse($data['date'])->setTimezone('Europe/Rome')->format('d M Y, H:m:s') }}</div>
                         </div>
                     </div>
 
@@ -59,11 +59,11 @@
                             <div class="row" style="margin-top: 20px;">
                                 <div class="col-md-6 col-xs-6">
                                     <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> START DATE & HOUR </div>
-                                    <div style="font-size: 22px; "> {{ $data['date'] }} </div>
+                                    <div style="font-size: 22px; "> {{\Carbon\Carbon::parse($data['date'])->setTimezone('Europe/Rome')->format('d M Y, H:m:s') }} </div>
                                 </div>
                                 <div class="col-md-6 col-xs-6" style="text-align: right;">
                                     <div style="letter-spacing: 1; font-weight: 300; padding: 10px 0;"> END DATE & HOUR </div>
-                                    <div style="font-size: 22px;"> {{ $data['expires'] }} </div>
+                                    <div style="font-size: 22px;"> {{\Carbon\Carbon::parse($data['expires'])->setTimezone('Europe/Rome')->format('d M Y, H:m:s')  }} </div>
                                 </div>
                                
                             </div>
