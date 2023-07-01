@@ -105,7 +105,13 @@
     .btn-home{
         background-color: var(--custom-green);
         margin: 30px; 
+        color:white;
     }
+    .btn-home:hover{
+        background-color: var(--custom-green);
+        margin: 30px; 
+        color:white;  
+        }
 </style>
 
 @endsection
