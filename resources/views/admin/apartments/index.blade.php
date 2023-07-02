@@ -4,6 +4,11 @@
 
 <main class="py-3">
     <div class="container mb-5 mt-2">
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         <h1>Your apartments </h1>
     </div>
 
