@@ -89,7 +89,7 @@
                     @endif
                 </div>
                     <div class="col-12 text-center">
-                        <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Torna alla Home</a>
+                        <a href="{{ route('admin.apartments.index')}}" class="btn btn-home">Dashboard</a>
                     </div>
                 </div>
 

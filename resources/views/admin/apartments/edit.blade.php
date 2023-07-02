@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-<main class="container pt-4">
+<main class="container px-3">
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -11,10 +11,11 @@
         </ul>
     </div>
     @endif
+    <button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}" class="nav-link">{{ __('Dashboard') }} </a></button>
     <form class="row" action="{{ route('admin.apartments.update', $apartment)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-lg-8 mt-5">
 
             {{-- inserimento nome appartamento --}}
             <div class="mb-3">
@@ -115,13 +116,13 @@
 
         </div>
         <div class="form-check form-switch mb-3 ms-3">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
-                {{-- @dd($apartment->is_visible) --}}
-                <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="is_visible" value="1" @if($apartment->is_visible) checked @endif>
+            {{-- @dd($apartment->is_visible) --}}
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is Visible?</label>
         </div>
 
         <div class="mb-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
 </main>
@@ -130,7 +131,33 @@
     label {
         color: #000;
     }
-   
+
+    .btn-back {
+        margin-top: 35px;
+        border: 1px solid var(--custom-green);
+        padding: 10px 20px;
+        color: var(--custom-green);
+        border-radius: 25px;
+        font-weight: 600;
+
+
+    }
+
+    .btn-back:hover {
+        /* scale: 1.05; */
+        transition: transform 0.2s ease-in-out;
+        background-color: var(--custom-green);
+        color: white;
+
+    }
+
+    .ms-text-primary {
+        color: var(--custom-black);
+    }
+
+    .ms-text-light {
+        color: var(--custom-black);
+    }
 </style>
 
 <script>
