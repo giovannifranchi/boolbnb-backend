@@ -16,16 +16,21 @@ class ViewSeeder extends Seeder
      */
     public function run()
     {
+        $apartments = [Apartment::where('id', 145)->first(), Apartment::where('id', 146)->first(), Apartment::where('id', 147)->first()];
     
-        for($i = 0; $i < 500; $i++){
-            $newView = new View();
-            $randomApartment = Apartment::inRandomOrder()->first();
+        foreach($apartments as $apartment){
+            for($i = 0; $i < rand(200, 600); $i++){
+                $newView = new View();
+                
+    
+                $newView->apartment_id = $apartment->id;
+    
+                $newView->ip_address = fake()->ipv4();
 
-            $newView->apartment_id = $randomApartment->id;
-
-            $newView->ip_address = fake()->ipv4();
-
-            $newView->save();
+                $newView->created_at = fake()->dateTimeBetween('2023-01-01', '2023-07-04');
+    
+                $newView->save();
+            }
         }
     }
 }

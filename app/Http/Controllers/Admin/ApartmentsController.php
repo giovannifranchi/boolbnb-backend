@@ -127,10 +127,10 @@ class ApartmentsController extends Controller
         $viewsData = [];
         
         // Iterate over all the months of the year 2022
-        for ($month = 1; $month <= 12; $month++) {
+        for ($month = 1; $month <= 7; $month++) {
             // Get the messages and views for this month
-            $messages = $apartment->messages()->whereYear('created_at', 2022)->whereMonth('created_at', $month)->count();
-            $views = $apartment->views()->whereYear('created_at', 2022)->whereMonth('created_at', $month)->count();
+            $messages = $apartment->messages()->whereYear('created_at', 2023)->whereMonth('created_at', $month)->count();
+            $views = $apartment->views()->whereYear('created_at', 2023)->whereMonth('created_at', $month)->count();
         
             // Add the data to the arrays
             $messagesData[] = $messages;
@@ -138,14 +138,13 @@ class ApartmentsController extends Controller
         }
         
         // Generate the chart
-        $chart = LarapexChart::setType('horizontalBarChart')
+        $chart = LarapexChart::BarChart()
             ->setTitle('Messages & Views for this apartment')
-            ->setColor(['#c1c1c1', '#000'])
             ->addData('Messages', $messagesData)
             ->addData('Views', $viewsData)
             ->setXAxis([
                 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+                'Jul'
             ]);
 
         return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'galleries', 'chart'));
