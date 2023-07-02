@@ -3,13 +3,10 @@
 @section('content')
     <main>
         <div class="container px-3">
-<<<<<<< HEAD
+
             <button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}" class="nav-link">{{ __('Dashboard') }}
                 </a></button>
-=======
-            <button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}"
-                    class="nav-link">{{ __('Go back to your apartments') }} </a></button>
->>>>>>> 1f435ed01fcb1f68148c624e1e58c940d61f0f03
+
 
             <h1 class="my-4">{{ $apartment->name }}</h1>
 
@@ -20,6 +17,16 @@
                             <img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="w-100 square-image"
                                 {{ count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100' }}">
                             <div class="preview row">
+
+
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-12  rounded p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
+                    <div class="row">
+                        <div class="col-12 col-md-6 d-flex flex-column my-image-container">
+                            <img src="{{ $galleries[0] }}" alt="" id="thumbnail"
+                                class="my-height img-fluid rounded {{ count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100' }}">
+                            <div class="preview p-3 row gap-2">
                                 @foreach ($galleries as $key => $gallery)
                                     <div class="box my-box-image {{ count($galleries) > 1 ? 'col' : 'col-3' }}">
                                         <img src="{{ asset($gallery) }}" alt="path"
