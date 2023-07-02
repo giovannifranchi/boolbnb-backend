@@ -510,6 +510,13 @@
         border-radius: 0;
     }
 
+    .btn-submit:hover {
+        background-color: var(--custom-green);
+        color: white;
+        font-weight: 600;
+        border-radius: 0;
+    }
+
     /* /submit btn offcanva */
 
     /* mediaquery */
