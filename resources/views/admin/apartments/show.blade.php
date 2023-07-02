@@ -3,45 +3,52 @@
 @section('content')
     <main>
         <div class="container px-3">
-            <button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}"
-                    class="nav-link">{{ __('Dashboard') }} </a></button>
+            <button class=" btn-back"> <a href="{{ route('admin.apartments.index') }}" class="nav-link">{{ __('Dashboard') }}
+                </a></button>
 
+            <h1 class="my-4">{{ $apartment->name }}</h1>
 
-            <div class="row justify-content-center mt-5">
-                <div class="col-12  rounded p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
-                    <div class="row">
-                        <div class="col-12 col-md-6 d-flex flex-column my-image-container">
-                            <img src="{{ $galleries[0] }}" alt="" id="thumbnail"
-                                class="my-height img-fluid rounded {{ count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100' }}">
-                            <div class="preview p-3 row gap-2">
+            <div class="row justify-content-center mx-1">
+                <div class="col-12 p-0 my-container" onmouseover="aggiungiClassi()" onmouseout="rimuoviClassi()">
+                    <div class="row m-2">
+                        <div class="col-12 col-md-6 d-flex flex-column p-2 my-image-container">
+                            <img src="{{ $galleries[0] }}" alt="" id="thumbnail" class="w-100 square-image"
+                                {{ count($apartment->images) > 0 ? 'flex-grow-1' : 'h-100' }}">
+                            <div class="preview row">
                                 @foreach ($galleries as $key => $gallery)
                                     <div class="box my-box-image {{ count($galleries) > 1 ? 'col' : 'col-3' }}">
                                         <img src="{{ asset($gallery) }}" alt="path"
-                                            class="w-100 h-100 rounded thumbnail {{ $key === 0 ? 'selected-thumbnail' : '' }}"
+                                            class="w-100 square-image thumbnail {{ $key === 0 ? 'selected-thumbnail' : '' }}"
                                             onclick="selectImage(this)" onmouseover="enlargeImage(this)"
                                             onmouseout="resetImageSize(this)">
                                     </div>
                                 @endforeach
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 d-flex flex-column gap-3 my-detail-container">
-                            <h1 class="fs-2 change-color">{{ $apartment->name }}</h1>
-                            <h4 class="change-color"> {{ $apartment->address }}, {{ $apartment->city }},
-                                {{ $apartment->state }}</h4>
-                            <div class="row">
-                                <div class="col-3 change-color">
-                                    m²:
-                                    <strong>{{ $apartment->square_meters }}</strong>
+                        <div class="col-12 col-md-6 d-flex flex-column py-2 px-4 my-detail-container">
+
+                            <h3>Main Info:</h3>
+                            <p>Address:
+                            <strong> {{ $apartment->address }}, {{ $apartment->city }},
+                                {{ $apartment->state }}</strong> </p>
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <p>m²:
+                                        <strong>{{ $apartment->square_meters }}</strong>
+                                    </p>
+
                                 </div>
-                                <div class="col-3 change-color">
-                                    BATHS:
-                                    <strong>{{ $apartment->bathrooms }}</strong>
+                                <div class="col-6">
+                                    <p> BATHS:
+                                        <strong>{{ $apartment->bathrooms }}</strong>
+                                    </p>
+
                                 </div>
-                                <div class="col-3 change-color">
+                                <div class="col-6">
                                     ROOMS:
                                     <strong>{{ $apartment->rooms }}</strong>
                                 </div>
-                                <div class="col-3 change-color">
+                                <div class="col-6 change-color">
                                     BEDS:
                                     <strong>{{ $apartment->beds }}</strong>
                                 </div>
@@ -56,10 +63,21 @@
                             </ul>
                             <h3>Description:</h3>
                             <p>{{ $apartment->description }}</p>
+
+                            <div>
+                                <h3>Sponsor status:</h3>
+                                @if ($apartment->lastPlan() && $apartment->lastPlan()->pivot->expire_date > now())
+                                    <p class="mb-3 sponsor active"> Active! Expire date:
+                                        {{ \Carbon\Carbon::parse($apartment->lastPlan()->pivot->expire_date)->format('d M Y') }}
+
+                                    </p>
+                                @else
+                                    <p class="mb-3 sponsor not-active">No active plans</p>
+                                @endif
+                            </div>
                             <div class="d-flex justify-content-end ">
                                 <h3 class="" id="my-price-id">{{ $apartment->price }} €/<small>night</small></h3>
                             </div>
-
                         </div>
                     </div>
 
@@ -178,6 +196,15 @@
     </script>
 
     <style>
+        h1 {
+            color: var(--custom-black);
+        }
+
+        .square-image {
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
         .btn-back {
             margin-top: 35px;
             border: 1px solid var(--custom-green);
@@ -187,6 +214,24 @@
             font-weight: 600;
 
 
+        }
+
+        .active::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--custom-green);
+        }
+
+        .not-active::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: grey;
         }
 
         .btn-back:hover {
@@ -217,19 +262,10 @@
             transition: 0.3s ease-in-out;
         }
 
-
-
-
-        .my-image-container {
-            padding: 10px 0 0 22px;
-
-        }
-
         .my-box-image {
             height: 100px;
             cursor: pointer;
         }
-
         #my-price-id {
             padding: 3px 10px 3px 10px;
             margin-right: 15px;
@@ -239,12 +275,14 @@
             color: white;
         }
 
-
-
-        .my-detail-container {
-            padding-left: 50px;
-            padding-top: 20px
+        .preview {
+            padding-top: 20px;
+            flex-wrap: wrap;
         }
+
+        /*         .my-detail-container {
+                            padding-top: 20px
+                        } */
 
         .my-height {
             max-height: 485px;
