@@ -122,12 +122,26 @@
         </div>
 
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-submit">Submit</button>
         </div>
     </form>
 </main>
 
 <style>
+    .btn-submit {
+        background-color: var(--custom-green);
+        color: white;
+        font-weight: 600;
+        border-radius: 0;
+    }
+
+    .btn-submit:hover {
+        background-color: var(--custom-green);
+        color: white;
+        font-weight: 600;
+        border-radius: 0;
+    }
+
     label {
         color: #000;
     }
