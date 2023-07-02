@@ -11,6 +11,7 @@ use App\Models\Apartment;
 use App\Models\Image;
 use App\Models\Plan;
 use App\Models\Service;
+use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -122,7 +123,32 @@ class ApartmentsController extends Controller
         $thumb = $apartment->thumb;
         $galleries = array_merge([$thumb], $pics);
 
-        return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'galleries'));
+        $messagesData = [];
+        $viewsData = [];
+        
+        // Iterate over all the months of the year 2022
+        for ($month = 1; $month <= 12; $month++) {
+            // Get the messages and views for this month
+            $messages = $apartment->messages()->whereYear('created_at', 2022)->whereMonth('created_at', $month)->count();
+            $views = $apartment->views()->whereYear('created_at', 2022)->whereMonth('created_at', $month)->count();
+        
+            // Add the data to the arrays
+            $messagesData[] = $messages;
+            $viewsData[] = $views;
+        }
+        
+        // Generate the chart
+        $chart = LarapexChart::setType('horizontalBarChart')
+            ->setTitle('Messages & Views for this apartment')
+            ->setColor(['#c1c1c1', '#000'])
+            ->addData('Messages', $messagesData)
+            ->addData('Views', $viewsData)
+            ->setXAxis([
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            ]);
+
+        return view('admin.apartments.show', compact('apartment', 'plans', 'images', 'galleries', 'chart'));
     }
 
     /**
