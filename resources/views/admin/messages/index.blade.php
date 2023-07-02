@@ -10,12 +10,12 @@
     <div class="table-responsive">
         <table id="message-table" class="table table-striped table-hover">
             <thead>
-                <tr>
+                <tr class="table-success">
                     <th scope="col" class="d-none d-md-table-cell">Nome</th>
                     <th scope="col" class="d-none d-md-table-cell">Cognome</th>
                     <th scope="col">Email</th>
-                    <th scope="col" class="d-none d-md-table-cell">Testo</th>
-                    <th scope="col">Ricevuto</th>
+                    <th scope="col">Testo</th>
+                    <th scope="col" class="d-none d-md-table-cell">Ricevuto</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -27,8 +27,8 @@
                     <td class="d-none d-md-table-cell">{{ $newMessage->name }}</td>
                     <td class="d-none d-md-table-cell">{{ $newMessage->lastname }}</td>
                     <td>{{ $newMessage->email }}</td>
-                    <td class="d-none d-md-table-cell">{{ $newMessage->text }}</td>
-                    <td>{{ $newMessage->created_at }}</td>
+                    <td>{{ $newMessage->text }}</td>
+                    <td class="d-none d-md-table-cell">{{ \Carbon\Carbon::parse($newMessage->created_at)->format('d M Y')  }}</td>
                     <td>
 
                         {{-- Elimina --}}
